@@ -1,11 +1,757 @@
 [
   {
-    "id": "burrard-davie",
-    "name": "Burrard St & Davie St",
+    "id": "beattydunsmuir",
+    "name": "Beatty St and Dunsmuir St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/BeattyDunsmuir.htm",
+    "lat": 49.2798513,
+    "lng": -123.110542,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BeattyDunsmuirNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BeattyDunsmuirEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BeattyDunsmuirSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BeattyDunsmuirWest.jpg"
+    }
+  },
+  {
+    "id": "beattyrobson",
+    "name": "Beatty St and Robson St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/beattyRobson.htm",
+    "lat": 49.277581,
+    "lng": -123.113982,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BeattyRobsonNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BeattyRobsonEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BeattyRobsonSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BeattyRobsonWest.jpg"
+    }
+  },
+  {
+    "id": "beattysmithe",
+    "name": "Beatty St and Smithe St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/beattySmithe.htm",
+    "lat": 49.276527,
+    "lng": -123.11558,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BeattyNorthSmithe.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/SmitheEastBeatty.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BeattySouthSmithe.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/SmitheWestBeatty.jpg"
+    }
+  },
+  {
+    "id": "beattygeorgia",
+    "name": "Beatty St and W Georgia St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/beattyGeorgia.htm",
+    "lat": 49.2787098421077,
+    "lng": -123.112273646781,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BeattyNorth_Georgia.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GeorgiaEast_Beatty.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BeattySouth_Georgia.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GeorgiaWest_Beatty.jpg"
+    }
+  },
+  {
+    "id": "burrardcanadaplace",
+    "name": "Burrard St and Canada Place",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/BurrardCanadaPlace.htm",
+    "lat": 49.2881431972814,
+    "lng": -123.115479083554,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardCanadaNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BurrardCanadaEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BurrardCanadaSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BurrardCanadaWest.jpg"
+    }
+  },
+  {
+    "id": "burrardnelson",
+    "name": "Burrard St and Nelson St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/burrardnelson.htm",
+    "lat": 49.281193,
+    "lng": -123.126012,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardNelsonNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BurrardNelsonEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BurrardNelsonSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BurrardNelsonWest.jpg"
+    }
+  },
+  {
+    "id": "burrardsmithe",
+    "name": "Burrard St and Smithe St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/burrardSmithe.htm",
+    "lat": 49.282246,
+    "lng": -123.124419,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardSmitheNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BurrardSmitheEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BurrardSmitheSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BurrardSmitheWest.jpg"
+    }
+  },
+  {
+    "id": "burrardpender",
+    "name": "Burrard St and W Pender St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/burrardpender.htm",
+    "lat": 49.286589,
+    "lng": -123.117829,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardPenderNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BurrardPenderEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BurrardPenderSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BurrardPenderWest.jpg"
+    }
+  },
+  {
+    "id": "burrardbridge",
+    "name": "Burrard St Bridge",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/BurrardBridge.htm",
+    "lat": 49.275566,
+    "lng": -123.136732,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardBridgeMidSpanNorthNorth.jpg"
+    }
+  },
+  {
+    "id": "cambiebridge",
+    "name": "Cambie Bridge",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/cambiebridge.htm",
+    "lat": 49.270967,
+    "lng": -123.114909,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/CambieBridgeNorth.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/CambieBridgeSouth.jpg"
+    }
+  },
+  {
+    "id": "cambienelson",
+    "name": "Cambie St and Nelson St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/cambieNelson.htm",
+    "lat": 49.2761048691871,
+    "lng": -123.118130911495,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Cambienorth_nelson.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Nelsoneast_cambie.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Cambiesouth_nelson.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Nelsonwest_cambie.jpg"
+    }
+  },
+  {
+    "id": "georgia3",
+    "name": "Cardero St and W Pender St and W Georgia St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/georgia3.htm",
+    "lat": 49.290510806346,
+    "lng": -123.130520302544,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/georgiaE.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/georgiaW.jpg"
+    }
+  },
+  {
+    "id": "continentalneon",
+    "name": "Continental St and Neon St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/continentalNeon.htm",
+    "lat": 49.275974,
+    "lng": -123.12903,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ContinentalNeonNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/ContinentalNeonEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/ContinentalNeonWest.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ContinentalNeonSouth.jpg"
+    }
+  },
+  {
+    "id": "continentalpacific",
+    "name": "Continental St and Pacific St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/continentalPacific.htm",
+    "lat": 49.275377,
+    "lng": -123.129933,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ContinentalPacificNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/ContinentalPacificEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/ContinentalPacificWest.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ContinentalPacificSouth.jpg"
+    }
+  },
+  {
+    "id": "denman3",
+    "name": "Denman St and W Georgia St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/denman3.htm",
+    "lat": 49.2925940002885,
+    "lng": -123.133742210751,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GeorgiaDenmanEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GeorgiaDenmanWest.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/DenmanGeorgiaSouth.jpg"
+    }
+  },
+  {
+    "id": "exposmithe",
+    "name": "Expo Blvd and Smithe St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/expoSmithe.htm",
+    "lat": 49.2758069601355,
+    "lng": -123.114727137422,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Expoblvdnorth_smithe.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/SmitheEast_ExpoBlvd.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Expoblvdsouth_smithe.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/SmitheWest_ExpoBlvd.jpg"
+    }
+  },
+  {
+    "id": "granvillehoweonramp",
+    "name": "Granville Bridge and Howe St On Ramp",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/granvilleHoweOnRamp.htm",
+    "lat": 49.27414,
+    "lng": -123.130745,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/GranvilleHoweOnRampNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GranvilleHoweOnRampHowe.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GranvilleHoweOnRampSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GranvilleHoweOnRampSeymour.jpg"
+    }
+  },
+  {
+    "id": "granvilledrake",
+    "name": "Granville St and Drake St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/granvilledrake.htm",
+    "lat": 49.276095,
+    "lng": -123.127792,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/GranvilleDrakeNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GranvilleDrakeEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GranvilleDrakeSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GranvilleDrakeWest.jpg"
+    }
+  },
+  {
+    "id": "granvilledunsmuir",
+    "name": "Granville St and Dunsmuir St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/GranvilleDunsmuir.htm",
+    "lat": 49.2836239860524,
+    "lng": -123.116411709855,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/GranvilleNorth_Dunsmuir.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/DunsmuirEast_Granville.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GranvilleSouth_Dunsmuir.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/DunsmuirWest_Granville.jpg"
+    }
+  },
+  {
+    "id": "granvillehastings",
+    "name": "Granville St and Hasting St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/granvillehastings.htm",
+    "lat": 49.285313,
+    "lng": -123.113882,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/GranvilleHastingsNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GranvilleHastingsEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GranvilleHastingsSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GranvilleHastingsWest.jpg"
+    }
+  },
+  {
+    "id": "granvillenelson",
+    "name": "Granville St and Nelson St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/granvilleNelson.htm",
+    "lat": 49.2792581951786,
+    "lng": -123.123013825971,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/GranvilleNorth_Nelson_South.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/NelsonEast_Granville_South.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GranvilleSouth_Nelson_South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/NelsonWest_Granville.jpg"
+    }
+  },
+  {
+    "id": "granvillerobson",
+    "name": "Granville St and Robson St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/granvillerobson.htm",
+    "lat": 49.2813697,
+    "lng": -123.119829,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/GranvilleRobsonSouthNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GranvilleRobsonWestEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GranvilleRobsonSouthSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GranvilleRobsonWestWest.jpg"
+    }
+  },
+  {
+    "id": "granvillesmithe",
+    "name": "Granville St and Smithe St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/granvilleSmithe.htm",
+    "lat": 49.280312,
+    "lng": -123.121422,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/GranvilleSmitheNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GranvilleSmitheEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GranvilleSmitheSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GranvilleSmitheWest.jpg"
+    }
+  },
+  {
+    "id": "granvillegeorgia",
+    "name": "Granville St and W Georgia St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/granvilleGeorgia.htm",
+    "lat": 49.2824942805362,
+    "lng": -123.11812055027,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/GranvilleNorth_Georgia.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GeorgiaEast_Granville.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GranvilleSouth_Georgia.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GeorgiaWest_Granville.jpg"
+    }
+  },
+  {
+    "id": "hornbydrake",
+    "name": "Hornby St and Drake St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/hornbyDrake.htm",
+    "lat": 49.277384,
+    "lng": -123.129791,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/HornbyDrakeNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/HornbyDrakeEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/HornbyDrakeSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/HornbyDrakeWest.jpg"
+    }
+  },
+  {
+    "id": "hornbynelson",
+    "name": "Hornby St and Nelson St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/hornbyNelson.htm",
+    "lat": 49.2805,
+    "lng": -123.124976,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/HornbyNelsonNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/HornbyNelsonEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/HornbyNelsonSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/HornbyNelsonWest.jpg"
+    }
+  },
+  {
+    "id": "hornbypacific",
+    "name": "Hornby St and Pacific St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/hornbyPacific.htm",
+    "lat": 49.2763164,
+    "lng": -123.131337,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/HornbyNorth_Pacific.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/PacificEast_Hornby.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/HornbySouth_Pacific.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/PacificWest_Hornby.jpg"
+    }
+  },
+  {
+    "id": "hornbyrobson",
+    "name": "Hornby St and Robson St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/HornbyRobson.htm",
+    "lat": 49.2826429,
+    "lng": -123.121791,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/HornbyNorth_Robson.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RobsonEast_Hornby.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/HornbySouth_Robson.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RobsonWest_Hornby.jpg"
+    }
+  },
+  {
+    "id": "hornbysmithe",
+    "name": "Hornby St and Smithe St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/hornbySmithe.htm",
+    "lat": 49.281586,
+    "lng": -123.123398,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/HornbySmitheNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/HornbySmitheEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/HornbySmitheSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/HornbySmitheWest.jpg"
+    }
+  },
+  {
+    "id": "hornbygeorgia",
+    "name": "Hornby St and W Georgia St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/hornbyGeorgia.htm",
+    "lat": 49.2837645081745,
+    "lng": -123.120082749606,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/HornbyNorth_Georgia.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GeorgiaEast_Hornby.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/HornbySouth_Georgia.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GeorgiaWest_Hornby.jpg"
+    }
+  },
+  {
+    "id": "howedrake",
+    "name": "Howe St and Drake St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/howeDrake.htm",
+    "lat": 49.276755,
+    "lng": -123.128859,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/HoweDrakeNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/HoweDrakeEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/HoweDrakeSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/HoweDrakeWest.jpg"
+    }
+  },
+  {
+    "id": "howepacific",
+    "name": "Howe St and Pacific St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/howePacific.htm",
+    "lat": 49.275674,
+    "lng": -123.13039,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/HowePacificNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/HowePacificEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/HowePacificSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/HowePacificWest.jpg"
+    }
+  },
+  {
+    "id": "howegeorgia",
+    "name": "Howe St and W Georgia St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/howeGeorgia.htm",
+    "lat": 49.2831269,
+    "lng": -123.119088,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/HoweNorthGeorgia.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GeorgiaEastHowe.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/HoweSouthGeorgia.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GeorgiaWestHowe.jpg"
+    }
+  },
+  {
+    "id": "mainterminal",
+    "name": "Main St and Terminal Ave",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/mainTerminal.htm",
+    "lat": 49.2727762979223,
+    "lng": -123.100028035364,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/MainNorth_Terminal_Dome.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/MainSouth_Terminal.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/TerminalWest_Main.jpg"
+    }
+  },
+  {
+    "id": "richardsdavie",
+    "name": "Richards St and Davie St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsDavie.htm",
+    "lat": 49.275885,
+    "lng": -123.124252,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsDavieNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsDavieEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsDavieSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsDavieWest.jpg"
+    }
+  },
+  {
+    "id": "richardsdrake",
+    "name": "Richards St and Drake St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsDrake.htm",
+    "lat": 49.274826,
+    "lng": -123.125831,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsDrakeNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsDrakeEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsDrakeSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsDrakeWest.jpg"
+    }
+  },
+  {
+    "id": "richardsdunsmuir",
+    "name": "Richards St and Dunsmuir St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsDunsmuir.htm",
+    "lat": 49.282358,
+    "lng": -123.11445,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsDunsmuirNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsDunsmuirEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsDunsmuirSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsDunsmuirWest.jpg"
+    }
+  },
+  {
+    "id": "richardshelmcken",
+    "name": "Richards St and Helmcken St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsHelmcken.htm",
+    "lat": 49.276939,
+    "lng": -123.122658,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsHelmckenNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsHelmckenEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsHelmckenSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsHelmckenWest.jpg"
+    }
+  },
+  {
+    "id": "richardsnelson",
+    "name": "Richards St and Nelson St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsNelson.htm",
+    "lat": 49.277993,
+    "lng": -123.121066,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsNelsonNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsNelsonEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsNelsonSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsNelsonWest.jpg"
+    }
+  },
+  {
+    "id": "richardspacific",
+    "name": "Richards St and Pacific St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsPacific.htm",
+    "lat": 49.27374,
+    "lng": -123.127496,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsPacificNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsPacificEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsPacificSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsPacificWest.jpg"
+    }
+  },
+  {
+    "id": "richardsrobson",
+    "name": "Richards St and Robson St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsRobson.htm",
+    "lat": 49.2801,
+    "lng": -123.117882,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsRobsonNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsRobsonEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsRobsonSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsRobsonWest.jpg"
+    }
+  },
+  {
+    "id": "richardssmithe",
+    "name": "Richards St and Smithe St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsSmithe.htm",
+    "lat": 49.279046,
+    "lng": -123.119473,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsSmitheNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsSmitheEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsSmitheSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsSmitheWest.jpg"
+    }
+  },
+  {
+    "id": "richardscordovawater",
+    "name": "Richards St and W Cordova St / Water St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsCordovaWater.htm",
+    "lat": 49.284679,
+    "lng": -123.110954,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsCordovaWaterNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsCordovaWaterEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsCordovaWaterSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsCordovaWaterWest.jpg"
+    }
+  },
+  {
+    "id": "richardsgeorgia",
+    "name": "Richards St and W Georgia St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsGeorgia.htm",
+    "lat": 49.28123,
+    "lng": -123.116174,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsGeorgiaNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsGeorgiaEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsGeorgiaSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsGeorgiaWest.jpg"
+    }
+  },
+  {
+    "id": "richardshastings",
+    "name": "Richards St and W Hastings St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsHastings.htm",
+    "lat": 49.28404,
+    "lng": -123.111904,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsHastingsNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsHastingsEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsHastingsSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsHastingsWest.jpg"
+    }
+  },
+  {
+    "id": "richardspender",
+    "name": "Richards St and W Pender St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/richardsPender.htm",
+    "lat": 49.283391,
+    "lng": -123.112886,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RichardsPenderNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RichardsPenderEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RichardsPenderSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RichardsPenderWest.jpg"
+    }
+  },
+  {
+    "id": "rolstonpacific",
+    "name": "Rolston St and Pacific St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/rolstonPacific.htm",
+    "lat": 49.274692,
+    "lng": -123.128911,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RolstonPacificNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RolstonPacificEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RolstonPacificWest.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RolstonPacificSouth.jpg"
+    }
+  },
+  {
+    "id": "seymourdrake",
+    "name": "Seymour St and Drake St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/seymourDrake.htm",
+    "lat": 49.275454,
+    "lng": -123.126801,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/SeymourDrakeNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/SeymourDrakeEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/SeymourDrakeSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/SeymourDrakeWest.jpg"
+    }
+  },
+  {
+    "id": "seymourdunsmuir",
+    "name": "Seymour St and Dunsmuir St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/seymourDunsmuir.htm",
+    "lat": 49.282986,
+    "lng": -123.115421,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/SeymourDunsmuirNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/SeymourDunsmuirEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/SeymourDunsmuirSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/SeymourDunsmuirWest.jpg"
+    }
+  },
+  {
+    "id": "seymournelson",
+    "name": "Seymour St and Nelson St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/seymourNelson.htm",
+    "lat": 49.278617,
+    "lng": -123.122022,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/SeymourNelsonNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/SeymourNelsonEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/SeymourNelsonSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/SeymourNelsonWest.jpg"
+    }
+  },
+  {
+    "id": "seymourrobson",
+    "name": "Seymour St and Robson St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/seymourRobson.htm",
+    "lat": 49.280728,
+    "lng": -123.118852,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/SeymourRobsonNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/SeymourRobsonEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/SeymourRobsonSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/SeymourRobsonWest.jpg"
+    }
+  },
+  {
+    "id": "seymoursmithe",
+    "name": "Seymour St and Smithe St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/seymourSmithe.htm",
+    "lat": 49.279674,
+    "lng": -123.120444,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/SeymourSmitheNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/SeymourSmitheEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/SeymourSmitheSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/SeymourSmitheWest.jpg"
+    }
+  },
+  {
+    "id": "seymourgeorgia",
+    "name": "Seymour St and W Georgia St",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/seymourGeorgia.htm",
+    "lat": 49.281859,
+    "lng": -123.117144,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/SeymourGeorgiaNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/SeymourGeorgiaEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/SeymourGeorgiaSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/SeymourGeorgiaWest.jpg"
+    }
+  },
+  {
+    "id": "thurlowcanadaplace",
+    "name": "Thurlow St and Canada Place",
+    "neighbourhood": "Downtown",
+    "page": "https://trafficcams.vancouver.ca/ThurlowCanadaPlace.htm",
+    "lat": 49.288853,
+    "lng": -123.118271,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ThurlowCanadaPlace_North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/ThurlowCanadaPlace_East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ThurlowCanadaPlace_South.jpg"
+    }
+  },
+  {
+    "id": "burrarddavie",
+    "name": "Burrard St and Davie St",
     "neighbourhood": "West End",
     "page": "https://trafficcams.vancouver.ca/burrardDavie.htm",
-    "lat": 49.2791,
-    "lng": -123.1292,
+    "lat": 49.279086,
+    "lng": -123.129196,
     "images": {
       "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardDavieNorth.jpg",
       "E": "https://trafficcams.vancouver.ca/cameraimages/BurrardDavieEast.jpg",
@@ -14,26 +760,12 @@
     }
   },
   {
-    "id": "bute-davie",
-    "name": "Bute St & Davie St",
-    "neighbourhood": "West End",
-    "page": "https://trafficcams.vancouver.ca/buteDavie.htm",
-    "lat": 49.2818,
-    "lng": -123.1334,
-    "images": {
-      "N": "https://trafficcams.vancouver.ca/cameraimages/ButeNorthDavie.jpg",
-      "E": "https://trafficcams.vancouver.ca/cameraimages/DavieEastBute.jpg",
-      "S": "https://trafficcams.vancouver.ca/cameraimages/ButeSouthDavie.jpg",
-      "W": "https://trafficcams.vancouver.ca/cameraimages/DavieWestBute.jpg"
-    }
-  },
-  {
-    "id": "burrard-drake",
-    "name": "Burrard St & Drake St",
+    "id": "burrarddrake",
+    "name": "Burrard St and Drake St",
     "neighbourhood": "West End",
     "page": "https://trafficcams.vancouver.ca/burrardDrake.htm",
-    "lat": 49.2809,
-    "lng": -123.1289,
+    "lat": 49.278025,
+    "lng": -123.130775,
     "images": {
       "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardDrakeNorth.jpg",
       "E": "https://trafficcams.vancouver.ca/cameraimages/BurrardDrakeEast.jpg",
@@ -42,17 +774,2279 @@
     }
   },
   {
-    "id": "burrard-pacific",
-    "name": "Burrard St & Pacific Ave",
+    "id": "burrardpacific4",
+    "name": "Burrard St and Pacific St",
     "neighbourhood": "West End",
     "page": "https://trafficcams.vancouver.ca/BurrardPacific4.htm",
-    "lat": 49.2775,
-    "lng": -123.1285,
+    "lat": 49.2769754719523,
+    "lng": -123.132359942237,
     "images": {
       "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardPacificNorth.jpg",
       "E": "https://trafficcams.vancouver.ca/cameraimages/BurrardPacificEast.jpg",
       "S": "https://trafficcams.vancouver.ca/cameraimages/BurrardBridgeSouth.jpg",
       "W": "https://trafficcams.vancouver.ca/cameraimages/BurrardPacificWest.jpg"
+    }
+  },
+  {
+    "id": "butedavie",
+    "name": "Bute St and Davie St",
+    "neighbourhood": "West End",
+    "page": "https://trafficcams.vancouver.ca/buteDavie.htm",
+    "lat": 49.281777,
+    "lng": -123.133382,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ButeNorthDavie.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/DavieEastBute.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ButeSouthDavie.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/DavieWestBute.jpg"
+    }
+  },
+  {
+    "id": "denmanbeach",
+    "name": "Denman St and Beach Ave",
+    "neighbourhood": "West End",
+    "page": "https://trafficcams.vancouver.ca/denmanBeach.htm",
+    "lat": 49.28688,
+    "lng": -123.142376,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/DenmanBeachEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/DenmanBeachWest.jpg"
+    }
+  },
+  {
+    "id": "denmandavie",
+    "name": "Denman St and Davie St",
+    "neighbourhood": "West End",
+    "page": "https://trafficcams.vancouver.ca/denmanDavie.htm",
+    "lat": 49.287258,
+    "lng": -123.141824,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/DenmanDavieNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/DenmanDavieEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/DenmanDavieSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/DenmanDavieWest.jpg"
+    }
+  },
+  {
+    "id": "thurlowpacific",
+    "name": "Thurlow St and Pacific St",
+    "neighbourhood": "West End",
+    "page": "https://trafficcams.vancouver.ca/thurlowPacific.htm",
+    "lat": 49.278304,
+    "lng": -123.134406,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ThurlowPacificE_North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/ThurlowPacificE_East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ThurlowPacificE_South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/ThurlowPacificE_West.jpg"
+    }
+  },
+  {
+    "id": "andersonlameysmill",
+    "name": "Anderson St and Lamey's Mill Road",
+    "neighbourhood": "Kitsilano",
+    "page": "https://trafficcams.vancouver.ca/andersonLameysMill.htm",
+    "lat": 49.269356,
+    "lng": -123.137976,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/AndersonLameysNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/AndersonLameysEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/AndersonLameysSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/AndersonLameysWest.jpg"
+    }
+  },
+  {
+    "id": "anderson04",
+    "name": "Anderson St and W 4th Ave",
+    "neighbourhood": "Kitsilano",
+    "page": "https://trafficcams.vancouver.ca/anderson04.htm",
+    "lat": 49.267903,
+    "lng": -123.137996,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Anderson04North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Anderson04East.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Anderson04West.jpg"
+    }
+  },
+  {
+    "id": "burrardcornwall4",
+    "name": "Burrard St and Cornwall Ave",
+    "neighbourhood": "Kitsilano",
+    "page": "https://trafficcams.vancouver.ca/BurrardCornwall4.htm",
+    "lat": 49.2728254984234,
+    "lng": -123.146200846216,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardBridgeNorth.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BurrardCornwallSouth.jpg"
+    }
+  },
+  {
+    "id": "burrard4",
+    "name": "Burrard St and W 4th Ave",
+    "neighbourhood": "Kitsilano",
+    "page": "https://trafficcams.vancouver.ca/burrard4.htm",
+    "lat": 49.268027,
+    "lng": -123.145657,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Burrard4thNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Burrard4thEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Burrard4thSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Burrard4thWest.jpg"
+    }
+  },
+  {
+    "id": "macdonaldkitsdiv",
+    "name": "Macdonald St and Kitsilano Diversion",
+    "neighbourhood": "Kitsilano",
+    "page": "https://trafficcams.vancouver.ca/macdonaldKitsDiv.htm",
+    "lat": 49.262338,
+    "lng": -123.168214,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/MacdonaldKitsDivNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/MacdonaldKitsDivEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/MacdonaldKitsDivSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/MacdonaldKitsDivWest.jpg"
+    }
+  },
+  {
+    "id": "macdonald16",
+    "name": "Macdonald St and W 16th Ave",
+    "neighbourhood": "Kitsilano",
+    "page": "https://trafficcams.vancouver.ca/macdonald16.htm",
+    "lat": 49.257668,
+    "lng": -123.168408,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Macdonald16North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Macdonald16East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Macdonald16South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Macdonald16West.jpg"
+    }
+  },
+  {
+    "id": "macdonald4",
+    "name": "Macdonald St and W 4th Ave",
+    "neighbourhood": "Kitsilano",
+    "page": "https://trafficcams.vancouver.ca/macdonald4.htm",
+    "lat": 49.26837,
+    "lng": -123.16831,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Macdonald04North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Macdonald04East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Macdonald04South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Macdonald04West.jpg"
+    }
+  },
+  {
+    "id": "macdonald8",
+    "name": "Macdonald St and W 8th Ave",
+    "neighbourhood": "Kitsilano",
+    "page": "https://trafficcams.vancouver.ca/macdonald8.htm",
+    "lat": 49.264945,
+    "lng": -123.168395,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Macdonald08North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Macdonald08East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Macdonald08South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Macdonald08West.jpg"
+    }
+  },
+  {
+    "id": "macdonaldbroadway",
+    "name": "Macdonald St and W Broadway",
+    "neighbourhood": "Kitsilano",
+    "page": "https://trafficcams.vancouver.ca/macdonaldBroadway.htm",
+    "lat": 49.26408,
+    "lng": -123.168202,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/MacdonaldBroadwayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/MacdonaldBroadwayEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/MacdonaldBroadwaySouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/MacdonaldBroadwayWest.jpg"
+    }
+  },
+  {
+    "id": "cambie2east",
+    "name": "Cambie St and W 2nd Ave - East intersection",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/cambie2East.htm",
+    "lat": 49.266837,
+    "lng": -123.114449,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Cambie02EastNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Cambie02EastEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Cambie02EastSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Cambie02EastWest.jpg"
+    }
+  },
+  {
+    "id": "cambie2west",
+    "name": "Cambie St and W 2nd Ave - West intersection",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/cambie2West.htm",
+    "lat": 49.266135,
+    "lng": -123.115918,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Cambie02WestNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Cambie02WestEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Cambie02WestSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Cambie02WestWest.jpg"
+    }
+  },
+  {
+    "id": "cambiebroadway",
+    "name": "Cambie St and W Broadway",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/cambieBroadway.htm",
+    "lat": 49.2632184560264,
+    "lng": -123.114883421659,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/CambieNorth_Broadway.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BroadwayEast_Cambie.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/CambieSouth_Broadway.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BroadwayWest_Cambie.jpg"
+    }
+  },
+  {
+    "id": "fir5",
+    "name": "Fir St and W 5th Ave",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/fir5.htm",
+    "lat": 49.267084,
+    "lng": -123.14089,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Fir05North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Fir05East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Fir05South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Fir05West.jpg"
+    }
+  },
+  {
+    "id": "granvilleneon",
+    "name": "Granville St and Neon St",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/granvilleNeon.htm",
+    "lat": 49.27563,
+    "lng": -123.128496,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/GranvilleNeonNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GranvilleNeonEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GranvilleNeonWest.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GranvilleNeonSouth.jpg"
+    }
+  },
+  {
+    "id": "granville12",
+    "name": "Granville St and W 12th Ave",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/granville12.htm",
+    "lat": 49.260772,
+    "lng": -123.138664,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Granville12SouthNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Granville12EastEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Granville12SouthSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Granville12EastWest.jpg"
+    }
+  },
+  {
+    "id": "broadwaygranville",
+    "name": "Granville St and W Broadway",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/broadwayGranville.htm",
+    "lat": 49.2635968497724,
+    "lng": -123.138554334693,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/GranvilleBroadnorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GranvilleBroadeast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GranvilleBroadsouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GranvilleBroadwest.jpg"
+    }
+  },
+  {
+    "id": "manitoba2",
+    "name": "Manitoba St and W 2nd Ave",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/manitoba2.htm",
+    "lat": 49.26928,
+    "lng": -123.106588,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Manitoba02North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Manitoba02East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Manitoba02South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Manitoba02West.jpg"
+    }
+  },
+  {
+    "id": "oakw10",
+    "name": "Oak St and W 10th Ave",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/oakW10.htm",
+    "lat": 49.26244,
+    "lng": -123.126628,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Oak10North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Oak10East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Oak10South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Oak10West.jpg"
+    }
+  },
+  {
+    "id": "oak12",
+    "name": "Oak St and W 12th Ave",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/oak12.htm",
+    "lat": 49.26058,
+    "lng": -123.126694,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Oak12North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Oak12East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Oak12South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Oak12West.jpg"
+    }
+  },
+  {
+    "id": "oakwbroadway",
+    "name": "Oak St and W Broadway",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/oakWBroadway.htm",
+    "lat": 49.26341,
+    "lng": -123.126589,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/OakBroadwayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/OakBroadwayEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/OakBroadwaySouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/OakBroadwayWest.jpg"
+    }
+  },
+  {
+    "id": "pine12",
+    "name": "Pine St and W 12th Ave",
+    "neighbourhood": "Fairview",
+    "page": "https://trafficcams.vancouver.ca/pine12.htm",
+    "lat": 49.260852,
+    "lng": -123.143496,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Pine12North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Pine12East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Pine12South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Pine12West.jpg"
+    }
+  },
+  {
+    "id": "clark12",
+    "name": "Clark Drive and E 12th Ave",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/clark12.htm",
+    "lat": 49.259622152424,
+    "lng": -123.077555176815,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/clark12north.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/clark12east.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/clark12south.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/clark12west.jpg"
+    }
+  },
+  {
+    "id": "clarkbroadway",
+    "name": "Clark Drive and E Broadway",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/clarkBroadway.htm",
+    "lat": 49.262375,
+    "lng": -123.077509,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ClarkBroadwayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/ClarkBroadwayEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ClarkBroadwaySouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/ClarkBroadwayWest.jpg"
+    }
+  },
+  {
+    "id": "kingsway10",
+    "name": "Kingsway and E 10th Ave",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/kingsway10.htm",
+    "lat": 49.261969,
+    "lng": -123.098639,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Kingsway10North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Kingsway10East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Kingsway10South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Kingsway10West.jpg"
+    }
+  },
+  {
+    "id": "kingsway11",
+    "name": "Kingsway and E 11th Ave",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/kingsway11.htm",
+    "lat": 49.261081,
+    "lng": -123.097767,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Kingsway11_North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Kingsway11_East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Kingsway11_South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Kingsway11_West.jpg"
+    }
+  },
+  {
+    "id": "kingswaybroadway",
+    "name": "Kingsway and W Broadway",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/kingswayBroadway.htm",
+    "lat": 49.262868,
+    "lng": -123.099514,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/KingswayBroadwayNorthNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/KingswayBroadwayWestEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/KingswayBroadwayNorthSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/KingswayBroadwayWestWest.jpg"
+    }
+  },
+  {
+    "id": "gladstonekingsway",
+    "name": "Kingsway Midblock East of Gladstone St",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/gladstoneKingsway.htm",
+    "lat": 49.242983,
+    "lng": -123.060535,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GladstoneMBEEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GladstoneMBESouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GladstoneMBEWest.jpg"
+    }
+  },
+  {
+    "id": "main2",
+    "name": "Main St and E 2nd Ave",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/Main2.htm",
+    "lat": 49.2691679881689,
+    "lng": -123.100696908039,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Main02North.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Main02South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Main02West.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Main02East.jpg"
+    }
+  },
+  {
+    "id": "mainbroadway",
+    "name": "Main St and E Broadway",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/mainBroadway.htm",
+    "lat": 49.262703,
+    "lng": -123.100776,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/MainBroadwayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/MainBroadwayEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/MainBroadwaySouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/MainBroadwayWest.jpg"
+    }
+  },
+  {
+    "id": "mainkingsway7",
+    "name": "Main St and Kingsway",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/mainKingsway7.htm",
+    "lat": 49.2644481387721,
+    "lng": -123.10089513196,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/MainKingsway7North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/MainKingsway7East.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/MainKingsway7West.jpg"
+    }
+  },
+  {
+    "id": "ontario01",
+    "name": "Ontario St and E 01st Ave",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/ontario01.htm",
+    "lat": 49.2701905,
+    "lng": -123.104634,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Ontario01North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Ontario01East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Ontario01South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Ontario01West.jpg"
+    }
+  },
+  {
+    "id": "quebecswitchmen",
+    "name": "Quebec St and Switchmen St",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/quebecSwitchmen.htm",
+    "lat": 49.271224,
+    "lng": -123.102278,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/QuebecSwitchmenNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/QuebecSwitchmenEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/QuebecSwitchmenSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/QuebecSwitchmenWest.jpg"
+    }
+  },
+  {
+    "id": "quebec2",
+    "name": "Quebec St and W 2nd Ave",
+    "neighbourhood": "Mount Pleasant",
+    "page": "https://trafficcams.vancouver.ca/quebec2.htm",
+    "lat": 49.269206,
+    "lng": -123.102702,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Quebec02North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Quebec02East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Quebec02South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Quebec02West.jpg"
+    }
+  },
+  {
+    "id": "campbellhastings",
+    "name": "Campbell Ave and Hastings St",
+    "neighbourhood": "Strathcona",
+    "page": "https://trafficcams.vancouver.ca/campbellHastings.htm",
+    "lat": 49.281059,
+    "lng": -123.084785,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/CampbellHastingsNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/CampbellHastingsEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/CampbellHastingsSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/CampbellHastingsWest.jpg"
+    }
+  },
+  {
+    "id": "carolinagreatnorthern",
+    "name": "Carolina St and Great Northern Way",
+    "neighbourhood": "Strathcona",
+    "page": "https://trafficcams.vancouver.ca/carolinaGreatNorthern.htm",
+    "lat": 49.266785,
+    "lng": -123.090919,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/CarolinaGrtNorthernNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/CarolinaGrtNorthernEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/CarolinaGrtNorthernWest.jpg"
+    }
+  },
+  {
+    "id": "clarkhastings",
+    "name": "Clark Drive and E Hastings St",
+    "neighbourhood": "Strathcona",
+    "page": "https://trafficcams.vancouver.ca/ClarkHastings.htm",
+    "lat": 49.28131,
+    "lng": -123.07711,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ClarkNorth_EHastings.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/EHastingsEast_Clark.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ClarkSouth_EHastings.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/EHastingsWest_Clark.jpg"
+    }
+  },
+  {
+    "id": "clarkpowell",
+    "name": "Clark Drive and Powell St",
+    "neighbourhood": "Strathcona",
+    "page": "https://trafficcams.vancouver.ca/ClarkPowell.htm",
+    "lat": 49.28309,
+    "lng": -123.07711,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ClarkNorth_Powell.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/PowellEast_Clark.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ClarkSouth_Powell.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/PowellWest_Clark.jpg"
+    }
+  },
+  {
+    "id": "glenpowell",
+    "name": "Glen Drive and Powell St",
+    "neighbourhood": "Strathcona",
+    "page": "https://trafficcams.vancouver.ca/glenPowell.htm",
+    "lat": 49.282787,
+    "lng": -123.081247,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/PowellEastGlen.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/PowellWestGlen.jpg"
+    }
+  },
+  {
+    "id": "mainhastings",
+    "name": "Main St and E Hastings St",
+    "neighbourhood": "Strathcona",
+    "page": "https://trafficcams.vancouver.ca/MainHastings.htm",
+    "lat": 49.2813356595642,
+    "lng": -123.099648798315,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/MainNorth_Hastings.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/HastingsEast_Main.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/MainSouth_Hastings.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/HastingsWest_Main.jpg"
+    }
+  },
+  {
+    "id": "mcleanpowell",
+    "name": "McLean Drive and Powell St",
+    "neighbourhood": "Strathcona",
+    "page": "https://trafficcams.vancouver.ca/mcleanPowell.htm",
+    "lat": 49.283234,
+    "lng": -123.074029,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/McLeanPowellNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/McLeanPowellEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/McLeanPowellSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/McLeanPowellWest.jpg"
+    }
+  },
+  {
+    "id": "nanaimodundas",
+    "name": "Nanaimo St and Dundas St",
+    "neighbourhood": "Strathcona",
+    "page": "https://trafficcams.vancouver.ca/nanaimoDundas.htm",
+    "lat": 49.284795,
+    "lng": -123.056532,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/NanaimoDundasSouthNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/NanaimoDundasSouthEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/NanaimoDundasSouthSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/NanaimoDundasEastWest.jpg"
+    }
+  },
+  {
+    "id": "raymurvenables",
+    "name": "Raymur Ave and Venables St",
+    "neighbourhood": "Strathcona",
+    "page": "https://trafficcams.vancouver.ca/raymurVenables.htm",
+    "lat": 49.276833,
+    "lng": -123.082603,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RaymurVenablesNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RaymurVenablesEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RaymurVenablesSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RaymurVenablesWest.jpg"
+    }
+  },
+  {
+    "id": "scotia2",
+    "name": "Scotia St and E 2nd Ave",
+    "neighbourhood": "Strathcona",
+    "page": "https://trafficcams.vancouver.ca/scotia2.htm",
+    "lat": 49.267764,
+    "lng": -123.098201,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Scotia02North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Scotia02East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Scotia02South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Scotia02West.jpg"
+    }
+  },
+  {
+    "id": "clark4",
+    "name": "Clark Drive and E 1st Ave",
+    "neighbourhood": "Grandview-Woodland",
+    "page": "https://trafficcams.vancouver.ca/clark4.htm",
+    "lat": 49.2696673278744,
+    "lng": -123.077346577693,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/clark1north.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/clark1east.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/clark1south.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/clark1west.jpg"
+    }
+  },
+  {
+    "id": "commercial01",
+    "name": "Commercial Drive and E 1st Ave",
+    "neighbourhood": "Grandview-Woodland",
+    "page": "https://trafficcams.vancouver.ca/Commercial01.htm",
+    "lat": 49.2695996340758,
+    "lng": -123.069621664266,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Commercial1north.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Commercial1east.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Commercial1south.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Commercial1west.jpg"
+    }
+  },
+  {
+    "id": "commercialbroadway",
+    "name": "Commercial Drive and E Broadway",
+    "neighbourhood": "Grandview-Woodland",
+    "page": "https://trafficcams.vancouver.ca/commercialBroadway.htm",
+    "lat": 49.2623194551024,
+    "lng": -123.069762688147,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/CommercialBroadwaynorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/CommercialBroadwayeast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/CommercialBroadwaysouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/CommercialBroadwaywest.jpg"
+    }
+  },
+  {
+    "id": "victoria12",
+    "name": "Victoria Drive and 12th Ave",
+    "neighbourhood": "Grandview-Woodland",
+    "page": "https://trafficcams.vancouver.ca/victoria12.htm",
+    "lat": 49.259531,
+    "lng": -123.065947,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Victoria12North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Victoria12East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Victoria12South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Victoria12West.jpg"
+    }
+  },
+  {
+    "id": "boundary1",
+    "name": "Boundary Rd and E 1st Ave",
+    "neighbourhood": "Hastings-Sunrise",
+    "page": "https://trafficcams.vancouver.ca/boundary1.htm",
+    "lat": 49.269455,
+    "lng": -123.023648,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Boundary1stSNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Boundary1stWEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Boundary1stSSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Boundary1stWWest.jpg"
+    }
+  },
+  {
+    "id": "hastings",
+    "name": "Boundary Road and E Hastings St",
+    "neighbourhood": "Hastings-Sunrise",
+    "page": "https://trafficcams.vancouver.ca/hastings.htm",
+    "lat": 49.2811188,
+    "lng": -123.023578,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BoundaryNorth_Hastings.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Hastingseast_boundary.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BoundarySouth_Hastings.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/HastingsWest_Boundary.jpg"
+    }
+  },
+  {
+    "id": "boundaryhenning",
+    "name": "Boundary Road and Henning Drive",
+    "neighbourhood": "Hastings-Sunrise",
+    "page": "https://trafficcams.vancouver.ca/boundaryHenning.htm",
+    "lat": 49.26368,
+    "lng": -123.023679,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BoundaryHenningNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BoundaryHenningEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BoundaryHenningSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BoundaryHenningWest.jpg"
+    }
+  },
+  {
+    "id": "boundarylougheed",
+    "name": "Boundary Road and Lougheed Hwy",
+    "neighbourhood": "Hastings-Sunrise",
+    "page": "https://trafficcams.vancouver.ca/boundaryLougheed.htm",
+    "lat": 49.265567,
+    "lng": -123.023669,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BoundaryLougheedSouthNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BoundaryLougheedWestEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BoundaryLougheedWestSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BoundaryLougheedWestWest.jpg"
+    }
+  },
+  {
+    "id": "cassiarhastings",
+    "name": "Cassiar Connector and E Hastings St",
+    "neighbourhood": "Hastings-Sunrise",
+    "page": "https://trafficcams.vancouver.ca/cassiarHastings.htm",
+    "lat": 49.2811264797669,
+    "lng": -123.030835801938,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Cassiarnorth_hastings.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Hastingseast_cassiar.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Cassiarsouth_hastings.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Hastingswest_cassiar.jpg"
+    }
+  },
+  {
+    "id": "nanaimograndview",
+    "name": "Nanaimo St and Grandview Hwy South",
+    "neighbourhood": "Hastings-Sunrise",
+    "page": "https://trafficcams.vancouver.ca/nanaimoGrandview.htm",
+    "lat": 49.257626,
+    "lng": -123.056711,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/NanaimoGrandviewSNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/NanaimoGrandviewSEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/NanaimoGrandviewSSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/NanaimoGrandviewSWest.jpg"
+    }
+  },
+  {
+    "id": "renfrewadanac",
+    "name": "Renfrew St and Adanac St",
+    "neighbourhood": "Hastings-Sunrise",
+    "page": "https://trafficcams.vancouver.ca/renfrewAdanac.htm",
+    "lat": 49.277455,
+    "lng": -123.044084,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RenfrewAdanacNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RenfrewAdanacEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RenfrewAdanacSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RenfrewAdanacWest.jpg"
+    }
+  },
+  {
+    "id": "renfrewhastings",
+    "name": "Renfrew St and E Hastings St",
+    "neighbourhood": "Hastings-Sunrise",
+    "page": "https://trafficcams.vancouver.ca/renfrewHastings.htm",
+    "lat": 49.2811221877658,
+    "lng": -123.044076554126,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Renfrewnorth_hastings.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Hastingseast_renfrew.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Renfrewsouth_hastings.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Hastingswest_renfrew.jpg"
+    }
+  },
+  {
+    "id": "renfrewpandora",
+    "name": "Renfrew St and Pandora St",
+    "neighbourhood": "Hastings-Sunrise",
+    "page": "https://trafficcams.vancouver.ca/renfrewPandora.htm",
+    "lat": 49.282971,
+    "lng": -123.044084,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RenfrewPandoraNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RenfrewPandoraEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RenfrewPandoraSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RenfrewPandoraWest.jpg"
+    }
+  },
+  {
+    "id": "transcanada01",
+    "name": "Trans Canada Hwy and E 1st Ave",
+    "neighbourhood": "Hastings-Sunrise",
+    "page": "https://trafficcams.vancouver.ca/transcanada01.htm",
+    "lat": 49.269466,
+    "lng": -123.027471,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/TransCanada01North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/TransCanada01East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/TransCanada01South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/TransCanada01West.jpg"
+    }
+  },
+  {
+    "id": "boundaryvanness",
+    "name": "Boundary Rd and Vanness Ave",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/boundaryVanness.htm",
+    "lat": 49.234379,
+    "lng": -123.023703,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BoundaryVannessNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BoundaryVannessEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BoundaryVannessSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BoundaryVannessWest.jpg"
+    }
+  },
+  {
+    "id": "boundarycanadaway",
+    "name": "Boundary Road and Canada Way",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/boundaryCanadaWay.htm",
+    "lat": 49.254887,
+    "lng": -123.02371,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BoundaryCanadaWayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BoundaryCanadaWayEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BoundaryCanadaWaySouth.jpg"
+    }
+  },
+  {
+    "id": "boundary22",
+    "name": "Boundary Road and E 22nd Ave",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/boundary22.htm",
+    "lat": 49.250633,
+    "lng": -123.02373,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Boundary22North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Boundary22East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Boundary22South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Boundary22West.jpg"
+    }
+  },
+  {
+    "id": "boundary29",
+    "name": "Boundary Road and E 29th Ave",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/boundary29.htm",
+    "lat": 49.244502,
+    "lng": -123.023796,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Boundary29North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Boundary29East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Boundary29South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Boundary29West.jpg"
+    }
+  },
+  {
+    "id": "boundarygrandviewhwy",
+    "name": "Boundary Road and Grandview Hwy",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/BoundaryGrandviewHwy.htm",
+    "lat": 49.25822,
+    "lng": -123.02361,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BoundaryNorth_GrandviewHwy.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GrandviewHwyEast_Boundary.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BoundarySouth_GrandviewHwy.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GrandviewHwyWest_Boundary.jpg"
+    }
+  },
+  {
+    "id": "boundarykingsway",
+    "name": "Boundary Road and Kingsway",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/boundaryKingsway.htm",
+    "lat": 49.23228,
+    "lng": -123.023649,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BoundaryKingswayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BoundaryKingswayEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BoundaryKingswaySouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BoundaryKingswayWest.jpg"
+    }
+  },
+  {
+    "id": "joycekingsway",
+    "name": "Joyce St and Kingsway",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/joyceKingsway.htm",
+    "lat": 49.2341556,
+    "lng": -123.035859,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/JoyceNorthKingsway.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/KingswayEastJoyce.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/JoyceSouthKingsway.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/KingswayWestJoyce.jpg"
+    }
+  },
+  {
+    "id": "joycevanness",
+    "name": "Joyce St and Vanness Ave",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/joyceVanness.htm",
+    "lat": 49.23839,
+    "lng": -123.031797,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/JoyceVannessSouthNorth.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/JoyceVannessSouthSouth.jpg"
+    }
+  },
+  {
+    "id": "renfrew01st",
+    "name": "Renfrew St and 1st Ave",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/renfrew01st.htm",
+    "lat": 49.26949,
+    "lng": -123.044216,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Renfrew01North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Renfrew01East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Renfrew01South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Renfrew01West.jpg"
+    }
+  },
+  {
+    "id": "renfrew22",
+    "name": "Renfrew St and E 22nd Ave",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/renfrew22.htm",
+    "lat": 49.250539,
+    "lng": -123.044345,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Renfrew22North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Renfrew22East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Renfrew22South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Renfrew22West.jpg"
+    }
+  },
+  {
+    "id": "renfrewbroadway",
+    "name": "Renfrew St and E Broadway",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/renfrewBroadway.htm",
+    "lat": 49.261973,
+    "lng": -123.044285,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RenfrewNorthBroadway.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BroadwayEastRenfrew.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RenfrewSouthBroadway.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BroadwayWestRenfrew.jpg"
+    }
+  },
+  {
+    "id": "renfrewgrandview",
+    "name": "Renfrew St and Grandview Hwy",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/renfrewGrandview.htm",
+    "lat": 49.258175,
+    "lng": -123.044289,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RenfrewGrandviewNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RenfrewGrandviewEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RenfrewGrandviewSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RenfrewGrandviewWest.jpg"
+    }
+  },
+  {
+    "id": "ruperte22",
+    "name": "Rupert St and E 22nd Ave",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/rupertE22.htm",
+    "lat": 49.250601,
+    "lng": -123.033805,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/RupertE22north.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RupertE22east.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RupertE22south.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RupertE22west.jpg"
+    }
+  },
+  {
+    "id": "rupert03rd",
+    "name": "Rupert St and E 3rd Ave",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/rupert03rd.htm",
+    "lat": 49.267549,
+    "lng": -123.033725,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Rupert03North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Rupert03East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Rupert03South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Rupert03West.jpg"
+    }
+  },
+  {
+    "id": "grandview4",
+    "name": "Rupert St and Grandview Hwy",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/grandview4.htm",
+    "lat": 49.2581519344414,
+    "lng": -123.033764228688,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/GrandviewRupertnorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/GrandviewRuperteast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/GrandviewRupertsouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/GrandviewRupertwest.jpg"
+    }
+  },
+  {
+    "id": "slocankingsway",
+    "name": "Slocan St and Kingsway",
+    "neighbourhood": "Renfrew-Collingwood",
+    "page": "https://trafficcams.vancouver.ca/slocanKingsway.htm",
+    "lat": 49.240012,
+    "lng": -123.05403,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/SlocanKingsway_North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/SlocanKingsway_East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/SlocanKingsway_South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/SlocanKingsway_West.jpg"
+    }
+  },
+  {
+    "id": "argylemarine",
+    "name": "Argyle St and SE Marine Drive",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/argylemarine.htm",
+    "lat": 49.211037,
+    "lng": -123.072115,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ArgyleMarineNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/ArgyleMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ArgyleMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/ArgyleMarineWest.jpg"
+    }
+  },
+  {
+    "id": "boundary49",
+    "name": "Boundry Road and E 49th Ave",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/boundary49.htm",
+    "lat": 49.222001,
+    "lng": -123.023606,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Boundary49North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Boundary49East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Boundary49South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Boundary49West.jpg"
+    }
+  },
+  {
+    "id": "elliottmarine",
+    "name": "Elliott St and SE Marine Dr",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/elliottmarine.htm",
+    "lat": 49.207087,
+    "lng": -123.056861,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ElliottMarineNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/ElliottMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ElliottMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/ElliottMarineWest.jpg"
+    }
+  },
+  {
+    "id": "kerr54",
+    "name": "Kerr St and E 54th Ave",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/kerr54.htm",
+    "lat": 49.220181,
+    "lng": -123.041291,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Kerr54North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Kerr54East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Kerr54South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Kerr54West.jpg"
+    }
+  },
+  {
+    "id": "kerrmarine",
+    "name": "Kerr St and SE Marine Drive",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/kerrMarine.htm",
+    "lat": 49.208109,
+    "lng": -123.042261,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/KerrMarine_North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/KerrMarine_East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/KerrMarine_South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/KerrMarine_West.jpg"
+    }
+  },
+  {
+    "id": "kinrossmarine",
+    "name": "Kinross St and Marine Way",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/kinrossMarine.htm",
+    "lat": 49.20693,
+    "lng": -123.036666,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/KinrossMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/KinrossMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/KinrossMarineWest.jpg"
+    }
+  },
+  {
+    "id": "riverdistrictmarine",
+    "name": "River District Crossing and Marine Way",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/RiverDistrictMarine.htm",
+    "lat": 49.206881,
+    "lng": -123.03084,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/RiverDistrictMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/RiverDistrictMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/RiverDistrictMarineWest.jpg"
+    }
+  },
+  {
+    "id": "ross41",
+    "name": "Ross St and E 41 Ave",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/ross41.htm",
+    "lat": 49.232788,
+    "lng": -123.082571,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Ross41North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Ross41East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Ross41South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Ross41West.jpg"
+    }
+  },
+  {
+    "id": "rupert41",
+    "name": "Rupert St and E 41st Ave",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/rupert41.htm",
+    "lat": 49.232969,
+    "lng": -123.043093,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Rupert41North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Rupert41East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Rupert41South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Rupert41West.jpg"
+    }
+  },
+  {
+    "id": "rupert45",
+    "name": "Rupert St and E 45th Ave",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/rupert45.htm",
+    "lat": 49.229296,
+    "lng": -123.043122,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Rupert45North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Rupert45East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Rupert45South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Rupert45West.jpg"
+    }
+  },
+  {
+    "id": "sawmilleastmarine",
+    "name": "Sawmill East Crescent and Marine Way",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/SawmillEastMarine.htm",
+    "lat": 49.2064,
+    "lng": -123.027149,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/SawmillEastMarineNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/SawmillEastMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/SawmillEastMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/SawmillEastMarineWest.jpg"
+    }
+  },
+  {
+    "id": "sawmillwestmarine",
+    "name": "Sawmill West Crescent and Marine Way",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/SawmillWestMarine.htm",
+    "lat": 49.207032,
+    "lng": -123.033566,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/SawmillWestMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/SawmillWestMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/SawmillWestMarineWest.jpg"
+    }
+  },
+  {
+    "id": "marinemarineway",
+    "name": "SE Marine Drive and Marine Way",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/marineMarineWay.htm",
+    "lat": 49.207814,
+    "lng": -123.038991,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/MarineMarineWayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/MarineMarineWayEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/MarineMarineWayWest.jpg"
+    }
+  },
+  {
+    "id": "victoria41",
+    "name": "Victoria Drive and E 41st Ave",
+    "neighbourhood": "Killarney",
+    "page": "https://trafficcams.vancouver.ca/victoria41.htm",
+    "lat": 49.232752,
+    "lng": -123.065537,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Victoria41North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Victoria41East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Victoria41South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Victoria41West.jpg"
+    }
+  },
+  {
+    "id": "earleskingsway",
+    "name": "Earles St and Kingsway",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/EarlesKingsway.htm",
+    "lat": 49.23758,
+    "lng": -123.04881,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/EarlesNorth_Kingsway.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/KingswayEast_Earles.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/EarlesSouth_Kingsway.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/KingswayWest_Earles.jpg"
+    }
+  },
+  {
+    "id": "fraserkingsway",
+    "name": "Fraser St and Kingsway",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/fraserKingsway.htm",
+    "lat": 49.256718,
+    "lng": -123.089854,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/FraserKingswayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/FraserKingswayEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/FraserKingswaySouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/FraserKingswayWest.jpg"
+    }
+  },
+  {
+    "id": "granville33",
+    "name": "Granville St and W 33rd Ave",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/granville33.htm",
+    "lat": 49.241869,
+    "lng": -123.139322,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Granville33North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Granville33East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Granville33South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Granville33West.jpg"
+    }
+  },
+  {
+    "id": "knight33",
+    "name": "Knight St and E 33rd Ave",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/knight33.htm",
+    "lat": 49.240209,
+    "lng": -123.076405,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Knight33North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Knight33East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Knight33South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Knight33West.jpg"
+    }
+  },
+  {
+    "id": "knight",
+    "name": "Knight St and E 41st Ave",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/knight.htm",
+    "lat": 49.2327151572131,
+    "lng": -123.077030889534,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/KnightNorth_E41.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/E41East_Knight.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/KnightSouth_E41.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/E41West_Knight.jpg"
+    }
+  },
+  {
+    "id": "knightkingedward",
+    "name": "Knight St and King Edward Ave",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/knightKingEdward.htm",
+    "lat": 49.248518,
+    "lng": -123.07614,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/KnightNorthKingEdward.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/KingEdwardEastKnight.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/KnightSouthKingEdward.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/KingEdwardWestKnight.jpg"
+    }
+  },
+  {
+    "id": "knightkingsway",
+    "name": "Knight St and Kingsway",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/knightKingsway.htm",
+    "lat": 49.250101,
+    "lng": -123.076038,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/KnightNorthKingsway.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/KingswayEastKnight.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/KnightSouthKingsway.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/KingswayWestKnight.jpg"
+    }
+  },
+  {
+    "id": "nanaimobroadway",
+    "name": "Nanaimo St and Broadway",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/nanaimobroadway.htm",
+    "lat": 49.262188,
+    "lng": -123.056621,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/NanaimoBroadwayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/NanaimoBroadwayEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/NanaimoBroadwaySouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/NanaimoBroadwayWest.jpg"
+    }
+  },
+  {
+    "id": "nanaimo1",
+    "name": "Nanaimo St and E 1st Ave",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/nanaimo1.htm",
+    "lat": 49.269508,
+    "lng": -123.056591,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Nanaimo01North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Nanaimo01East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Nanaimo01South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Nanaimo01West.jpg"
+    }
+  },
+  {
+    "id": "nanaimo24",
+    "name": "Nanaimo St and E 24th Ave",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/nanaimo24.htm",
+    "lat": 49.248805,
+    "lng": -123.056641,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/NanaimoNorth24th.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/E24thEastNanaimo.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/NanaimoSouth24th.jpg"
+    }
+  },
+  {
+    "id": "nanaimo33",
+    "name": "Nanaimo St and E 33rd Ave",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/nanaimo33.htm",
+    "lat": 49.239778,
+    "lng": -123.05872,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Nanaimo33North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Nanaimo33East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Nanaimo33South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Nanaimo33West.jpg"
+    }
+  },
+  {
+    "id": "nanaimohastings",
+    "name": "Nanaimo St and E Hastings St",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/nanaimoHastings.htm",
+    "lat": 49.281123,
+    "lng": -123.056587,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/NanaimoHastingsNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/NanaimoHastingsEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/NanaimoHastingsSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/NanaimoHastingsWest.jpg"
+    }
+  },
+  {
+    "id": "nanaimokingsway",
+    "name": "Nanaimo St and Kingsway",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/nanaimoKingsway.htm",
+    "lat": 49.241886,
+    "lng": -123.058128,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/NanaimoKingswayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/NanaimoKingswayEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/NanaimoKingswaySouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/NanaimoKingswayWest.jpg"
+    }
+  },
+  {
+    "id": "victoria33",
+    "name": "Victoria Drive and E 33rd Ave",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/victoria33.htm",
+    "lat": 49.240029,
+    "lng": -123.06533,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Victoria33North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Victoria33East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Victoria33South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Victoria33West.jpg"
+    }
+  },
+  {
+    "id": "victoriavictoriacommercial",
+    "name": "Victoria Drive and Victoria Diversion",
+    "neighbourhood": "Kensington-Cedar Cottage",
+    "page": "https://trafficcams.vancouver.ca/victoriaVictoriaCommercial.htm",
+    "lat": 49.252975,
+    "lng": -123.066299,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/VictoriaVicComNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/VictoriaVicComEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/VictoriaVicComSouth.jpg"
+    }
+  },
+  {
+    "id": "fraser41",
+    "name": "Fraser St and E 41st Ave",
+    "neighbourhood": "Sunset",
+    "page": "https://trafficcams.vancouver.ca/fraser41.htm",
+    "lat": 49.23289139,
+    "lng": -123.090558,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Fraser41North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Fraser41East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Fraser41South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Fraser41West.jpg"
+    }
+  },
+  {
+    "id": "frasermarine",
+    "name": "Fraser St and SE Marine Dr",
+    "neighbourhood": "Sunset",
+    "page": "https://trafficcams.vancouver.ca/frasermarine.htm",
+    "lat": 49.211018,
+    "lng": -123.091118,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/FraserMarineNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/FraserMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/FraserMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/FraserMarineWest.jpg"
+    }
+  },
+  {
+    "id": "knight49",
+    "name": "Knight St and E 49th Ave",
+    "neighbourhood": "Sunset",
+    "page": "https://trafficcams.vancouver.ca/knight49.htm",
+    "lat": 49.225295,
+    "lng": -123.077292,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Knight49North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Knight49East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Knight49South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Knight49West.jpg"
+    }
+  },
+  {
+    "id": "knight57",
+    "name": "Knight St and E 57th Ave",
+    "neighbourhood": "Sunset",
+    "page": "https://trafficcams.vancouver.ca/knight57.htm",
+    "lat": 49.2181272253316,
+    "lng": -123.07702523194,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/KnightNorth_E57.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/E57East_Knight.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/KnightSouth_E57.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/E57West_Knight.jpg"
+    }
+  },
+  {
+    "id": "knightmarinebridge",
+    "name": "Knight St and SE Marine Drive",
+    "neighbourhood": "Sunset",
+    "page": "https://trafficcams.vancouver.ca/knightMarineBridge.htm",
+    "lat": 49.211117,
+    "lng": -123.077205,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/KnightBridgeNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/MarineEastKnight_East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/KnightBridgeSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/KnightMarineW_West.jpg"
+    }
+  },
+  {
+    "id": "mainmarine",
+    "name": "Main St and SE Marine Drive",
+    "neighbourhood": "Sunset",
+    "page": "https://trafficcams.vancouver.ca/mainmarine.htm",
+    "lat": 49.211097,
+    "lng": -123.102199,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/MainMarineNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/MainMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/MainMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/MainMarineWest.jpg"
+    }
+  },
+  {
+    "id": "victoria49",
+    "name": "Victoria Drive and E 49th Ave",
+    "neighbourhood": "Sunset",
+    "page": "https://trafficcams.vancouver.ca/victoria49.htm",
+    "lat": 49.225182,
+    "lng": -123.065737,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Victoria49North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Victoria49East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Victoria49South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Victoria49West.jpg"
+    }
+  },
+  {
+    "id": "victoriamarine",
+    "name": "Victoria Drive and SE Marine Drive",
+    "neighbourhood": "Sunset",
+    "page": "https://trafficcams.vancouver.ca/victoriaMarine.htm",
+    "lat": 49.209689,
+    "lng": -123.066111,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/VictoriaMarineNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/VictoriaMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/VictoriaMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/VictoriaMarineWest.jpg"
+    }
+  },
+  {
+    "id": "cambie37",
+    "name": "Cambie St and W 37th Ave",
+    "neighbourhood": "Oakridge",
+    "page": "https://trafficcams.vancouver.ca/cambie37.htm",
+    "lat": 49.237262,
+    "lng": -123.116051,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Cambie37North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Cambie37East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Cambie37South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Cambie37West.jpg"
+    }
+  },
+  {
+    "id": "cambie41",
+    "name": "Cambie St and W 41st Ave",
+    "neighbourhood": "Oakridge",
+    "page": "https://trafficcams.vancouver.ca/cambie41.htm",
+    "lat": 49.2335434721856,
+    "lng": -123.116192190431,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/CambieNorth_41.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/41East_Cambie.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/CambieSouth_41.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/41West_Cambie.jpg"
+    }
+  },
+  {
+    "id": "cambie44",
+    "name": "Cambie St and W 44th Ave",
+    "neighbourhood": "Oakridge",
+    "page": "https://trafficcams.vancouver.ca/cambie44.htm",
+    "lat": 49.230741,
+    "lng": -123.116306,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Cambie44North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Cambie44East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Cambie44South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Cambie44West.jpg"
+    }
+  },
+  {
+    "id": "cambie49",
+    "name": "Cambie St and W 49th Ave",
+    "neighbourhood": "Oakridge",
+    "page": "https://trafficcams.vancouver.ca/cambie49.htm",
+    "lat": 49.2261139995231,
+    "lng": -123.116492357278,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/CambieNorth_49.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/49East_Cambie.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/CambieSouth_49.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/49West_Cambie.jpg"
+    }
+  },
+  {
+    "id": "carnarvon41",
+    "name": "Carnarvon St and W 41st Ave",
+    "neighbourhood": "Oakridge",
+    "page": "https://trafficcams.vancouver.ca/carnarvon41.htm",
+    "lat": 49.234751,
+    "lng": -123.17306,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Carnarvon41North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Carnarvon41East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Carnarvon41South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Carnarvon41West.jpg"
+    }
+  },
+  {
+    "id": "main41",
+    "name": "Main St and E 41st Ave",
+    "neighbourhood": "Oakridge",
+    "page": "https://trafficcams.vancouver.ca/main41.htm",
+    "lat": 49.233079,
+    "lng": -123.101519,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Main41North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Main41East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Main41South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Main41West.jpg"
+    }
+  },
+  {
+    "id": "oak49",
+    "name": "Oak St and W 49th Ave",
+    "neighbourhood": "Oakridge",
+    "page": "https://trafficcams.vancouver.ca/oak49.htm",
+    "lat": 49.226558,
+    "lng": -123.128331,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/oak49north.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/oak49east.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/oak49south.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/oak49west.jpg"
+    }
+  },
+  {
+    "id": "oak57",
+    "name": "Oak St and W 57th Ave",
+    "neighbourhood": "Oakridge",
+    "page": "https://trafficcams.vancouver.ca/oak57.htm",
+    "lat": 49.219204,
+    "lng": -123.12859,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/oak57north.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/oak57east.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/oak57south.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/oak57west.jpg"
+    }
+  },
+  {
+    "id": "cambiemarine",
+    "name": "Cambie St and SW Marine Drive",
+    "neighbourhood": "Marpole",
+    "page": "https://trafficcams.vancouver.ca/CambieMarine.htm",
+    "lat": 49.2101449448247,
+    "lng": -123.117110735151,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/CambieMarineNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/CambieMarineEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/CambieMarineWest.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/CambieMarineSouth.jpg"
+    }
+  },
+  {
+    "id": "cornishswmarine",
+    "name": "Cornish St and SW Marine drive",
+    "neighbourhood": "Marpole",
+    "page": "https://trafficcams.vancouver.ca/cornishSWMarine.htm",
+    "lat": 49.208558,
+    "lng": -123.142148,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/CornishSWMarineNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/CornishSWMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/CornishSWMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/CornishSWMarineWest.jpg"
+    }
+  },
+  {
+    "id": "granville70th",
+    "name": "Granville St and W 70th Ave",
+    "neighbourhood": "Marpole",
+    "page": "https://trafficcams.vancouver.ca/granville70th.htm",
+    "lat": 49.2085840137306,
+    "lng": -123.140525163827,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Granville70north.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Granville70east.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Granville70south.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Granville70west.jpg"
+    }
+  },
+  {
+    "id": "manitobamarine",
+    "name": "Manitoba St and SW Marine Drive",
+    "neighbourhood": "Marpole",
+    "page": "https://trafficcams.vancouver.ca/manitobamarine.htm",
+    "lat": 49.212191,
+    "lng": -123.109971,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ManitobaMarineNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/ManitobaMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ManitobaMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/ManitobaMarineWest.jpg"
+    }
+  },
+  {
+    "id": "oak4",
+    "name": "Oak St and W 70th Ave",
+    "neighbourhood": "Marpole",
+    "page": "https://trafficcams.vancouver.ca/oak4.htm",
+    "lat": 49.2084701202487,
+    "lng": -123.130252725283,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Oak70north.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Oak70EastEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Oakbridge.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Oak70EastWest.jpg"
+    }
+  },
+  {
+    "id": "marine70",
+    "name": "SW Marine Drive and W 70th Ave",
+    "neighbourhood": "Marpole",
+    "page": "https://trafficcams.vancouver.ca/marine70.htm",
+    "lat": 49.208304,
+    "lng": -123.121502,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Marine70SemiNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Marine70SemiEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Marine70SemiSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Marine70SemiWest.jpg"
+    }
+  },
+  {
+    "id": "yukonswmarine",
+    "name": "Yukon St and SW Marine Drive",
+    "neighbourhood": "Marpole",
+    "page": "https://trafficcams.vancouver.ca/yukonSWMarine.htm",
+    "lat": 49.211016,
+    "lng": -123.114864,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/YukonSWMarineEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/YukonSWMarineSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/YukonSWMarineWest.jpg"
+    }
+  },
+  {
+    "id": "angusmarine",
+    "name": "Angus Drive and SW Marine Drive",
+    "neighbourhood": "Dunbar-Southlands",
+    "page": "https://trafficcams.vancouver.ca/angusMarine.htm",
+    "lat": 49.209601,
+    "lng": -123.148748,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/AngusMarineNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/AngusMarineEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/AngusMarineWest.jpg"
+    }
+  },
+  {
+    "id": "arbutusgreenwayswmarine",
+    "name": "Arbutus Greenway and SW Marine Drive",
+    "neighbourhood": "Dunbar-Southlands",
+    "page": "https://trafficcams.vancouver.ca/arbutusGreenwaySWMarine.htm",
+    "lat": 49.208597,
+    "lng": -123.14447,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/ArbutusGreenwaySWMEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/ArbutusGreenwaySWMWest.jpg"
+    }
+  },
+  {
+    "id": "dunbar41",
+    "name": "Dunbar St and W 41st Ave",
+    "neighbourhood": "Dunbar-Southlands",
+    "page": "https://trafficcams.vancouver.ca/dunbar41.htm",
+    "lat": 49.234718,
+    "lng": -123.185261,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Dunbar41North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Dunbar41East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Dunbar41South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Dunbar41West.jpg"
+    }
+  },
+  {
+    "id": "eastboulevard41",
+    "name": "East Boulevard and W 41st Ave",
+    "neighbourhood": "Dunbar-Southlands",
+    "page": "https://trafficcams.vancouver.ca/eastboulevard41.htm",
+    "lat": 49.234568,
+    "lng": -123.15501,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/EBlvd41North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/EBlvd41East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/EBlvd41South.jpg"
+    }
+  },
+  {
+    "id": "marine41",
+    "name": "SW Marine Drive and W 41st Ave",
+    "neighbourhood": "Dunbar-Southlands",
+    "page": "https://trafficcams.vancouver.ca/marine41.htm",
+    "lat": 49.234772,
+    "lng": -123.196716,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Marine4141stEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Marine41MarineWest.jpg"
+    }
+  },
+  {
+    "id": "westboulevard41",
+    "name": "West Boulevard and W 41st Ave",
+    "neighbourhood": "Dunbar-Southlands",
+    "page": "https://trafficcams.vancouver.ca/westBoulevard41.htm",
+    "lat": 49.234576,
+    "lng": -123.155562,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/WBlvd41North.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/WBlvd41West.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/WBlvd41South.jpg"
+    }
+  },
+  {
+    "id": "greenway12",
+    "name": "Arbutus Greenway and W 12th Ave",
+    "neighbourhood": "Arbutus-Ridge",
+    "page": "https://trafficcams.vancouver.ca/greenway12.htm",
+    "lat": 49.2610022,
+    "lng": -123.1546702,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Greenway12North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Greenway12East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Greenway12South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Greenway12West.jpg"
+    }
+  },
+  {
+    "id": "arbutuslahb",
+    "name": "Arbutus St and Lahb Ave",
+    "neighbourhood": "Arbutus-Ridge",
+    "page": "https://trafficcams.vancouver.ca/arbutusLahb.htm",
+    "lat": 49.248462,
+    "lng": -123.153224,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ArbutusLahbNorth.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ArbutusLahbSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/ArbutusLahbWest.jpg"
+    }
+  },
+  {
+    "id": "arbutus12",
+    "name": "Arbutus St and W 12th Ave",
+    "neighbourhood": "Arbutus-Ridge",
+    "page": "https://trafficcams.vancouver.ca/arbutus12.htm",
+    "lat": 49.260993,
+    "lng": -123.153051,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Arbutus12North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Arbutus12East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Arbutus12South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Arbutus12West.jpg"
+    }
+  },
+  {
+    "id": "arbutus16",
+    "name": "Arbutus St and W 16th Ave",
+    "neighbourhood": "Arbutus-Ridge",
+    "page": "https://trafficcams.vancouver.ca/arbutus16.htm",
+    "lat": 49.257275,
+    "lng": -123.153058,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Arbutus16North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Arbutus16East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Arbutus16South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Arbutus16West.jpg"
+    }
+  },
+  {
+    "id": "arbutusbroadway",
+    "name": "Arbutus St and W Broadway",
+    "neighbourhood": "Arbutus-Ridge",
+    "page": "https://trafficcams.vancouver.ca/arbutusBroadway.htm",
+    "lat": 49.263817,
+    "lng": -123.152958,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ArbutusBroadwayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/ArbutusBroadwayEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ArbutusBroadwaySouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/ArbutusBroadwayWest.jpg"
+    }
+  },
+  {
+    "id": "arbutuswkingedward",
+    "name": "Arbutus St and W King Edward Ave",
+    "neighbourhood": "Arbutus-Ridge",
+    "page": "https://trafficcams.vancouver.ca/arbutusWKingEdward.htm",
+    "lat": 49.25154,
+    "lng": -123.153114,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ArbutusKingEdNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/ArbutusKingEdEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ArbutusKingEdSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/ArbutusKingEdWest.jpg"
+    }
+  },
+  {
+    "id": "almaptgrey",
+    "name": "Alma St and Point Grey Road",
+    "neighbourhood": "West Point Grey",
+    "page": "https://trafficcams.vancouver.ca/almaPtGrey.htm",
+    "lat": 49.272269,
+    "lng": -123.185567,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/PtGreyEastAlma.jpg"
+    }
+  },
+  {
+    "id": "alma10",
+    "name": "Alma St and W 10th Ave",
+    "neighbourhood": "West Point Grey",
+    "page": "https://trafficcams.vancouver.ca/alma10.htm",
+    "lat": 49.263478,
+    "lng": -123.185885,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/AlmaNorthW10th.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/W10thEastAlma.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/AlmaSouthW10th.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/W10thWestAlma.jpg"
+    }
+  },
+  {
+    "id": "blanca10",
+    "name": "Blanca St and W 10th Ave",
+    "neighbourhood": "West Point Grey",
+    "page": "https://trafficcams.vancouver.ca/blanca10.htm",
+    "lat": 49.263925,
+    "lng": -123.215212,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Blanca10North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Blanca10East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Blanca10South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Blanca10West.jpg"
+    }
+  },
+  {
+    "id": "sasamat10",
+    "name": "Sasamat St and W 10th Ave",
+    "neighbourhood": "West Point Grey",
+    "page": "https://trafficcams.vancouver.ca/sasamat10.htm",
+    "lat": 49.26383,
+    "lng": -123.2091,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Sasamat10North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Sasamat10East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Sasamat10South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Sasamat10West.jpg"
+    }
+  },
+  {
+    "id": "ubc-weather",
+    "name": "UBC Weather Camera",
+    "neighbourhood": "UBC",
+    "page": "https://weather.eos.ubc.ca/wxfcst/current/cameras/index.html",
+    "lat": 49.2633,
+    "lng": -123.2522,
+    "images": {
+      "N": "https://weather.eos.ubc.ca/wxfcst/current/cameras/UBC_cam1_north.jpg",
+      "E": "https://weather.eos.ubc.ca/wxfcst/current/cameras/UBC_cam2_east.jpg",
+      "S": "https://weather.eos.ubc.ca/wxfcst/current/cameras/UBC_cam4_south.jpg",
+      "W": "https://weather.eos.ubc.ca/wxfcst/current/cameras/UBC_cam3_west.jpg"
+    }
+  },
+  {
+    "id": "granville16",
+    "name": "Granville St and W 16th Ave",
+    "neighbourhood": "Shaughnessy",
+    "page": "https://trafficcams.vancouver.ca/granville16.htm",
+    "lat": 49.257058,
+    "lng": -123.138808,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Granville16North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Granville16East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Granville16South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Granville16West.jpg"
+    }
+  },
+  {
+    "id": "granville41",
+    "name": "Granville St.and W 41st Ave",
+    "neighbourhood": "Shaughnessy",
+    "page": "https://trafficcams.vancouver.ca/granville41.htm",
+    "lat": 49.234332,
+    "lng": -123.139589,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Granville41North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Granville41East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Granville41South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Granville41West.jpg"
+    }
+  },
+  {
+    "id": "oak33",
+    "name": "Oak St and W 33rd Ave",
+    "neighbourhood": "Shaughnessy",
+    "page": "https://trafficcams.vancouver.ca/oak33.htm",
+    "lat": 49.241388,
+    "lng": -123.127873,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Oak33North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Oak33East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Oak33South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Oak33West.jpg"
+    }
+  },
+  {
+    "id": "burrard12",
+    "name": "Burrard St and W 12th Ave",
+    "neighbourhood": "South Cambie",
+    "page": "https://trafficcams.vancouver.ca/burrard12.htm",
+    "lat": 49.260889,
+    "lng": -123.145864,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Burrard12North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Burrard12East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Burrard12South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Burrard12West.jpg"
+    }
+  },
+  {
+    "id": "ash10",
+    "name": "Ash St and 10th Ave",
+    "neighbourhood": "Riley Park",
+    "page": "https://trafficcams.vancouver.ca/ash10.htm",
+    "lat": 49.262299,
+    "lng": -123.117553,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Ash10North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Ash10East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Ash10South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Ash10West.jpg"
+    }
+  },
+  {
+    "id": "cambie12",
+    "name": "Cambie St and W 12th Ave",
+    "neighbourhood": "Riley Park",
+    "page": "https://trafficcams.vancouver.ca/cambie12.htm",
+    "lat": 49.2603889490707,
+    "lng": -123.114967985868,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Cambie12North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Cambie12East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Cambie12South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Cambie12West.jpg"
+    }
+  },
+  {
+    "id": "cambie16th",
+    "name": "Cambie St and W 16th Ave",
+    "neighbourhood": "Riley Park",
+    "page": "https://trafficcams.vancouver.ca/cambie16th.htm",
+    "lat": 49.256907684832,
+    "lng": -123.115084873166,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Cambie16North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Cambie16East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Cambie16South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Cambie16West.jpg"
+    }
+  },
+  {
+    "id": "cambie29",
+    "name": "Cambie St and W 29th Ave",
+    "neighbourhood": "Riley Park",
+    "page": "https://trafficcams.vancouver.ca/cambie29.htm",
+    "lat": 49.245194,
+    "lng": -123.115565,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Cambie29North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Cambie29East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Cambie29South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Cambie29West.jpg"
+    }
+  },
+  {
+    "id": "cambie30",
+    "name": "Cambie St and W 30th Ave",
+    "neighbourhood": "Riley Park",
+    "page": "https://trafficcams.vancouver.ca/cambie30.htm",
+    "lat": 49.243696,
+    "lng": -123.117316,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Cambie30North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Cambie30East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Cambie30South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Cambie30West.jpg"
+    }
+  },
+  {
+    "id": "cambie33",
+    "name": "Cambie St and W 33rd Ave",
+    "neighbourhood": "Riley Park",
+    "page": "https://trafficcams.vancouver.ca/cambie33.htm",
+    "lat": 49.241057,
+    "lng": -123.118386,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Cambie33North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Cambie33East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Cambie33South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Cambie33West.jpg"
+    }
+  },
+  {
+    "id": "cambie25",
+    "name": "Cambie St and W King Edward Ave",
+    "neighbourhood": "Riley Park",
+    "page": "https://trafficcams.vancouver.ca/cambie25.htm",
+    "lat": 49.248990875309,
+    "lng": -123.115406053889,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/CambieNorth_King_Edward.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/King_EdwardEast_Cambie.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/CambieSouth_King_Edward.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/King_EdwardWest_Cambie.jpg"
+    }
+  },
+  {
+    "id": "fraserkingedward",
+    "name": "Fraser St and E King Edward Ave",
+    "neighbourhood": "Riley Park",
+    "page": "https://trafficcams.vancouver.ca/fraserKingEdward.htm",
+    "lat": 49.248643,
+    "lng": -123.090157,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/FraserKingEdNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/FraserKingEdEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/FraserKingEdSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/FraserKingEdWest.jpg"
+    }
+  },
+  {
+    "id": "main33",
+    "name": "Main St and E 33rd Ave",
+    "neighbourhood": "Riley Park",
+    "page": "https://trafficcams.vancouver.ca/main33.htm",
+    "lat": 49.2405023736559,
+    "lng": -123.101486354168,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/MainNorth_E33.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/E33East_Main.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/MainSouth_E33.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/E33West_Main.jpg"
+    }
+  },
+  {
+    "id": "yukoninterurban",
+    "name": "Yukon St and Interurban Way",
+    "neighbourhood": "Riley Park",
+    "page": "https://trafficcams.vancouver.ca/yukonInterurban.htm",
+    "lat": 49.209638,
+    "lng": -123.115128,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/YukonNorthInterurban.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/YukonSouthInterurban.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/InterurbanWestYukon.jpg"
+    }
+  },
+  {
+    "id": "granville59",
+    "name": "Granville St and W 59th Ave",
+    "neighbourhood": "Kerrisdale",
+    "page": "https://trafficcams.vancouver.ca/granville59.htm",
+    "lat": 49.217413,
+    "lng": -123.140217,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Granville59North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Granville59East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Granville59South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Granville59West.jpg"
+    }
+  },
+  {
+    "id": "maple41",
+    "name": "Maple St and 41st Ave",
+    "neighbourhood": "Kerrisdale",
+    "page": "https://trafficcams.vancouver.ca/maple41.htm",
+    "lat": 49.234525,
+    "lng": -123.152065,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/Maple41North.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Maple41East.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/Maple41South.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Maple41West.jpg"
+    }
+  },
+  {
+    "id": "marine49",
+    "name": "SW Marine Drive and W 49th Ave",
+    "neighbourhood": "Kerrisdale",
+    "page": "https://trafficcams.vancouver.ca/marine49.htm",
+    "lat": 49.227355,
+    "lng": -123.171398,
+    "images": {
+      "E": "https://trafficcams.vancouver.ca/cameraimages/Marine49MarineEast.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/Marine49MarineWest.jpg"
+    }
+  },
+  {
+    "id": "collectorsbridgeway",
+    "name": "Collectors and Bridgeway St",
+    "neighbourhood": "Vancouver",
+    "page": "https://trafficcams.vancouver.ca/collectorsBridgeway.htm",
+    "lat": 49.283737,
+    "lng": -123.031839,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/CollectorsBridgewayNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/CollectorsBridgewayEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/CollectorsBridgewaySouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/CollectorsBridgewayWest.jpg"
     }
   }
 ]
