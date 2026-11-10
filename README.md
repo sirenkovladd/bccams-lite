@@ -61,10 +61,10 @@ bun scripts/build.mjs
 # 2. Point the viewer at history (or leave {"base": ""} for live-only)
 echo '{"base": "https://pub-xxxxxxxxxxxxxxxx.r2.dev"}' > public/history.json
 
-# 3a. Static hosting on R2 (wrangler with an admin API token; per-file content types)
-for f in index.html app.js style.css cams.json history.json; do
-  npx -y wrangler r2 object put "bccams-lite/$f" --file "public/$f" --remote
-done
+# 3a. Static hosting on R2 (per-file content types; all targets from env —
+#     export R2_BUCKET + CLOUDFLARE_API_TOKEN in your shell first,
+#     R2_PUBLIC_BASE_URL optionally enables post-upload checks)
+bun scripts/deploy.mjs
 # 3b. or any static box:
 python3 -m http.server -d public 80
 # caddy file-server --root public --listen :80
@@ -84,7 +84,7 @@ R2 volume at full-city scale: ~876 frames/cycle, ~7k new files/day, ~1–2GB liv
 at 24h retention (inside the free tier). Manifest PUTs stay small: the slim
 top-level manifest plus only the per-cam shards that changed each cycle
 (quiet cycles publish nothing). Needs an R2 API token scoped to the
-`bccams-lite` bucket for the archiver's S3 uploads (mint in dashboard).
+deploy bucket for the archiver's S3 uploads (mint in dashboard).
 
 R2 bucket CORS (dashboard → bucket → CORS, or `wrangler r2 bucket cors`):
 
