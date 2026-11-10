@@ -40,8 +40,11 @@ async function load() {
   renderStats();
   renderChips();
   applyFilter();
-  initMap();
   wireControls();
+  // NOTE: no initMap() here. The map is created lazily on first Map-tab show:
+  // L.map() + fitBounds on the hidden pane poisons Leaflet's cached size (0x0)
+  // and the first fit sticks as a world view (invalidateSize is a no-op
+  // while the map has no view yet, so the stale size never self-heals).
 }
 
 function groupRegions() {
@@ -262,9 +265,12 @@ function showTab(which) {
   document.getElementById("tab-map").setAttribute("aria-selected", String(which === "map"));
   document.getElementById("view-grid").hidden = which !== "grid";
   document.getElementById("view-map").hidden = which !== "map";
-  if (which === "map" && map) {
-    map.invalidateSize();
-    drawPins();
+  if (which === "map") {
+    if (!map) initMap(); // pane is visible now: real size, fit lands on Vancouver
+    else {
+      map.invalidateSize();
+      drawPins();
+    }
   }
 }
 
