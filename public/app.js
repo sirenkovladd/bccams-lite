@@ -301,7 +301,7 @@ function wireControls() {
     if (e.key === "Escape") closeModal();
     else if (e.key === "ArrowLeft") tlStep(-1);
     else if (e.key === "ArrowRight") tlStep(1);
-    else if (e.key === "End") tlLatest();
+    else if (e.key === "End") tlLive();
   });
 
 }
@@ -538,8 +538,8 @@ function renderTimeline() {
   const latest = document.createElement("button");
   latest.type = "button";
   latest.className = "tl-latest";
-  latest.textContent = "Latest";
-  latest.setAttribute("aria-label", "Jump to latest frames");
+  latest.textContent = "Live";
+  latest.setAttribute("aria-label", "Reload live frames from trafficcams");
   const bar = document.createElement("div");
   bar.className = "tl-bar";
   bar.setAttribute("role", "slider");
@@ -580,7 +580,7 @@ function renderTimeline() {
   });
   prev.addEventListener("click", () => tlStep(-1));
   next.addEventListener("click", () => tlStep(1));
-  latest.addEventListener("click", tlLatest);
+  latest.addEventListener("click", tlLive);
   zin.addEventListener("click", () => tlZoom(0.5));
   zout.addEventListener("click", () => tlZoom(2));
   bar.addEventListener("click", (e) => {
@@ -660,9 +660,24 @@ function tlZoom(factor) {
   renderTimeline();
 }
 
-function tlLatest() {
-  const T = current && current.tl;
-  if (T && T.groups.length) tlSelect(T.groups.length - 1);
+// Latest means the current bytes on trafficcams, not the newest timeline dot
+// (which may be an archived frame). Reloads live stills, then selects the
+// moment holding them.
+function tlLive() {
+  if (!current) return;
+  refreshStills();
+  const T = current.tl;
+  if (T.groups.length) tlSelect(T.groups.length - 1);
+  // tlSelect may have put archived twins from the same moment in the slots;
+  // re-assert the just-fetched live bytes.
+  for (const dir of Object.keys(current.cam.images)) {
+    const img = document.querySelector(`#modal-stills img[data-dir="${dir}"]`);
+    const time = document.querySelector(`#modal-stills time[data-dir="${dir}"]`);
+    const buf = current.frames[dir];
+    if (!img || !buf || !buf.length) continue;
+    if (img.getAttribute("src") !== buf[0].url) img.src = buf[0].url;
+    if (time) time.textContent = "updated " + fmtTime(new Date(buf[0].ts));
+  }
 }
 
 function tlStep(d) {
