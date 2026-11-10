@@ -1,0 +1,40 @@
+{
+  "note": "Seed only — every URL below was verified live. Agent: expand by scraping, never invent URLs.",
+  "sourceIndexes": [
+    "https://trafficcams.vancouver.ca",
+    "https://www.drivebc.ca/cameras"
+  ],
+  "mustInclude": [
+    {
+      "id": "burrard-davie",
+      "name": "Burrard St & Davie St",
+      "neighbourhood": "West End",
+      "sourcePage": "https://trafficcams.vancouver.ca/burrardDavie.htm",
+      "images": {
+        "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardDavieNorth.jpg",
+        "E": "https://trafficcams.vancouver.ca/cameraimages/BurrardDavieEast.jpg",
+        "S": "https://trafficcams.vancouver.ca/cameraimages/BurrardDavieSouth.jpg",
+        "W": "https://trafficcams.vancouver.ca/cameraimages/BurrardDavieWest.jpg"
+      },
+      "why": "Missing on bccams.ca (0 matches) — regression test for this repo"
+    },
+    {
+      "id": "bute-davie",
+      "name": "Bute St & Davie St",
+      "neighbourhood": "West End",
+      "sourcePage": "https://trafficcams.vancouver.ca",
+      "images": {
+        "N": "https://trafficcams.vancouver.ca/cameraimages/ButeNorthDavie.jpg",
+        "E": "https://trafficcams.vancouver.ca/cameraimages/DavieEastBute.jpg",
+        "S": "https://trafficcams.vancouver.ca/cameraimages/ButeSouthDavie.jpg",
+        "W": "https://trafficcams.vancouver.ca/cameraimages/DavieWestBute.jpg"
+      }
+    }
+  ],
+  "nextToScrape": [
+    "Burrard St & Drake St (West End)",
+    "Burrard St & Pacific Ave (West End)",
+    "Lions Gate Bridge (DriveBC)",
+    "Ironworkers Memorial Bridge (DriveBC)"
+  ]
+}
