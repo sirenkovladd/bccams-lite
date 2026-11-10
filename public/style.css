@@ -18,8 +18,12 @@ header .src a{color:#fff}
 #region-chips #more-note{align-self:center;font-size:.8rem;color:#555}
 main{padding:.25rem 1rem 2rem;max-width:1400px;margin:0 auto}
 .region{margin:1rem 0}
-.region>h2{font-size:1.1rem;margin:.5rem 0;border-bottom:2px solid #0b3d62;padding-bottom:.2rem;display:flex;justify-content:space-between;align-items:baseline}
-.region>h2 .cnt{font-size:.8rem;color:#555;font-weight:normal}
+.region>summary{display:flex;align-items:baseline;gap:.4rem;list-style:none;cursor:pointer}
+.region>summary::-webkit-details-marker{display:none}
+.region>summary::before{content:"\25b8";color:#0b3d62;font-size:.9rem}
+.region[open]>summary::before{content:"\25be"}
+.region>summary>h2{flex:1;font-size:1.1rem;margin:.5rem 0;border-bottom:2px solid #0b3d62;padding-bottom:.2rem;display:flex;justify-content:space-between;align-items:baseline}
+.region>summary>h2 .cnt{font-size:.8rem;color:#555;font-weight:normal}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem}
 .card{border:0;padding:0;background:#fff;border-radius:.4rem;overflow:hidden;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.12);text-align:left}
 .card img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;background:#dde4ea}
