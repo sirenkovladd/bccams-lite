@@ -117,19 +117,43 @@ function regionSections(list) {
     .filter((g) => g.cams.length > 0);
 }
 
+// Short card label: "Beatty St and Dunsmuir St" -> "Beatty–Dunsmuir".
+// Road suffixes go; directional prefixes (W Pender vs E Pender) stay.
+const ROAD_SUFFIX = /\s+(St|Ave|Av|Blvd|Dr|Rd|Way|Cres)\.?$/i;
+function shortName(name) {
+  return name
+    .split(/\s+and\s+|\s*&\s*|\s*@\s*/i)
+    .map((p) => p.trim().replace(ROAD_SUFFIX, ""))
+    .filter(Boolean)
+    .join("–");
+}
+
 function cardFigure(cam, dir) {
-  const fig = document.createElement("figure");
-  fig.className = "card";
+  const label = DIR_LABEL[dir] || dir;
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "card";
+  btn.setAttribute("aria-label", `${cam.name} — ${label}. Open camera.`);
   const img = document.createElement("img");
   img.loading = "lazy";
   img.decoding = "async";
-  img.alt = `${cam.name} — ${DIR_LABEL[dir] || dir}`;
+  img.alt = "";
   img.src = cam.images[dir];
-  const cap = document.createElement("figcaption");
-  cap.textContent = `${cam.name} – ${DIR_LABEL[dir] || dir}`;
-  fig.append(img, cap);
-  fig.addEventListener("click", () => openModal(cam));
-  return fig;
+  const ol = document.createElement("span");
+  ol.className = "card-ol";
+  ol.setAttribute("aria-hidden", "true");
+  const nm = document.createElement("span");
+  nm.className = "card-name";
+  nm.textContent = shortName(cam.name);
+  const badge = document.createElement("span");
+  badge.className = "card-dir";
+  badge.textContent = dir;
+  const live = document.createElement("span");
+  live.className = "card-live";
+  ol.append(nm, badge, live);
+  btn.append(img, ol);
+  btn.addEventListener("click", () => openModal(cam));
+  return btn;
 }
 
 // Render first 2 regions synchronously (fast first paint); the rest when the
