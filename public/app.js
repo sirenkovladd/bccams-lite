@@ -345,6 +345,9 @@ function openModal(cam) {
   current = { cam, timer: null, frames: {} };
   for (const d of Object.keys(cam.images)) current.frames[d] = [];
   document.getElementById("modal-title").textContent = cam.name;
+  document.getElementById("modal-source").href = cam.page;
+  document.getElementById("modal-maps").href =
+    `https://www.google.com/maps/search/?api=1&query=${cam.lat},${cam.lng}`;
   const stills = document.getElementById("modal-stills");
   stills.innerHTML = "";
   for (const dir of DIR_ORDER.filter((d) => cam.images[d])) {
