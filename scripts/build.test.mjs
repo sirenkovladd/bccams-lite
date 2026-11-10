@@ -11,6 +11,7 @@ import {
   regionFor,
   sameWords,
   slug,
+  stampAssets,
 } from "./build.mjs";
 
 const root = join(import.meta.dir, "..");
@@ -148,4 +149,17 @@ describe("matching helpers", () => {
     const fallback = JSON.parse(readFileSync(join(root, "data", "regions.json"), "utf8")).fallback;
     expect(regionFor("Somewhere With No Keywords 12345")).toBe(fallback);
   });
+});
+
+
+test("stampAssets pins hashed asset URLs and is idempotent", () => {
+  const first = stampAssets();
+  for (const f of ["app.js", "style.css"]) {
+    expect(first[f]).toMatch(/^[0-9a-f]{8}$/);
+  }
+  const html = readFileSync(join(import.meta.dir, "..", "public", "index.html"), "utf8");
+  expect(html).toContain(`app.js?h=${first["app.js"]}`);
+  expect(html).toContain(`style.css?h=${first["style.css"]}`);
+  const second = stampAssets();
+  expect(second).toEqual(first);
 });

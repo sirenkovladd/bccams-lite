@@ -78,7 +78,7 @@ func placeholderSet() map[string]bool {
 
 func loadConfig() *config {
 	cfg := &config{
-		pollIntervalMs: getenvInt64("POLL_INTERVAL_MS", 300000),
+		pollIntervalMs: getenvInt64("POLL_INTERVAL_MS", 180000),
 		retentionHours: getenvInt("RETENTION_HOURS", 24),
 		accountID:      os.Getenv("R2_ACCOUNT_ID"),
 		accessKey:      os.Getenv("R2_ACCESS_KEY_ID"),

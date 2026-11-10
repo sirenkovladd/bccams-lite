@@ -5,6 +5,7 @@
 // live (HEAD, GET fallback; 200 + image/*). Unverifiable cams are skipped with
 // reasons in data/skipped.json; only a missing mustInclude cam fails the build.
 import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { join } from "node:path";
 
 const KML_URL = "https://vanmapp1.vancouver.ca/googleKml/traffic_cameras/";
@@ -148,6 +149,22 @@ export function extractImages(pageHtml) {
     if (dir && !found[dir]) found[dir] = url;
   }
   return found;
+}
+
+// Cache-bust the viewer assets: index.html references app.js/style.css with a
+// content hash, so deploys take effect without a manual hard refresh.
+export function stampAssets() {
+  const hashes = {};
+  for (const file of ["app.js", "style.css"]) {
+    const body = readFileSync(join(root, "public", file));
+    hashes[file] = createHash("sha1").update(body).digest("hex").slice(0, 8);
+  }
+  const htmlPath = join(root, "public", "index.html");
+  const html = readFileSync(htmlPath, "utf8")
+    .replace(/(app\.js)(\?h=[a-z0-9]+)?/g, `app.js?h=${hashes["app.js"]}`)
+    .replace(/(style\.css)(\?h=[a-z0-9]+)?/g, `style.css?h=${hashes["style.css"]}`);
+  writeFileSync(htmlPath, html);
+  return hashes;
 }
 
 async function pool(items, n, fn) {
@@ -320,4 +337,6 @@ writeFileSync(join(root, "data", "skipped.json"), JSON.stringify(skipped, null, 
 console.log(
   `wrote data/cams.json (${cams.length} cams, ${verifiedCount} images verified, ${skipped.length} skipped) [${kmlSource}]`,
 );
+const stamped = stampAssets();
+console.log(`stamped index.html (app.js?h=${stamped["app.js"]} style.css?h=${stamped["style.css"]})`);
 }
