@@ -47,8 +47,19 @@ main{padding:.25rem 1rem 2rem;max-width:1400px;margin:0 auto}
 #modal-close{position:absolute;top:.5rem;right:.5rem;font-size:1.5rem;border:0;background:none;cursor:pointer;line-height:1}
 #modal-links{margin:.15rem 0 .6rem;font-size:.85rem;color:#555}
 #modal-links a{color:#0b3d62}
+#modal-focusbar{display:flex;align-items:center;gap:.6rem;margin:.1rem 0 .6rem;font-size:.9rem;font-weight:600;color:#0b3d62}
+#modal-focusbar[hidden]{display:none}
+#modal-showall{border:1px solid #c6d0d9;background:#eef4ea;color:#0b3d62;border-radius:999px;padding:.2rem .7rem;font-size:.8rem;cursor:pointer;white-space:nowrap}
+#modal-showall:hover{background:#dcead4}
 #modal-stills{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
-#modal-stills figure{margin:0}
+#modal-stills figure{margin:0;cursor:zoom-in}
+#modal-stills.single{grid-template-columns:1fr}
+#modal-stills.single figure{display:none;cursor:default}
+#modal-stills.single figure.focused{display:block}
+#modal-stills.single img{aspect-ratio:auto;max-height:62vh;object-fit:contain;background:#111}
+#modal-stills figcaption{gap:.4rem}
+.fig-hint{font-size:.72rem;color:#0b3d62;background:#e0eaf3;border-radius:.3rem;padding:.05rem .4rem;white-space:nowrap}
+#modal-stills.single .fig-hint{display:none}
 #modal-stills img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:#eee;opacity:0;transition:opacity .18s ease-out}
 #modal-stills img.on{opacity:1}
 @media (prefers-reduced-motion:reduce){#modal-stills img,.card img{transition:none}}

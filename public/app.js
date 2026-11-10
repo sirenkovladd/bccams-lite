@@ -293,13 +293,19 @@ function wireControls() {
   document.getElementById("tab-grid").addEventListener("click", () => showTab("grid"));
   document.getElementById("tab-map").addEventListener("click", () => showTab("map"));
   document.getElementById("modal-close").addEventListener("click", () => closeModal());
+  document.getElementById("modal-showall").addEventListener("click", () => setFocus(null));
   document.getElementById("modal").addEventListener("click", (e) => {
     if (e.target.id === "modal") closeModal();
   });
   document.addEventListener("keydown", (e) => {
-    if (document.getElementById("modal").hidden || !current || !current.tl) return;
-    if (e.key === "Escape") closeModal();
-    else if (e.key === "ArrowLeft") tlStep(-1);
+    if (document.getElementById("modal").hidden || !current) return;
+    if (e.key === "Escape") {
+      if (current.focus) setFocus(null);
+      else closeModal();
+      return;
+    }
+    if (!current.tl) return;
+    if (e.key === "ArrowLeft") tlStep(-1);
     else if (e.key === "ArrowRight") tlStep(1);
     else if (e.key === "End") tlLive();
   });
@@ -342,9 +348,25 @@ function fmtTime(d) {
   return d.toTimeString().slice(0, 8);
 }
 
+function setFocus(dir) {
+  if (!current) return;
+  current.focus = dir;
+  const stills = document.getElementById("modal-stills");
+  stills.classList.toggle("single", !!dir);
+  for (const fig of stills.querySelectorAll("figure")) {
+    fig.classList.toggle("focused", fig.dataset.dir === dir);
+  }
+  const bar = document.getElementById("modal-focusbar");
+  bar.hidden = !dir;
+  if (dir) {
+    document.getElementById("modal-focuslabel").textContent = `Showing ${DIR_LABEL[dir] || dir}`;
+    document.getElementById("modal-showall").focus();
+  }
+}
+
 function openModal(cam) {
   closeModal();
-  current = { cam, timer: null, frames: {}, archived: null, captured: null, archivedAt: 0, pollMs: 300000, enhancing: false };
+  current = { cam, timer: null, frames: {}, archived: null, captured: null, archivedAt: 0, pollMs: 300000, enhancing: false, focus: null };
   for (const d of Object.keys(cam.images)) current.frames[d] = [];
   document.getElementById("modal-title").textContent = cam.name;
   document.getElementById("modal-source").href = cam.page;
@@ -352,12 +374,22 @@ function openModal(cam) {
     `https://www.google.com/maps/search/?api=1&query=${cam.lat},${cam.lng}`;
   const stills = document.getElementById("modal-stills");
   stills.innerHTML = "";
+  stills.classList.remove("single");
+  document.getElementById("modal-focusbar").hidden = true;
+  const singleDir = DIR_ORDER.filter((d) => cam.images[d]).length === 1;
   for (const dir of DIR_ORDER.filter((d) => cam.images[d])) {
     const fig = document.createElement("figure");
+    fig.dataset.dir = dir;
     const img = document.createElement("img");
     img.dataset.dir = dir;
     img.loading = "lazy";
     img.alt = `${cam.name} — ${DIR_LABEL[dir]}`;
+    if (!singleDir) {
+      img.tabIndex = 0;
+      img.setAttribute("role", "button");
+      img.title = `Click to enlarge ${DIR_LABEL[dir]} view`;
+      img.setAttribute("aria-label", `${cam.name} — ${DIR_LABEL[dir]}. Activate to enlarge.`);
+    }
     img.addEventListener("load", () => img.classList.add("on"), { once: true });
     img.src = stillUrl(cam, dir, true);
     const cap = document.createElement("figcaption");
@@ -367,6 +399,22 @@ function openModal(cam) {
     time.dataset.dir = dir;
     time.textContent = "updated " + fmtTime(new Date());
     cap.append(label, time);
+    if (!singleDir) {
+      const hint = document.createElement("span");
+      hint.className = "fig-hint";
+      hint.textContent = "Click to enlarge";
+      cap.append(hint);
+      const enlarge = () => {
+        if (current && !current.focus) setFocus(dir);
+      };
+      fig.addEventListener("click", enlarge);
+      img.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          enlarge();
+        }
+      });
+    }
     fig.append(img, cap);
     stills.append(fig);
     pushFrame(cam.id, dir, img.src);
