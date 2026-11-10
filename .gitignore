@@ -1,0 +1,4 @@
+# Real env + daemon runtime state. Never commit values.
+.env
+data/archive-log.jsonl
+data/archive-state.json

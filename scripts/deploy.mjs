@@ -18,7 +18,7 @@
 // not its value.
 
 import { $ } from "bun";
-import { existsSync } from "node:fs";
+import { existsSync, writeFileSync } from "node:fs";
 
 const FILES = [
   ["index.html", "text/html"],
@@ -71,11 +71,31 @@ if (!skipBuild) {
   await $`bun scripts/build.mjs`;
 }
 
+// history.json is a generated pointer, never a committed URL: the viewer fetches
+// it relative ("history.json") and works live-only when base is "". A fresh
+// clone runs with the committed placeholder; only deploy injects the real
+// base from the shell environment. Do NOT commit the generated file.
+writeFileSync(
+  "public/history.json",
+  base ? JSON.stringify({ base }) + "\n" : '{"base": ""}\n',
+);
+if (base) {
+  console.log("deploy: history.json base set from R2_PUBLIC_BASE_URL (ephemeral, do not commit)");
+} else {
+  console.log('deploy: R2_PUBLIC_BASE_URL unset — history.json stays live-only ({"base": ""})');
+}
+
 console.log("deploy: uploading public/ …");
-for (const [f, ct] of FILES) {
-  // Token reaches wrangler through inherited process env only — never argv.
-  await $`npx -y wrangler r2 object put ${`${bucket}/${f}`} --file ${`public/${f}`} --content-type ${ct} --remote`;
-  console.log(`  ok ${f} (${ct})`);
+try {
+  for (const [f, ct] of FILES) {
+    // Token reaches wrangler through inherited process env only — never argv.
+    await $`npx -y wrangler r2 object put ${`${bucket}/${f}`} --file ${`public/${f}`} --content-type ${ct} --remote`;
+    console.log(`  ok ${f} (${ct})`);
+  }
+} finally {
+  // Restore the committed live-only placeholder so the real base never
+  // lingers in the working tree where it could be committed by accident.
+  writeFileSync("public/history.json", '{"base": ""}\n');
 }
 
 if (!skipVerify) {

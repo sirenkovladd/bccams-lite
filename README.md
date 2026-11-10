@@ -58,8 +58,11 @@ visitor --[GET image / html / css / js]--> R2 storage (public bucket)
 # 1. Verify cameras + regenerate data (fails on any dead URL)
 bun scripts/build.mjs
 
-# 2. Point the viewer at history (or leave {"base": ""} for live-only)
-echo '{"base": "https://pub-xxxxxxxxxxxxxxxx.r2.dev"}' > public/history.json
+# 2. Point the viewer at history via env (or skip for live-only).
+#    public/history.json is committed as {"base": ""} so a fresh clone
+#    runs live-only with no edits. deploy.mjs regenerates it from the
+#    shell env at deploy time — never store the real URL in a file.
+export R2_PUBLIC_BASE_URL="https://pub-<yours>.r2.dev"   # shell only, never commit
 
 # 3a. Static hosting on R2 (per-file content types; all targets from env —
 #     export R2_BUCKET + CLOUDFLARE_API_TOKEN in your shell first,
