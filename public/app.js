@@ -783,6 +783,18 @@ async function enhanceFromHistory(cam) {
     if (e.ts > 0 && (!captured[e.dir] || e.ts > captured[e.dir])) captured[e.dir] = e.ts;
   }
   current.captured = captured;
+  // Backfill the live session frames (stamped with the fetch clock because the
+  // shard hadn't arrived yet) with the capture times. Bytes almost always
+  // match (city changes scenes far slower than the daemon polls); the rare
+  // just-updated window self-heals on the next re-enhance.
+  for (const dir of Object.keys(captured)) {
+    const buf = current.frames[dir];
+    if (buf && buf.length && buf[0].ts > captured[dir]) {
+      buf[0].ts = captured[dir];
+      const time = document.querySelector(`#modal-stills time[data-dir="${dir}"]`);
+      if (time) time.textContent = "updated " + fmtTime(new Date(captured[dir]));
+    }
+  }
   renderStrip();
 }
 
