@@ -1,14 +1,26 @@
 "use strict";
-/* bccams-lite viewer: static list + Leaflet pins + modal with live refresh.
- * History: R2 manifest when history.json points at a base, else in-memory strip. */
-const DIRS = ["N", "E", "S", "W"];
+/* bccams-lite full-city viewer: bccams-style region grid + map tab + search.
+ * Region order comes from cams.json itself (the build sorts by regions.json
+ * order, so first-seen order IS the canonical order — one mechanism, no
+ * extra fetch). Regions after the first render collapsed (native <details>).
+ * R2 history: per-cam shard <base>/history/<cam-id>/manifest.json; a top-level
+ * manifest with a cams map is also accepted (tolerant reader). */
+const DIR_ORDER = ["N", "E", "S", "W"];
+const DIR_LABEL = { N: "North", E: "East", S: "South", W: "West" };
+const SEARCH_CAP = 200;
 
 let cams = [];
+let byRegion = []; // [{region, cams:[...]}] in canonical order
 let historyBase = "";
-let historyManifest = null;
 let map = null;
-let markers = [];
-let current = null; // { cam, timer, frames: {DIR: [url,...]} }
+let mapMarkers = [];
+let mapFitDone = false;
+let activeRegion = ""; // chip filter ("" = all)
+let current = null; // {cam, timer, frames:{DIR:[url,...]}}
+
+function slug(s) {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
 
 async function load() {
   const [camsRes, histRes] = await Promise.all([
@@ -24,81 +36,236 @@ async function load() {
       /* ignore malformed pointer */
     }
   }
-  renderList(cams);
+  groupRegions();
+  renderStats();
+  renderChips();
+  applyFilter();
   initMap();
   wireControls();
 }
 
-function matches(cam, q, hood) {
-  const name = cam.name.toLowerCase();
-  return (!q || name.includes(q)) && (!hood || cam.neighbourhood === hood);
+function groupRegions() {
+  const seen = new Map();
+  for (const cam of cams) {
+    if (!seen.has(cam.neighbourhood)) seen.set(cam.neighbourhood, []);
+    seen.get(cam.neighbourhood).push(cam);
+  }
+  byRegion = [...seen.entries()].map(([region, list]) => ({ region, cams: list }));
 }
 
-function applyFilter() {
+function visibleCams() {
   const q = document.getElementById("search").value.trim().toLowerCase();
-  const hood = document.getElementById("hood-filter").value;
-  const shown = cams.filter((c) => matches(c, q, hood));
-  renderList(shown);
-  drawPins(shown);
+  return cams.filter(
+    (c) =>
+      (!activeRegion || c.neighbourhood === activeRegion) &&
+      (!q || c.name.toLowerCase().includes(q) || c.neighbourhood.toLowerCase().includes(q)),
+  );
 }
 
-function renderList(shown) {
-  const ul = document.getElementById("cam-list");
-  ul.innerHTML = "";
-  for (const cam of shown) {
-    const li = document.createElement("li");
+function renderStats() {
+  const dirs = cams.reduce((n, c) => n + Object.keys(c.images).length, 0);
+  document.getElementById("stats").textContent =
+    `${byRegion.length} regions · ${cams.length} cams · ${dirs} feeds · 24/7`;
+}
+
+function renderChips() {
+  const box = document.getElementById("region-chips");
+  box.innerHTML = "";
+  const all = document.createElement("button");
+  all.type = "button";
+  all.textContent = "All";
+  all.className = activeRegion ? "" : "on";
+  all.addEventListener("click", () => setRegion(""));
+  box.append(all);
+  for (const { region, cams: list } of byRegion) {
     const b = document.createElement("button");
     b.type = "button";
-    b.innerHTML = "";
-    const strong = document.createElement("strong");
-    strong.textContent = cam.name;
-    const small = document.createElement("small");
-    small.textContent = " " + cam.neighbourhood;
-    b.append(strong, small);
-    b.addEventListener("click", () => openModal(cam));
-    li.append(b);
-    ul.append(li);
+    b.dataset.region = region;
+    b.className = activeRegion === region ? "on" : "";
+    const name = document.createElement("span");
+    name.textContent = region;
+    const n = document.createElement("span");
+    n.className = "n";
+    n.textContent = ` ${list.length}`;
+    b.append(name, n);
+    b.addEventListener("click", () => setRegion(activeRegion === region ? "" : region));
+    box.append(b);
   }
-  document.getElementById("count").textContent = `${shown.length} cam${shown.length === 1 ? "" : "s"}`;
+}
+
+function setRegion(region) {
+  activeRegion = region;
+  renderChips();
+  applyFilter();
+  if (region) {
+    const sec = document.getElementById("region-" + slug(region));
+    if (sec) {
+      sec.open = true;
+      sec.scrollIntoView({ block: "start" });
+    }
+  }
+}
+
+function regionSections(list) {
+  // Group a cam list back into canonical region order.
+  const inList = new Set(list);
+  return byRegion
+    .map(({ region, cams: all }) => ({ region, cams: all.filter((c) => inList.has(c)) }))
+    .filter((g) => g.cams.length > 0);
+}
+
+function cardFigure(cam, dir) {
+  const fig = document.createElement("figure");
+  fig.className = "card";
+  const img = document.createElement("img");
+  img.loading = "lazy";
+  img.decoding = "async";
+  img.alt = `${cam.name} — ${DIR_LABEL[dir] || dir}`;
+  img.src = cam.images[dir];
+  const cap = document.createElement("figcaption");
+  cap.textContent = `${cam.name} – ${DIR_LABEL[dir] || dir}`;
+  fig.append(img, cap);
+  fig.addEventListener("click", () => openModal(cam));
+  return fig;
+}
+
+// Render first 2 regions synchronously (fast first paint); the rest when the
+// browser is idle (requestIdleCallback, setTimeout fallback) — one mechanism.
+// A render token drops stale idle callbacks when a new filter starts.
+// Total feeds rendered per cycle are capped at SEARCH_CAP, with a note.
+let renderToken = 0;
+let renderedFeeds = 0;
+let restScheduled = false;
+
+function applyFilter() {
+  renderToken++;
+  restScheduled = false;
+  renderedFeeds = 0;
+  renderPass(renderToken, 0, 2);
+  updateNote();
+  drawPins();
+  scheduleRest(renderToken);
+}
+
+function scheduleRest(token) {
+  const total = regionSections(visibleCams()).length;
+  if (restScheduled || total <= 2) return;
+  restScheduled = true;
+  const run = () => {
+    restScheduled = false;
+    if (token !== renderToken) return;
+    renderPass(token, 2, Infinity);
+    updateNote();
+  };
+  if (typeof requestIdleCallback === "function") requestIdleCallback(run, { timeout: 2000 });
+  else setTimeout(run, 50);
+}
+
+function renderPass(token, from, to) {
+  if (token !== renderToken) return;
+  const box = document.getElementById("regions");
+  if (from === 0) box.innerHTML = "";
+  const groups = regionSections(visibleCams());
+  groups.slice(from, to).forEach((g, gi) => {
+    const det = document.createElement("details");
+    det.className = "region";
+    det.id = "region-" + slug(g.region);
+    det.open = from + gi === 0 && !activeRegion && !document.getElementById("search").value;
+    const sum = document.createElement("summary");
+    const h = document.createElement("h2");
+    h.textContent = g.region;
+    const cnt = document.createElement("span");
+    cnt.className = "cnt";
+    cnt.textContent = `${g.cams.length} cams`;
+    h.append(cnt);
+    sum.append(h);
+    const grid = document.createElement("div");
+    grid.className = "cards";
+    for (const cam of g.cams) {
+      for (const dir of DIR_ORDER.filter((d) => cam.images[d])) {
+        if (renderedFeeds >= SEARCH_CAP) break;
+        grid.append(cardFigure(cam, dir));
+        renderedFeeds++;
+      }
+      if (renderedFeeds >= SEARCH_CAP) break;
+    }
+    det.append(sum, grid);
+    box.append(det);
+  });
+}
+
+function updateNote() {
+  const box = document.getElementById("regions");
+  let note = document.getElementById("grid-note");
+  if (!note) {
+    note = document.createElement("p");
+    note.id = "grid-note";
+    box.after(note);
+  }
+  const total = regionSections(visibleCams()).reduce(
+    (n, g) => n + g.cams.reduce((m, c) => m + Object.keys(c.images).length, 0),
+    0,
+  );
+  note.textContent =
+    renderedFeeds >= total
+      ? `${total} feeds shown`
+      : `Showing ${renderedFeeds} of ${total} feeds — refine search for more`;
 }
 
 function initMap() {
-  if (!window.L || typeof window.L.map !== "function") return; // CDN blocked: list still works
-  map = window.L.map("map").setView([49.28, -123.13], 13);
+  if (!window.L || typeof window.L.map !== "function") return;
+  map = window.L.map("map");
   window.L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
   }).addTo(map);
-  drawPins(cams);
+  drawPins();
 }
 
-function drawPins(shown) {
+function drawPins() {
   if (!map) return;
-  for (const m of markers) m.remove();
-  markers = shown.map((cam) => {
+  for (const m of mapMarkers) m.remove();
+  mapMarkers = [];
+  const list = visibleCams().filter((c) => c.lat && c.lng);
+  for (const cam of list) {
     const mk = window.L.marker([cam.lat, cam.lng]).addTo(map).bindPopup(cam.name);
     mk.on("click", () => openModal(cam));
-    return mk;
-  });
+    mapMarkers.push(mk);
+  }
+  if (list.length && !mapFitDone) {
+    map.fitBounds(window.L.latLngBounds(list.map((c) => [c.lat, c.lng])).pad(0.1));
+    mapFitDone = true;
+  }
 }
 
 function wireControls() {
   document.getElementById("search").addEventListener("input", applyFilter);
-  document.getElementById("hood-filter").addEventListener("change", applyFilter);
-  document.getElementById("modal-close").addEventListener("click", closeModal);
+  document.getElementById("tab-grid").addEventListener("click", () => showTab("grid"));
+  document.getElementById("tab-map").addEventListener("click", () => showTab("map"));
+  document.getElementById("modal-close").addEventListener("click", () => closeModal());
   document.getElementById("modal").addEventListener("click", (e) => {
     if (e.target.id === "modal") closeModal();
   });
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !document.getElementById("modal").hidden) closeModal();
   });
-  // Clicking a history thumb shows it large in the matching still slot.
   document.getElementById("frame-strip").addEventListener("click", (e) => {
     const img = e.target.closest("img[data-dir]");
     if (!img || !current) return;
     const slot = document.querySelector(`#modal-stills img[data-dir="${img.dataset.dir}"]`);
     if (slot) slot.src = img.src;
   });
+}
+
+function showTab(which) {
+  document.getElementById("tab-grid").setAttribute("aria-selected", String(which === "grid"));
+  document.getElementById("tab-map").setAttribute("aria-selected", String(which === "map"));
+  document.getElementById("view-grid").hidden = which !== "grid";
+  document.getElementById("view-map").hidden = which !== "map";
+  if (which === "map" && map) {
+    map.invalidateSize();
+    drawPins();
+  }
 }
 
 function stillUrl(cam, dir, cacheBust) {
@@ -110,21 +277,22 @@ function fmtTime(d) {
 }
 
 function openModal(cam) {
-  closeModal(true);
-  current = { cam, timer: null, frames: { N: [], E: [], S: [], W: [] } };
+  closeModal();
+  current = { cam, timer: null, frames: {} };
+  for (const d of Object.keys(cam.images)) current.frames[d] = [];
   document.getElementById("modal-title").textContent = cam.name;
   const stills = document.getElementById("modal-stills");
   stills.innerHTML = "";
-  for (const dir of DIRS) {
+  for (const dir of DIR_ORDER.filter((d) => cam.images[d])) {
     const fig = document.createElement("figure");
     const img = document.createElement("img");
     img.dataset.dir = dir;
     img.loading = "lazy";
-    img.alt = `${cam.name} — ${dir}`;
+    img.alt = `${cam.name} — ${DIR_LABEL[dir]}`;
     img.src = stillUrl(cam, dir, true);
     const cap = document.createElement("figcaption");
     const label = document.createElement("span");
-    label.textContent = dir;
+    label.textContent = DIR_LABEL[dir];
     const time = document.createElement("time");
     time.dataset.dir = dir;
     time.textContent = "updated " + fmtTime(new Date());
@@ -146,7 +314,7 @@ function openModal(cam) {
 
 function pushFrame(camId, dir, url) {
   if (!current || current.cam.id !== camId) return;
-  const buf = current.frames[dir];
+  const buf = current.frames[dir] || (current.frames[dir] = []);
   buf.unshift(url);
   if (buf.length > 6) buf.length = 6;
 }
@@ -154,7 +322,7 @@ function pushFrame(camId, dir, url) {
 function refreshStills() {
   if (!current) return;
   const now = fmtTime(new Date());
-  for (const dir of DIRS) {
+  for (const dir of Object.keys(current.cam.images)) {
     const img = document.querySelector(`#modal-stills img[data-dir="${dir}"]`);
     const time = document.querySelector(`#modal-stills time[data-dir="${dir}"]`);
     if (!img) continue;
@@ -174,7 +342,7 @@ function renderStrip() {
   const strip = document.getElementById("frame-strip");
   strip.innerHTML = "";
   if (!current) return;
-  for (const dir of DIRS) {
+  for (const dir of DIR_ORDER.filter((d) => current.frames[d])) {
     for (const url of current.frames[dir]) {
       const img = document.createElement("img");
       img.loading = "lazy";
@@ -190,19 +358,19 @@ async function enhanceFromHistory(cam) {
   if (!historyBase || !current || current.cam.id !== cam.id) return;
   let manifest;
   try {
-    const res = await fetch(historyBase + "/history/manifest.json", { cache: "no-store" });
+    const res = await fetch(`${historyBase}/history/${cam.id}/manifest.json`, { cache: "no-store" });
     if (!res.ok) throw new Error("HTTP " + res.status);
     manifest = await res.json();
   } catch (err) {
     console.warn("history unavailable, using live frames:", err.message);
     return;
   }
-  historyManifest = manifest;
-  const entry = manifest && manifest.cams && manifest.cams[cam.id];
+  // Tolerant reader: per-cam shard (dir map at top level) or top-level cams map.
+  const entry = manifest && manifest.cams && manifest.cams[cam.id] ? manifest.cams[cam.id] : manifest;
   if (!entry || !current || current.cam.id !== cam.id) return;
   const strip = document.getElementById("frame-strip");
   strip.innerHTML = "";
-  for (const dir of DIRS) {
+  for (const dir of DIR_ORDER.filter((d) => cam.images[d])) {
     for (const rel of entry[dir] || []) {
       const img = document.createElement("img");
       img.loading = "lazy";
@@ -214,16 +382,15 @@ async function enhanceFromHistory(cam) {
   }
 }
 
-function closeModal(silent) {
+function closeModal() {
   if (current && current.timer) clearInterval(current.timer);
   current = null;
-  if (!silent) document.getElementById("modal").hidden = true;
-  else document.getElementById("modal").hidden = true;
+  document.getElementById("modal").hidden = true;
 }
 
-if (typeof document !== "undefined" && document.getElementById("map")) {
+if (typeof document !== "undefined" && document.getElementById("regions")) {
   load().catch((err) => {
-    document.getElementById("count").textContent = "failed to load cams.json";
+    document.getElementById("stats").textContent = "failed to load cams.json";
     console.error(err);
   });
 }
