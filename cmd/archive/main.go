@@ -334,13 +334,12 @@ func (cy *cycle) applyFrame(j frameJob, fr fetchResult) {
 	r2key := fmt.Sprintf("history/%s/%s/%s.jpg", cam.ID, dir, ts)
 	cfg, r2 := cy.cfg, cy.r2
 	if cfg.dryRun || r2 == nil {
+		// Report-only: nothing was uploaded, so record nothing. Recording
+		// here persists phantom keys that later publish as dangling
+		// manifest entries (viewer renders them as blank stills).
 		cy.ok++
 		cy.store++
 		line.Changed = true
-		recordUpdate(fs, now, cfg.statsDepth)
-		fs.LastModified, fs.ETag, fs.LastHash, fs.LastFile = fr.lastMod, fr.etag, fr.hash, ts
-		insertKey(fs, r2key, cfg.manifestCap)
-		cy.dirty[cam.ID] = true
 		line.PrevUpdateAt, line.AvgIntervalMs, line.NextPredicted =
 			fs.PrevUpdateAt, fs.AvgIntervalMs, fs.NextPredicted
 		cy.lines = append(cy.lines, line)

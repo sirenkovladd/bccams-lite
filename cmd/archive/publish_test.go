@@ -161,3 +161,38 @@ func TestDefaultPlaceholderPinned(t *testing.T) {
 		t.Fatal("verified out-of-service fingerprint missing from defaults")
 	}
 }
+
+// Dry runs (and nil-R2 runs) must not record state: every recorded-but-never-
+// uploaded key becomes a phantom manifest entry pointing at a 404, which the
+// viewer then renders as a blank still. Regression: an early dry-run poisoned
+// state.json with keys that later published as dangling manifest entries.
+func TestDryRunLeavesStateUntouched(t *testing.T) {
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "image/jpeg")
+		w.Header().Set("Last-Modified", "Tue, 10 Nov 2026 12:00:00 GMT")
+		_, _ = w.Write([]byte("fakejpegbytes"))
+	}))
+	defer srv.Close()
+	dir := t.TempDir()
+	cfg := &config{
+		pollIntervalMs: 300000,
+		retentionHours: 24,
+		logPath:        filepath.Join(dir, "log.jsonl"),
+		statePath:      filepath.Join(dir, "state.json"),
+		spoolDir:       filepath.Join(dir, "spool"),
+		fetchWorkers:   2,
+		manifestCap:    100,
+		dryRun:         true,
+	}
+	st := &daemonState{Frames: map[string]*frameState{}}
+	cams := []camera{{ID: "testcam", Images: map[string]string{"N": srv.URL + "/n.jpg"}}}
+	ok, _, stored, errs := runCycle(cfg, st, srv.Client(), nil, cams)
+	if errs != 0 || ok != 1 || stored != 1 {
+		t.Fatalf("dry-run report: ok=%d stored=%d errs=%d", ok, stored, errs)
+	}
+	for key, fs := range st.Frames {
+		if len(fs.StoredKeys) != 0 || fs.LastHash != "" || fs.LastFile != "" {
+			t.Fatalf("dry-run mutated state for %s: %+v", key, fs)
+		}
+	}
+}
