@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bccams-lite — Vancouver traffic cams</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>bccams-lite</h1>
+  <p>Vancouver traffic cameras. Images: <a href="https://trafficcams.vancouver.ca">trafficcams.vancouver.ca</a> (updates every 10–15 min).</p>
+</header>
+<div id="controls">
+  <input id="search" type="search" placeholder="Search intersections…" autocomplete="off">
+  <select id="hood-filter" aria-label="Filter by neighbourhood">
+    <option value="">All neighbourhoods</option>
+    <option value="West End">West End</option>
+  </select>
+  <span id="count"></span>
+</div>
+<main>
+  <div id="map" aria-label="Camera map"></div>
+  <ul id="cam-list"></ul>
+</main>
+<div id="modal" hidden>
+  <div id="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button id="modal-close" aria-label="Close">×</button>
+    <h2 id="modal-title"></h2>
+    <div id="modal-stills"></div>
+    <h3>Previous frames</h3>
+    <div id="frame-strip"></div>
+  </div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
