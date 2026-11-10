@@ -301,6 +301,7 @@ function wireControls() {
     if (e.key === "Escape") closeModal();
     else if (e.key === "ArrowLeft") tlStep(-1);
     else if (e.key === "ArrowRight") tlStep(1);
+    else if (e.key === "End") tlLatest();
   });
 
 }
@@ -534,6 +535,11 @@ function renderTimeline() {
   next.className = "tl-arrow";
   next.setAttribute("aria-label", "Next moment");
   next.textContent = "\u203a";
+  const latest = document.createElement("button");
+  latest.type = "button";
+  latest.className = "tl-latest";
+  latest.textContent = "Latest";
+  latest.setAttribute("aria-label", "Jump to latest frames");
   const bar = document.createElement("div");
   bar.className = "tl-bar";
   bar.setAttribute("role", "slider");
@@ -554,7 +560,7 @@ function renderTimeline() {
   zout.className = "tl-arrow";
   zout.setAttribute("aria-label", "Zoom timeline out");
   zout.textContent = "\u2212";
-  nav.append(prev, bar, next, readout, zin, zout);
+  nav.append(prev, bar, next, latest, readout, zin, zout);
   strip.append(nav);
 
   const EDGE = 12; // px inset: edge dots stay fully inside the bar and clickable
@@ -563,7 +569,7 @@ function renderTimeline() {
     const ts = (g.start + g.end) / 2;
     const dot = document.createElement("button");
     dot.type = "button";
-    dot.className = "tl-dot" + (i === T.sel ? " sel" : "");
+    dot.className = "tl-dot" + (i === T.sel ? " sel" : "") + (i === T.groups.length - 1 ? " latest-dot" : "");
     dot.dataset.i = i;
     dot.title = `${new Date(g.start).toLocaleTimeString()} · ${g.frames.length} frames`;
     dot.setAttribute("aria-label", `Moment ${i + 1} of ${T.groups.length} at ${new Date(g.start).toLocaleString()}`);
@@ -574,6 +580,7 @@ function renderTimeline() {
   });
   prev.addEventListener("click", () => tlStep(-1));
   next.addEventListener("click", () => tlStep(1));
+  latest.addEventListener("click", tlLatest);
   zin.addEventListener("click", () => tlZoom(0.5));
   zout.addEventListener("click", () => tlZoom(2));
   bar.addEventListener("click", (e) => {
@@ -600,7 +607,8 @@ function tlReadout() {
   if (!el) return;
   if (T.sel >= 0) {
     const g = T.groups[T.sel];
-    el.textContent = `${new Date(g.start).toLocaleTimeString()} · ${T.sel + 1}/${T.groups.length}`;
+    const where = T.sel === T.groups.length - 1 ? "latest" : `${T.sel + 1}/${T.groups.length}`;
+    el.textContent = `${new Date(g.start).toLocaleTimeString()} · ${where}`;
   } else {
     el.textContent = `${T.groups.length} moments`;
   }
@@ -650,6 +658,11 @@ function tlZoom(factor) {
   if (start < full.start) { start = full.start; end = full.end; }
   T.view = { start, end };
   renderTimeline();
+}
+
+function tlLatest() {
+  const T = current && current.tl;
+  if (T && T.groups.length) tlSelect(T.groups.length - 1);
 }
 
 function tlStep(d) {
