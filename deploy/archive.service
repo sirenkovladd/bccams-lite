@@ -1,0 +1,19 @@
+[Unit]
+Description=bccams-lite history archiver (polls city cams, stores to R2)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/bccams-lite
+EnvironmentFile=/opt/bccams-lite/.env
+ExecStart=/opt/bccams-lite/archive
+Restart=on-failure
+RestartSec=30
+# Keep the Go runtime lean.
+Environment=GOMEMLIMIT=40MiB
+Environment=GOGC=50
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
