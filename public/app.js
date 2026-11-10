@@ -58,12 +58,15 @@ function groupRegions() {
 }
 
 function visibleCams() {
-  const q = document.getElementById("search").value.trim().toLowerCase();
-  return cams.filter(
-    (c) =>
-      (!activeRegion || c.neighbourhood === activeRegion) &&
-      (!q || c.name.toLowerCase().includes(q) || c.neighbourhood.toLowerCase().includes(q)),
-  );
+  const words = document.getElementById("search").value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  return cams.filter((c) => {
+    if (activeRegion && c.neighbourhood !== activeRegion) return false;
+    if (!words.length) return true;
+    // Every word must appear somewhere in name + neighbourhood, in any order:
+    // "davie burrard" and "burrard davie" both find Burrard St and Davie St.
+    const hay = `${c.name} ${c.neighbourhood}`.toLowerCase();
+    return words.every((w) => hay.includes(w));
+  });
 }
 
 function renderStats() {
