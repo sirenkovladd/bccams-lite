@@ -53,24 +53,33 @@ func (c *r2Client) sign(req *http.Request, payloadHash string, t time.Time) {
 	req.Header.Set("X-Amz-Date", amzDate)
 	req.Header.Set("X-Amz-Content-Sha256", payloadHash)
 
-	signedHeaders := []string{"host", "x-amz-content-sha256", "x-amz-date"}
-	var canonicalHeaders string
-	for _, h := range signedHeaders {
-		canonicalHeaders += h + ":" + strings.TrimSpace(req.Header.Get(h)) + "\n"
+	// NOTE: req.Header.Get("host") is always empty in Go - the Host header
+	// lives in req.Host / req.URL.Host, not in the Header map. Signing the
+	// empty value while sending the real Host breaks every signature (R2 403).
+	host := req.Host
+	if host == "" {
+		host = req.URL.Host
 	}
-	// Include content-type / cache-control in signature when present.
-	extra := []string{}
+	// R2 (like S3) requires SignedHeaders in sorted order; an unsorted list
+	// fails verification even when every value is correct (HTTP 403).
+	vals := map[string]string{"host": host}
+	names := []string{"host", "x-amz-content-sha256", "x-amz-date"}
 	for _, h := range []string{"content-type", "cache-control"} {
 		if v := req.Header.Get(h); v != "" {
-			extra = append(extra, h)
+			vals[h] = v
+			names = append(names, h)
 		}
 	}
-	sort.Strings(extra)
-	for _, h := range extra {
-		signedHeaders = append(signedHeaders, h)
-		canonicalHeaders += h + ":" + strings.TrimSpace(req.Header.Get(h)) + "\n"
+	sort.Strings(names)
+	signedHeaders := names
+	var canonicalHeaders string
+	for _, h := range signedHeaders {
+		v := vals[h]
+		if v == "" {
+			v = req.Header.Get(h)
+		}
+		canonicalHeaders += h + ":" + strings.TrimSpace(v) + "\n"
 	}
-
 	uri := req.URL.EscapedPath()
 	if uri == "" {
 		uri = "/"
