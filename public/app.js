@@ -413,7 +413,9 @@ function updateStripHead() {
 }
 
 const STRIP_MAX = 150; // dots are cheap; the old thumb strip was capped instead
-const GROUP_WINDOW = 120000; // frames within 2 min form one moment (one poll cycle)
+const GROUP_WINDOW = 45000; // frames within 45 s form one moment: archived polls land
+// ~5 min apart and the modal refreshes every 60 s, so both stay separated.
+// (A 2 min window chained consecutive live refreshes into one blob.)
 const TL_MIN_SPAN = 120000; // closest zoom: 2 minutes
 
 // One timeline renderer for live session frames and archived shard frames.
@@ -448,11 +450,11 @@ function tlPeekEl() {
     peek = document.createElement("div");
     peek.id = "tl-peek";
     peek.hidden = true;
-    const img = document.createElement("img");
-    img.alt = "";
+    const thumbs = document.createElement("div");
+    thumbs.className = "tl-peek-thumbs";
     const cap = document.createElement("div");
     cap.className = "tl-peek-cap";
-    peek.append(img, cap);
+    peek.append(thumbs, cap);
     document.getElementById("modal-box").append(peek);
   }
   return peek;
@@ -468,16 +470,23 @@ function tlPeekShow(dot) {
   if (!T) return;
   const g = T.groups[+dot.dataset.i];
   if (!g) return;
-  const f = g.frames[0];
   const n = g.frames.length;
   const box = document.getElementById("modal-box").getBoundingClientRect();
   const r = dot.getBoundingClientRect();
   const peek = tlPeekEl();
-  peek.querySelector("img").src = f.url;
+  const thumbs = peek.querySelector(".tl-peek-thumbs");
+  thumbs.innerHTML = "";
+  for (const fr of g.frames) {
+    const img = document.createElement("img");
+    img.alt = `${fr.dir} frame`;
+    img.src = fr.url;
+    img.title = fr.dir;
+    thumbs.append(img);
+  }
   peek.querySelector(".tl-peek-cap").textContent =
     `${new Date(g.start).toLocaleTimeString()} · ${n} frame${n === 1 ? "" : "s"}`;
   peek.hidden = false;
-  const pw = 148;
+  const pw = 216;
   peek.style.left = Math.max(8, Math.min(r.left - box.left + r.width / 2 - pw / 2, box.width - pw - 8)) + "px";
   peek.style.top = Math.max(8, r.top - box.top - 108) + "px";
 }
