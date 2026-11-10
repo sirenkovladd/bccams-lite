@@ -51,7 +51,11 @@ main{padding:.25rem 1rem 2rem;max-width:1400px;margin:0 auto}
 #modal-stills img.on{opacity:1}
 @media (prefers-reduced-motion:reduce){#modal-stills img,.card img{transition:none}}
 #modal-stills figcaption{font-size:.8rem;color:#555;display:flex;justify-content:space-between}
-#frame-strip{display:flex;gap:.4rem;overflow-x:auto;padding:.25rem 0}
-#frame-strip img{height:64px;width:auto;flex:none;background:#eee}
+#frame-strip{display:flex;flex-direction:column;gap:.35rem;overflow-x:hidden}
+.fr-group{display:flex;align-items:center;gap:.5rem}
+.fr-hour{font-size:.75rem;color:#555;flex:none;min-width:2.8em}
+.fr-thumbs{display:flex;gap:.4rem;overflow-x:auto;padding:.25rem 0;min-width:0}
+#frame-strip img{height:64px;width:auto;flex:none;background:#eee;cursor:pointer}
+#frame-strip img.sel{outline:2px solid #0b3d62;outline-offset:1px}
 @media(max-width:800px){#modal-stills{grid-template-columns:1fr}#map{min-height:60vh}}
 @media(max-width:700px){.cards{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.5rem}}

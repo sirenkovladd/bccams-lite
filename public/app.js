@@ -300,7 +300,18 @@ function wireControls() {
     const img = e.target.closest("img[data-dir]");
     if (!img || !current) return;
     const slot = document.querySelector(`#modal-stills img[data-dir="${img.dataset.dir}"]`);
-    if (slot) slot.src = img.src;
+    if (!slot) return;
+    slot.src = img.src;
+    slot.classList.remove("on");
+    slot.addEventListener("load", () => slot.classList.add("on"), { once: true });
+    const time = document.querySelector(`#modal-stills time[data-dir="${img.dataset.dir}"]`);
+    if (time && img.dataset.ts && +img.dataset.ts > 0) {
+      time.textContent = new Date(+img.dataset.ts).toLocaleTimeString();
+    }
+    document
+      .querySelectorAll("#frame-strip img.sel")
+      .forEach((el) => el.classList.remove("sel"));
+    img.classList.add("sel");
   });
 }
 
@@ -366,7 +377,7 @@ function openModal(cam) {
 function pushFrame(camId, dir, url) {
   if (!current || current.cam.id !== camId) return;
   const buf = current.frames[dir] || (current.frames[dir] = []);
-  buf.unshift(url);
+  buf.unshift({ url, ts: Date.now() });
   if (buf.length > 6) buf.length = 6;
 }
 
@@ -394,24 +405,65 @@ function updateStripHead() {
   document.getElementById("prev-frames-h").hidden = !strip.hasChildNodes();
 }
 
-function renderStrip() {
+const STRIP_MAX = 24; // timeline thumbs cap: enough history, no spam
+// One timeline renderer for live session frames and archived shard frames.
+// entries: [{dir, url, ts}]. Drops whatever is showing in the stills above
+// (full-URL compare: live frames differ only by ?t= cache-buster),
+// newest first, grouped by hour.
+function setStrip(entries) {
   const strip = document.getElementById("frame-strip");
   strip.innerHTML = "";
   if (!current) {
     updateStripHead();
     return;
   }
-  for (const dir of DIR_ORDER.filter((d) => current.frames[d])) {
-    for (const url of current.frames[dir]) {
-      const img = document.createElement("img");
-      img.loading = "lazy";
-      img.dataset.dir = dir;
-      img.alt = `${current.cam.name} ${dir} previous frame`;
-      img.src = url;
-      strip.append(img);
+  const stillSrc = {};
+  for (const dir of Object.keys(current.cam.images)) {
+    const slot = document.querySelector(`#modal-stills img[data-dir="${dir}"]`);
+    if (slot && slot.src) stillSrc[dir] = slot.src;
+  }
+  const fresh = entries
+    .filter((e) => e.url !== stillSrc[e.dir])
+    .sort((a, b) => b.ts - a.ts)
+    .slice(0, STRIP_MAX);
+  let lastHour = null;
+  let row = null;
+  for (const e of fresh) {
+    const hour = new Date(e.ts).toTimeString().slice(0, 2) + ":00";
+    if (hour !== lastHour) {
+      const grp = document.createElement("div");
+      grp.className = "fr-group";
+      const lab = document.createElement("span");
+      lab.className = "fr-hour";
+      lab.textContent = hour;
+      row = document.createElement("div");
+      row.className = "fr-thumbs";
+      grp.append(lab, row);
+      strip.append(grp);
+      lastHour = hour;
     }
+    const img = document.createElement("img");
+    img.loading = "lazy";
+    img.decoding = "async";
+    img.dataset.dir = e.dir;
+    img.dataset.ts = e.ts;
+    img.alt = `${current.cam.name} ${e.dir} frame at ${new Date(e.ts).toLocaleTimeString()}`;
+    img.src = e.url;
+    row.append(img);
   }
   updateStripHead();
+}
+
+function renderStrip() {
+  if (!current) {
+    setStrip([]);
+    return;
+  }
+  const entries = [];
+  for (const dir of DIR_ORDER.filter((d) => current.frames[d])) {
+    for (const f of current.frames[dir]) entries.push({ dir, url: f.url, ts: f.ts });
+  }
+  setStrip(entries);
 }
 
 async function enhanceFromHistory(cam) {
@@ -428,19 +480,17 @@ async function enhanceFromHistory(cam) {
   // Tolerant reader: per-cam shard (dir map at top level) or top-level cams map.
   const entry = manifest && manifest.cams && manifest.cams[cam.id] ? manifest.cams[cam.id] : manifest;
   if (!entry || !current || current.cam.id !== cam.id) return;
-  const strip = document.getElementById("frame-strip");
-  strip.innerHTML = "";
+  const entries = [];
   for (const dir of DIR_ORDER.filter((d) => cam.images[d])) {
     for (const rel of entry[dir] || []) {
-      const img = document.createElement("img");
-      img.loading = "lazy";
-      img.dataset.dir = dir;
-      img.alt = `${cam.name} ${dir} archived frame`;
-      img.src = historyBase + "/" + rel;
-      strip.append(img);
+      // Shard keys look like history/<cam>/<dir>/2026-11-10T12-00-00.jpg
+      // (UTC, optional "local-" prefix); hour label only needs the hour.
+      const m = /(\d{4}-\d{2}-\d{2}T\d{2})-\d{2}-\d{2}\.jpg$/.exec(rel);
+      const ts = m ? Date.parse(m[1] + ":00:00Z") : 0;
+      entries.push({ dir, url: historyBase + "/" + rel, ts });
     }
   }
-  updateStripHead();
+  setStrip(entries);
 }
 
 function closeModal() {
