@@ -473,7 +473,8 @@ function renderTimeline() {
   nav.append(prev, bar, next, readout, zin, zout);
   strip.append(nav);
 
-  const pos = (ts) => ((ts - start) / span) * 100;
+  const EDGE = 12; // px inset: edge dots stay fully inside the bar and clickable
+  const frac = (ts) => Math.min(1, Math.max(0, (ts - start) / span));
   T.groups.forEach((g, i) => {
     const ts = (g.start + g.end) / 2;
     const dot = document.createElement("button");
@@ -482,7 +483,7 @@ function renderTimeline() {
     dot.dataset.i = i;
     dot.title = `${new Date(g.start).toLocaleTimeString()} · ${g.frames.length} frames`;
     dot.setAttribute("aria-label", `Moment ${i + 1} of ${T.groups.length} at ${new Date(g.start).toLocaleString()}`);
-    dot.style.left = pos(ts) + "%";
+    dot.style.left = `calc(${EDGE}px + ${frac(ts)} * (100% - ${2 * EDGE}px))`;
     dot.addEventListener("click", () => tlSelect(i));
     bar.append(dot);
   });
@@ -493,7 +494,8 @@ function renderTimeline() {
   bar.addEventListener("click", (e) => {
     if (e.target !== bar && e.target !== track) return;
     const r = bar.getBoundingClientRect();
-    const ts = start + ((e.clientX - r.left) / Math.max(r.width, 1)) * span;
+    const f = Math.min(1, Math.max(0, (e.clientX - r.left - EDGE) / Math.max(r.width - 2 * EDGE, 1)));
+    const ts = start + f * span;
     let best = 0, bd = Infinity;
     T.groups.forEach((g, i) => {
       const c = (g.start + g.end) / 2;
