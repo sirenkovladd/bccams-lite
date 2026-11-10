@@ -10,19 +10,24 @@
 <body>
 <header>
   <h1>bccams-lite</h1>
-  <p>Vancouver traffic cameras. Images: <a href="https://trafficcams.vancouver.ca">trafficcams.vancouver.ca</a> (updates every 10–15 min).</p>
+  <p id="stats">loading…</p>
+  <p class="src">Live images: <a href="https://trafficcams.vancouver.ca">trafficcams.vancouver.ca</a> + UBC weather cams. Updated every 10–15 min. <span class="live">● LIVE</span></p>
 </header>
+<nav id="tabs" role="tablist" aria-label="Views">
+  <button id="tab-grid" role="tab" aria-selected="true">Grid</button>
+  <button id="tab-map" role="tab" aria-selected="false">Map</button>
+</nav>
 <div id="controls">
-  <input id="search" type="search" placeholder="Search intersections…" autocomplete="off">
-  <select id="hood-filter" aria-label="Filter by neighbourhood">
-    <option value="">All neighbourhoods</option>
-    <option value="West End">West End</option>
-  </select>
-  <span id="count"></span>
+  <input id="search" type="search" placeholder="Search cameras…" autocomplete="off" aria-label="Search cameras">
+  <div id="region-chips" aria-label="Jump to region"></div>
 </div>
 <main>
-  <div id="map" aria-label="Camera map"></div>
-  <ul id="cam-list"></ul>
+  <section id="view-grid" role="tabpanel">
+    <div id="regions"></div>
+  </section>
+  <section id="view-map" role="tabpanel" hidden>
+    <div id="map" aria-label="Camera map"></div>
+  </section>
 </main>
 <div id="modal" hidden>
   <div id="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
