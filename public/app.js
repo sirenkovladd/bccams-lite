@@ -398,41 +398,57 @@ function updateStripHead() {
   document.getElementById("prev-frames-h").hidden = !strip.hasChildNodes();
 }
 
-const STRIP_MAX = 150; // timeline dots are cheap; thumbs were not
+const STRIP_MAX = 150; // dots are cheap; the old thumb strip was capped instead
+const GROUP_WINDOW = 120000; // frames within 2 min form one moment (one poll cycle)
 const TL_MIN_SPAN = 120000; // closest zoom: 2 minutes
 
+// One timeline renderer for live session frames and archived shard frames.
+// entries: [{dir, url, ts}]. Current stills are excluded (no duplicate of what
+// is showing above); the rest cluster into moments by capture time. Arrows
+// and dots jump whole moments: every direction's still updates at once.
+function groupByTime(entries) {
+  const sorted = entries.slice().sort((a, b) => a.ts - b.ts);
+  const groups = [];
+  for (const e of sorted) {
+    const last = groups[groups.length - 1];
+    if (last && e.ts - last.end <= GROUP_WINDOW) {
+      last.frames.push(e);
+      if (e.ts > last.end) last.end = e.ts;
+    } else {
+      groups.push({ start: e.ts, end: e.ts, frames: [e] });
+    }
+  }
+  return groups;
+}
+
 function tlFullRange() {
-  const ts = current.tl.frames.map((f) => f.ts);
-  const lo = Math.min(...ts), hi = Math.max(...ts);
+  const T = current.tl;
+  const lo = T.groups[0].start, hi = T.groups[T.groups.length - 1].end;
   return lo === hi ? { start: lo - 300000, end: hi + 300000 } : { start: lo, end: hi };
 }
 
-// Video-player timeline: one bar, a dot per frame moment, zoom + steppers.
-// Dots are <button>s (keyboard focusable); selecting one loads it into its
-// direction's still, like the old strip click did.
 function renderTimeline() {
   const strip = document.getElementById("frame-strip");
   strip.innerHTML = "";
   const T = current.tl;
-  if (!T.frames.length) {
+  if (!T.groups.length) {
     updateStripHead();
     return;
   }
   if (!T.view) T.view = tlFullRange();
   const { start, end } = T.view;
   const span = Math.max(end - start, 1);
-
   const nav = document.createElement("div");
   nav.className = "tl-nav";
   const prev = document.createElement("button");
   prev.type = "button";
   prev.className = "tl-arrow";
-  prev.setAttribute("aria-label", "Previous frame");
+  prev.setAttribute("aria-label", "Previous moment");
   prev.textContent = "\u2039";
   const next = document.createElement("button");
   next.type = "button";
   next.className = "tl-arrow";
-  next.setAttribute("aria-label", "Next frame");
+  next.setAttribute("aria-label", "Next moment");
   next.textContent = "\u203a";
   const bar = document.createElement("div");
   bar.className = "tl-bar";
@@ -458,15 +474,15 @@ function renderTimeline() {
   strip.append(nav);
 
   const pos = (ts) => ((ts - start) / span) * 100;
-  T.frames.forEach((f, i) => {
+  T.groups.forEach((g, i) => {
+    const ts = (g.start + g.end) / 2;
     const dot = document.createElement("button");
     dot.type = "button";
     dot.className = "tl-dot" + (i === T.sel ? " sel" : "");
     dot.dataset.i = i;
-    dot.title = `${f.dir} ${new Date(f.ts).toLocaleTimeString()}`;
-    dot.setAttribute("aria-label", `Frame ${f.dir} at ${new Date(f.ts).toLocaleString()}`);
-    dot.style.left = pos(f.ts) + "%";
-    dot.style.top = `calc(50% + ${(DIR_ORDER.indexOf(f.dir) - 1.5) * 7}px)`;
+    dot.title = `${new Date(g.start).toLocaleTimeString()} · ${g.frames.length} frames`;
+    dot.setAttribute("aria-label", `Moment ${i + 1} of ${T.groups.length} at ${new Date(g.start).toLocaleString()}`);
+    dot.style.left = pos(ts) + "%";
     dot.addEventListener("click", () => tlSelect(i));
     bar.append(dot);
   });
@@ -479,8 +495,9 @@ function renderTimeline() {
     const r = bar.getBoundingClientRect();
     const ts = start + ((e.clientX - r.left) / Math.max(r.width, 1)) * span;
     let best = 0, bd = Infinity;
-    T.frames.forEach((f, i) => {
-      const d = Math.abs(f.ts - ts);
+    T.groups.forEach((g, i) => {
+      const c = (g.start + g.end) / 2;
+      const d = Math.abs(c - ts);
       if (d < bd) { bd = d; best = i; }
     });
     tlSelect(best);
@@ -494,13 +511,22 @@ function tlReadout() {
   if (!T) return;
   const el = document.querySelector("#frame-strip .tl-readout");
   if (!el) return;
-  const sel = T.sel >= 0 ? new Date(T.frames[T.sel].ts).toLocaleTimeString() : null;
-  el.textContent = (sel ? sel + " · " : "") + T.frames.length + " frames";
+  if (T.sel >= 0) {
+    const g = T.groups[T.sel];
+    el.textContent = `${new Date(g.start).toLocaleTimeString()} · ${T.sel + 1}/${T.groups.length}`;
+  } else {
+    el.textContent = `${T.groups.length} moments`;
+  }
+}
+
+function tlGroupTs() {
+  const g = current.tl.groups[current.tl.sel];
+  return (g.start + g.end) / 2;
 }
 
 function tlEnsureVisible() {
   const T = current.tl;
-  const ts = T.frames[T.sel].ts;
+  const ts = tlGroupTs();
   if (ts < T.view.start || ts > T.view.end) {
     const span = Math.max(T.view.end - T.view.start, TL_MIN_SPAN);
     T.view = { start: ts - span / 2, end: ts + span / 2 };
@@ -509,25 +535,24 @@ function tlEnsureVisible() {
 
 function tlSelect(i) {
   const T = current.tl;
-  T.sel = Math.max(0, Math.min(i, T.frames.length - 1));
+  T.sel = Math.max(0, Math.min(i, T.groups.length - 1));
   tlEnsureVisible();
-  const f = T.frames[T.sel];
-  const slot = document.querySelector(`#modal-stills img[data-dir="${f.dir}"]`);
-  if (slot && slot.src !== f.url) {
+  for (const f of T.groups[T.sel].frames) {
+    const slot = document.querySelector(`#modal-stills img[data-dir="${f.dir}"]`);
+    if (!slot || slot.src === f.url) continue;
     slot.src = f.url;
     slot.classList.remove("on");
     slot.addEventListener("load", () => slot.classList.add("on"), { once: true });
     const time = document.querySelector(`#modal-stills time[data-dir="${f.dir}"]`);
     if (time) time.textContent = new Date(f.ts).toLocaleTimeString();
   }
-  document.querySelectorAll("#frame-strip .tl-dot.sel").forEach((el) => el.classList.remove("sel"));
   renderTimeline();
 }
 
 function tlZoom(factor) {
   const T = current.tl;
   const full = tlFullRange();
-  const anchor = T.sel >= 0 ? T.frames[T.sel].ts : (T.view.start + T.view.end) / 2;
+  const anchor = T.sel >= 0 ? tlGroupTs() : (T.view.start + T.view.end) / 2;
   let span = (T.view.end - T.view.start) * factor;
   span = Math.min(span, full.end - full.start);
   if (span <= TL_MIN_SPAN && factor < 1) return;
@@ -542,9 +567,9 @@ function tlZoom(factor) {
 
 function tlStep(d) {
   const T = current.tl;
-  if (!T.frames.length) return;
-  if (T.sel < 0) return tlSelect(d > 0 ? 0 : T.frames.length - 1);
-  if (T.sel + d < 0 || T.sel + d >= T.frames.length) return;
+  if (!T.groups.length) return;
+  if (T.sel < 0) return tlSelect(d > 0 ? T.groups.length - 1 : 0);
+  if (T.sel + d < 0 || T.sel + d >= T.groups.length) return;
   tlSelect(T.sel + d);
 }
 
@@ -556,10 +581,9 @@ function setStrip(entries) {
       if (slot && slot.src) stillSrc[dir] = slot.src;
     }
     current.tl = {
-      frames: entries
-        .filter((e) => e.ts > 0 && e.url !== stillSrc[e.dir])
-        .sort((a, b) => a.ts - b.ts)
-        .slice(-STRIP_MAX),
+      groups: groupByTime(
+        entries.filter((e) => e.ts > 0 && e.url !== stillSrc[e.dir]).sort((a, b) => b.ts - a.ts).slice(0, STRIP_MAX),
+      ),
       view: null,
       sel: -1,
     };
