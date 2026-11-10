@@ -88,6 +88,7 @@ type cycleLine struct {
 	Stored  int    `json:"stored"`
 	Errors  int    `json:"errors"`
 	CycleMs int64  `json:"cycleMs"`
+	Workers int    `json:"workers,omitempty"`
 	DryRun  bool   `json:"dryRun,omitempty"`
 }
 
@@ -111,12 +112,15 @@ func appendLog(path string, lines []any) error {
 }
 
 // manifest is the viewer-facing history index published to R2.
+// Top-level keeps counts only; per-cam shards (same shape, Cams filled for one
+// cam) carry the full dir lists so a 220-cam manifest stays small.
 type manifest struct {
 	GeneratedAt  string                         `json:"generatedAt"`
 	RetentionHrs int                            `json:"retentionHours"`
 	PollMs       int64                          `json:"pollIntervalMs"`
 	PublicBase   string                         `json:"publicBase"`
-	Cams         map[string]map[string][]string `json:"cams"`
+	Cams         map[string]map[string][]string `json:"cams,omitempty"`
+	Counts       map[string]map[string]int      `json:"counts,omitempty"`
 	Stats        map[string]manifestStat        `json:"stats"`
 }
 
@@ -126,32 +130,55 @@ type manifestStat struct {
 	NextPredicted string `json:"nextPredictedAt"`
 }
 
-func buildManifest(st *daemonState, cfg *config) *manifest {
+func statFor(st *daemonState, camID, dir string) (manifestStat, []string) {
+	fs := st.Frames[camID+"/"+dir]
+	if fs == nil {
+		return manifestStat{}, []string{}
+	}
+	return manifestStat{
+		LastModified:  fs.LastModified,
+		AvgIntervalMs: fs.AvgIntervalMs,
+		NextPredicted: fs.NextPredicted,
+	}, append([]string{}, fs.StoredKeys...)
+}
+
+func buildManifest(st *daemonState, cfg *config, cams []camera) *manifest {
 	m := &manifest{
 		GeneratedAt:  time.Now().UTC().Format(time.RFC3339),
 		RetentionHrs: cfg.retentionHours,
 		PollMs:       cfg.pollIntervalMs,
 		PublicBase:   cfg.publicBase,
-		Cams:         map[string]map[string][]string{},
+		Counts:       map[string]map[string]int{},
 		Stats:        map[string]manifestStat{},
 	}
-	for _, cam := range cameras {
-		perDir := map[string][]string{}
+	for _, cam := range cams {
+		counts := map[string]int{}
 		for _, dir := range directions {
-			key := cam.ID + "/" + dir
-			fs := st.Frames[key]
-			if fs == nil {
-				perDir[dir] = []string{}
+			if cam.Images[dir] == "" {
 				continue
 			}
-			perDir[dir] = append([]string{}, fs.StoredKeys...)
-			m.Stats[key] = manifestStat{
-				LastModified:  fs.LastModified,
-				AvgIntervalMs: fs.AvgIntervalMs,
-				NextPredicted: fs.NextPredicted,
-			}
+			stat, keys := statFor(st, cam.ID, dir)
+			counts[dir] = len(keys)
+			m.Stats[cam.ID+"/"+dir] = stat
 		}
-		m.Cams[cam.ID] = perDir
+		m.Counts[cam.ID] = counts
+	}
+	return m
+}
+
+func buildCamShard(st *daemonState, cfg *config, camID string) *manifest {
+	m := &manifest{
+		GeneratedAt:  time.Now().UTC().Format(time.RFC3339),
+		RetentionHrs: cfg.retentionHours,
+		PollMs:       cfg.pollIntervalMs,
+		PublicBase:   cfg.publicBase,
+		Cams:         map[string]map[string][]string{camID: {}},
+		Stats:        map[string]manifestStat{},
+	}
+	for _, dir := range directions {
+		stat, keys := statFor(st, camID, dir)
+		m.Cams[camID][dir] = keys
+		m.Stats[camID+"/"+dir] = stat
 	}
 	return m
 }

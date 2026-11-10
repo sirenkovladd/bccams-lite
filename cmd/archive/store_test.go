@@ -2,16 +2,18 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"sync"
 	"testing"
 	"time"
 )
 
-// Manifest direction lists follow Last-Modified order, not fetch order, and
-// pre-existing entries survive new appends (no truncation on publish).
+// Per-cam shard direction lists follow Last-Modified order, not fetch order,
+// and pre-existing entries survive new appends (no truncation on publish).
 func TestManifestOrderAndNoTruncation(t *testing.T) {
 	st := &daemonState{Frames: map[string]*frameState{}}
 	fs := &frameState{}
@@ -24,7 +26,7 @@ func TestManifestOrderAndNoTruncation(t *testing.T) {
 		insertKey(fs, k, 100)
 	}
 	cfg := &config{retentionHours: 24, pollIntervalMs: 300000, manifestCap: 100}
-	m := buildManifest(st, cfg)
+	m := buildCamShard(st, cfg, "burrard-davie")
 	got := m.Cams["burrard-davie"]["N"]
 	want := []string{
 		"history/burrard-davie/N/2026-11-10T08-00-00.jpg",
@@ -33,6 +35,35 @@ func TestManifestOrderAndNoTruncation(t *testing.T) {
 	}
 	if len(got) != 3 || got[0] != want[0] || got[1] != want[1] || got[2] != want[2] {
 		t.Fatalf("not Last-Modified ordered: %v", got)
+	}
+}
+
+// At full-city scale the top-level manifest stays slim and shards stay small.
+func TestManifestSizes(t *testing.T) {
+	st := &daemonState{Frames: map[string]*frameState{}}
+	var cams []camera
+	for i := 0; i < 220; i++ {
+		id := fmt.Sprintf("cam%03d", i)
+		images := map[string]string{}
+		for _, d := range directions {
+			images[d] = "https://x/" + d + ".jpg"
+			key := id + "/" + d
+			fs := &frameState{}
+			for k := 0; k < 100; k++ {
+				insertKey(fs, fmt.Sprintf("history/%s/%s/2026-11-10T%02d-%02d-00.jpg", id, d, k/60, k%60), 100)
+			}
+			st.Frames[key] = fs
+		}
+		cams = append(cams, camera{ID: id, Images: images})
+	}
+	cfg := &config{retentionHours: 24, pollIntervalMs: 300000, publicBase: "https://r2/x"}
+	top, _ := json.Marshal(buildManifest(st, cfg, cams))
+	if len(top) > 100*1024 {
+		t.Fatalf("top-level manifest too big: %d bytes", len(top))
+	}
+	shard, _ := json.Marshal(buildCamShard(st, cfg, "cam000"))
+	if len(shard) > 50*1024 {
+		t.Fatalf("per-cam shard too big: %d bytes", len(shard))
 	}
 }
 
@@ -94,43 +125,29 @@ func TestR2PutDel(t *testing.T) {
 	}
 }
 
-// Go cam table must not drift from data/cams.json (the build's source of truth).
-func TestCamTableMatchesCamsJSON(t *testing.T) {
-	raw, err := os.ReadFile("../../data/cams.json")
-	if err != nil {
-		t.Skip("data/cams.json not present")
+// Worker pool visits every job exactly once, results in job order.
+func TestRunPool(t *testing.T) {
+	jobs := make([]int, 0, 876)
+	for i := 0; i < 876; i++ {
+		jobs = append(jobs, i)
 	}
-	var disk []struct {
-		ID     string            `json:"id"`
-		Name   string            `json:"name"`
-		Hood   string            `json:"neighbourhood"`
-		Page   string            `json:"page"`
-		Lat    float64           `json:"lat"`
-		Lng    float64           `json:"lng"`
-		Images map[string]string `json:"images"`
+	var mu sync.Mutex
+	seen := map[int]int{}
+	out := runPool(jobs, 16, func(j int) int {
+		mu.Lock()
+		seen[j]++
+		mu.Unlock()
+		return j * 2
+	})
+	if len(out) != len(jobs) {
+		t.Fatalf("got %d results, want %d", len(out), len(jobs))
 	}
-	if err := json.Unmarshal(raw, &disk); err != nil {
-		t.Fatal(err)
-	}
-	if len(disk) != len(cameras) {
-		t.Fatalf("cams.json has %d cams, Go table has %d", len(disk), len(cameras))
-	}
-	byID := map[string]camera{}
-	for _, c := range cameras {
-		byID[c.ID] = c
-	}
-	for _, d := range disk {
-		g, ok := byID[d.ID]
-		if !ok {
-			t.Fatalf("cam %s missing from Go table", d.ID)
+	for i, v := range out {
+		if v != jobs[i]*2 {
+			t.Fatalf("result %d out of order: %d", i, v)
 		}
-		if g.Name != d.Name || g.Hood != d.Hood || g.Page != d.Page || g.Lat != d.Lat || g.Lng != d.Lng {
-			t.Fatalf("cam %s metadata drift", d.ID)
-		}
-		for _, dir := range directions {
-			if g.Dirs[dir] != d.Images[dir] {
-				t.Fatalf("cam %s dir %s drift: go=%q disk=%q", d.ID, dir, g.Dirs[dir], d.Images[dir])
-			}
+		if seen[i] != 1 {
+			t.Fatalf("job %d visited %d times", i, seen[i])
 		}
 	}
 }
