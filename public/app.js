@@ -343,7 +343,7 @@ function fmtTime(d) {
 
 function openModal(cam) {
   closeModal();
-  current = { cam, timer: null, frames: {}, archived: null };
+  current = { cam, timer: null, frames: {}, archived: null, captured: null, archivedAt: 0, pollMs: 300000, enhancing: false };
   for (const d of Object.keys(cam.images)) current.frames[d] = [];
   document.getElementById("modal-title").textContent = cam.name;
   document.getElementById("modal-source").href = cam.page;
@@ -381,23 +381,42 @@ function openModal(cam) {
   document.getElementById("modal").hidden = false;
 }
 
+// Live stills reuse the daemon's capture time for the current bytes while the
+// shard is fresh (city images change every ~10-15 min, the daemon polls every
+// ~5, so they usually match). Falls back to fetch time once the shard ages out.
+function liveFrameTs(dir) {
+  if (current && current.captured && current.captured[dir]) {
+    if (Date.now() - current.archivedAt < (current.pollMs || 300000) * 2) return current.captured[dir];
+  }
+  return Date.now();
+}
+
 function pushFrame(camId, dir, url) {
-  if (!current || current.cam.id !== camId) return;
+  if (!current || current.cam.id !== camId) return 0;
+  const ts = liveFrameTs(dir);
   const buf = current.frames[dir] || (current.frames[dir] = []);
-  buf.unshift({ url, ts: Date.now() });
+  buf.unshift({ url, ts });
   if (buf.length > 6) buf.length = 6;
+  return ts;
 }
 
 function refreshStills() {
   if (!current) return;
-  const now = fmtTime(new Date());
+  // Re-pull the shard once it ages out: keeps capture times fresh and picks up
+  // newly archived moments in long-open modals.
+  if (current.archivedAt && Date.now() - current.archivedAt > (current.pollMs || 300000) && !current.enhancing) {
+    current.enhancing = true;
+    enhanceFromHistory(current.cam).finally(() => {
+      if (current) current.enhancing = false;
+    });
+  }
   for (const dir of Object.keys(current.cam.images)) {
     const img = document.querySelector(`#modal-stills img[data-dir="${dir}"]`);
     const time = document.querySelector(`#modal-stills time[data-dir="${dir}"]`);
     if (!img) continue;
     img.src = stillUrl(current.cam, dir, true);
-    if (time) time.textContent = "updated " + now;
-    pushFrame(current.cam.id, dir, img.src);
+    const ts = pushFrame(current.cam.id, dir, img.src);
+    if (time && ts) time.textContent = "updated " + fmtTime(new Date(ts));
   }
   try {
     localStorage.setItem("bccams-lite:lastSeen:" + current.cam.id, new Date().toISOString());
@@ -729,6 +748,13 @@ async function enhanceFromHistory(cam) {
   }
   if (!current || current.cam.id !== cam.id) return;
   current.archived = entries;
+  current.archivedAt = Date.now();
+  current.pollMs = (manifest && manifest.pollIntervalMs) || 300000;
+  const captured = {};
+  for (const e of entries) {
+    if (e.ts > 0 && (!captured[e.dir] || e.ts > captured[e.dir])) captured[e.dir] = e.ts;
+  }
+  current.captured = captured;
   renderStrip();
 }
 
