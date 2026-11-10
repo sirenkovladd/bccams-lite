@@ -305,6 +305,20 @@ function wireControls() {
 
 }
 
+// Timeline dot peek (delegated: dots are re-created on every render).
+document.getElementById("frame-strip").addEventListener("mouseover", (e) => {
+  const dot = e.target.closest(".tl-dot");
+  if (dot) tlPeekShow(dot);
+});
+document.getElementById("frame-strip").addEventListener("mouseout", (e) => {
+  if (e.target.closest(".tl-dot")) tlPeekHide();
+});
+document.getElementById("frame-strip").addEventListener("focusin", (e) => {
+  const dot = e.target.closest(".tl-dot");
+  if (dot) tlPeekShow(dot);
+});
+document.getElementById("frame-strip").addEventListener("focusout", tlPeekHide);
+
 function showTab(which) {
   document.getElementById("tab-grid").setAttribute("aria-selected", String(which === "grid"));
   document.getElementById("tab-map").setAttribute("aria-selected", String(which === "map"));
@@ -427,7 +441,49 @@ function tlFullRange() {
   return lo === hi ? { start: lo - 300000, end: hi + 300000 } : { start: lo, end: hi };
 }
 
+// Hover/focus peek: time + thumbnail above the dot, loaded on demand.
+function tlPeekEl() {
+  let peek = document.getElementById("tl-peek");
+  if (!peek) {
+    peek = document.createElement("div");
+    peek.id = "tl-peek";
+    peek.hidden = true;
+    const img = document.createElement("img");
+    img.alt = "";
+    const cap = document.createElement("div");
+    cap.className = "tl-peek-cap";
+    peek.append(img, cap);
+    document.getElementById("modal-box").append(peek);
+  }
+  return peek;
+}
+
+function tlPeekHide() {
+  const peek = document.getElementById("tl-peek");
+  if (peek) peek.hidden = true;
+}
+
+function tlPeekShow(dot) {
+  const T = current && current.tl;
+  if (!T) return;
+  const g = T.groups[+dot.dataset.i];
+  if (!g) return;
+  const f = g.frames[0];
+  const n = g.frames.length;
+  const box = document.getElementById("modal-box").getBoundingClientRect();
+  const r = dot.getBoundingClientRect();
+  const peek = tlPeekEl();
+  peek.querySelector("img").src = f.url;
+  peek.querySelector(".tl-peek-cap").textContent =
+    `${new Date(g.start).toLocaleTimeString()} · ${n} frame${n === 1 ? "" : "s"}`;
+  peek.hidden = false;
+  const pw = 148;
+  peek.style.left = Math.max(8, Math.min(r.left - box.left + r.width / 2 - pw / 2, box.width - pw - 8)) + "px";
+  peek.style.top = Math.max(8, r.top - box.top - 108) + "px";
+}
+
 function renderTimeline() {
+  tlPeekHide();
   const strip = document.getElementById("frame-strip");
   strip.innerHTML = "";
   const T = current.tl;
