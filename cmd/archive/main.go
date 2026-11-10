@@ -32,6 +32,7 @@ type config struct {
 	fetchWorkers   int
 	manifestCap    int
 	statsDepth     int
+	placeholder    map[string]bool
 	dryRun         bool
 	once           bool
 }
@@ -54,6 +55,27 @@ func getenvInt64(name string, def int64) int64 {
 	return def
 }
 
+// City's "temporarily out of service" card (300x205 static JPEG, verified
+// 2026-11-10: 98% placeholder-blue, byte-identical across cams). Frames with
+// these hashes are never stored or published. Extend without a rebuild via
+// PLACEHOLDER_SHA256S (comma-separated).
+var defaultPlaceholders = map[string]bool{
+	"dd16c59eb9dafb660a6bbef0d62547da5250e6310b736982c63fd784edae2c1a": true,
+}
+
+func placeholderSet() map[string]bool {
+	out := map[string]bool{}
+	for h := range defaultPlaceholders {
+		out[h] = true
+	}
+	for _, h := range strings.Split(os.Getenv("PLACEHOLDER_SHA256S"), ",") {
+		if h = strings.TrimSpace(h); h != "" {
+			out[h] = true
+		}
+	}
+	return out
+}
+
 func loadConfig() *config {
 	cfg := &config{
 		pollIntervalMs: getenvInt64("POLL_INTERVAL_MS", 300000),
@@ -69,6 +91,7 @@ func loadConfig() *config {
 		camsJSON:       firstNonEmpty(os.Getenv("CAMS_JSON"), "./data/cams.json"),
 		fetchWorkers:   getenvInt("FETCH_WORKERS", 16),
 		manifestCap:    getenvInt("MANIFEST_CAP", 100),
+		placeholder:    placeholderSet(),
 		statsDepth:     getenvInt("STATS_DEPTH", 20),
 	}
 	flag.BoolVar(&cfg.dryRun, "dry-run", false, "single fetch pass, no uploads")
@@ -295,6 +318,17 @@ func (cy *cycle) applyFrame(j frameJob, fr fetchResult) {
 		return
 	}
 	// New frame.
+	if cy.cfg.placeholder[fr.hash] {
+		// Out-of-service card: never stored, never published, state untouched
+		// (the cam stays "new" so recovery is picked up on the next cycle).
+		cy.skip++
+		line.Changed = false
+		line.PrevUpdateAt, line.AvgIntervalMs, line.NextPredicted =
+			fs.PrevUpdateAt, fs.AvgIntervalMs, fs.NextPredicted
+		cy.lines = append(cy.lines, line)
+		cy.lines = append(cy.lines, cycleNote("placeholder-skipped", cam.ID+"/"+dir))
+		return
+	}
 	now := time.Now()
 	ts := fileName(fr.lastMod)
 	r2key := fmt.Sprintf("history/%s/%s/%s.jpg", cam.ID, dir, ts)
