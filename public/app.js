@@ -8,6 +8,7 @@
 const DIR_ORDER = ["N", "E", "S", "W"];
 const DIR_LABEL = { N: "North", E: "East", S: "South", W: "West" };
 const SEARCH_CAP = 200;
+const REGION_FEEDS = 12; // per-region teaser cap in the unfiltered All view
 
 let cams = [];
 let byRegion = []; // [{region, cams:[...]}] in canonical order
@@ -138,6 +139,7 @@ function cardFigure(cam, dir) {
   img.loading = "lazy";
   img.decoding = "async";
   img.alt = "";
+  img.addEventListener("load", () => img.classList.add("on"), { once: true });
   img.src = cam.images[dir];
   const ol = document.createElement("span");
   ol.className = "card-ol";
@@ -192,32 +194,50 @@ function renderPass(token, from, to) {
   if (token !== renderToken) return;
   const box = document.getElementById("regions");
   if (from === 0) box.innerHTML = "";
+  const query = document.getElementById("search").value.trim();
+  // Filtered (chip or search): one flat grid, no section headers — the filter
+  // already says what you're looking at. Unfiltered: sections capped per
+  // region so every region stays browsable (a global fill starves Downtown).
+  const flat = Boolean(activeRegion || query);
+  if (flat && from > 0) return; // filtered view renders in a single pass
+  const cap = query ? SEARCH_CAP : Infinity;
   const groups = regionSections(visibleCams());
-  groups.slice(from, to).forEach((g, gi) => {
-    const det = document.createElement("details");
-    det.className = "region";
-    det.id = "region-" + slug(g.region);
-    det.open = from + gi === 0 && !activeRegion && !document.getElementById("search").value;
-    const sum = document.createElement("summary");
-    const h = document.createElement("h2");
-    h.textContent = g.region;
-    const cnt = document.createElement("span");
-    cnt.className = "cnt";
-    cnt.textContent = `${g.cams.length} cams`;
-    h.append(cnt);
-    sum.append(h);
-    const grid = document.createElement("div");
+  let grid = null;
+  if (flat) {
+    grid = document.createElement("div");
     grid.className = "cards";
+    box.append(grid);
+  }
+  groups.slice(from, flat ? undefined : to).forEach((g, gi) => {
+    if (!flat) {
+      const det = document.createElement("details");
+      det.className = "region";
+      det.id = "region-" + slug(g.region);
+      det.open = from + gi === 0;
+      const sum = document.createElement("summary");
+      const h = document.createElement("h2");
+      h.textContent = g.region;
+      const cnt = document.createElement("span");
+      cnt.className = "cnt";
+      cnt.textContent = `${g.cams.length} cams`;
+      h.append(cnt);
+      sum.append(h);
+      grid = document.createElement("div");
+      grid.className = "cards";
+      det.append(sum, grid);
+      box.append(det);
+    }
+    let shown = 0;
+    const full = () => renderedFeeds >= cap || (!flat && shown >= REGION_FEEDS);
     for (const cam of g.cams) {
       for (const dir of DIR_ORDER.filter((d) => cam.images[d])) {
-        if (renderedFeeds >= SEARCH_CAP) break;
+        if (full()) break;
         grid.append(cardFigure(cam, dir));
         renderedFeeds++;
+        shown++;
       }
-      if (renderedFeeds >= SEARCH_CAP) break;
+      if (full()) break;
     }
-    det.append(sum, grid);
-    box.append(det);
   });
 }
 
@@ -319,6 +339,7 @@ function openModal(cam) {
     img.dataset.dir = dir;
     img.loading = "lazy";
     img.alt = `${cam.name} — ${DIR_LABEL[dir]}`;
+    img.addEventListener("load", () => img.classList.add("on"), { once: true });
     img.src = stillUrl(cam, dir, true);
     const cap = document.createElement("figcaption");
     const label = document.createElement("span");
@@ -368,10 +389,18 @@ function refreshStills() {
   renderStrip();
 }
 
+function updateStripHead() {
+  const strip = document.getElementById("frame-strip");
+  document.getElementById("prev-frames-h").hidden = !strip.hasChildNodes();
+}
+
 function renderStrip() {
   const strip = document.getElementById("frame-strip");
   strip.innerHTML = "";
-  if (!current) return;
+  if (!current) {
+    updateStripHead();
+    return;
+  }
   for (const dir of DIR_ORDER.filter((d) => current.frames[d])) {
     for (const url of current.frames[dir]) {
       const img = document.createElement("img");
@@ -382,6 +411,7 @@ function renderStrip() {
       strip.append(img);
     }
   }
+  updateStripHead();
 }
 
 async function enhanceFromHistory(cam) {
@@ -410,6 +440,7 @@ async function enhanceFromHistory(cam) {
       strip.append(img);
     }
   }
+  updateStripHead();
 }
 
 function closeModal() {

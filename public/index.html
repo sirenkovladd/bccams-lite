@@ -9,13 +9,17 @@
 </head>
 <body>
 <header>
-  <h1>bccams-lite</h1>
-  <p id="stats">loading…</p>
-  <p class="src">Live images: <a href="https://trafficcams.vancouver.ca">trafficcams.vancouver.ca</a> + UBC weather cams. Updated every 10–15 min. <span class="live">● LIVE</span></p>
+  <div class="wrap">
+    <h1>bccams-lite</h1>
+    <p id="stats">loading…</p>
+    <p class="src">Live images: <a href="https://trafficcams.vancouver.ca">trafficcams.vancouver.ca</a> + UBC weather cams. Updated every 10–15 min. <span class="live">● LIVE</span></p>
+  </div>
 </header>
 <nav id="tabs" role="tablist" aria-label="Views">
-  <button id="tab-grid" role="tab" aria-selected="true">Grid</button>
-  <button id="tab-map" role="tab" aria-selected="false">Map</button>
+  <div class="wrap">
+    <button id="tab-grid" role="tab" aria-selected="true">Grid</button>
+    <button id="tab-map" role="tab" aria-selected="false">Map</button>
+  </div>
 </nav>
 <div id="controls">
   <div class="wrap">
@@ -36,7 +40,7 @@
     <button id="modal-close" aria-label="Close">×</button>
     <h2 id="modal-title"></h2>
     <div id="modal-stills"></div>
-    <h3>Previous frames</h3>
+    <h3 id="prev-frames-h" hidden>Previous frames</h3>
     <div id="frame-strip"></div>
   </div>
 </div>
