@@ -31,6 +31,22 @@ func hmacSHA256(key []byte, data string) []byte {
 	return h.Sum(nil)
 }
 
+func buildStringToSign(amzDate, dateStamp, region, service, canonicalHash string) string {
+	credentialScope := dateStamp + "/" + region + "/" + service + "/aws4_request"
+	return "AWS4-HMAC-SHA256\n" + amzDate + "\n" + credentialScope + "\n" + canonicalHash
+}
+
+func deriveSigningKey(secret, dateStamp, region, service string) []byte {
+	kDate := hmacSHA256([]byte("AWS4"+secret), dateStamp)
+	kRegion := hmacSHA256(kDate, region)
+	kService := hmacSHA256(kRegion, service)
+	return hmacSHA256(kService, "aws4_request")
+}
+
+func hexHMAC(key []byte, msg string) string {
+	return hex.EncodeToString(hmacSHA256(key, msg))
+}
+
 func (c *r2Client) sign(req *http.Request, payloadHash string, t time.Time) {
 	amzDate := t.UTC().Format("20060102T150405Z")
 	dateStamp := t.UTC().Format("20060102")
@@ -61,14 +77,9 @@ func (c *r2Client) sign(req *http.Request, payloadHash string, t time.Time) {
 	}
 	canonical := req.Method + "\n" + uri + "\n\n" + canonicalHeaders + "\n" +
 		strings.Join(signedHeaders, ";") + "\n" + payloadHash
-	credentialScope := fmt.Sprintf("%s/%s/s3/aws4_request", dateStamp, c.region)
-	stringToSign := "AWS4-HMAC-SHA256\n" + amzDate + "\n" + credentialScope + "\n" + sha256Hex([]byte(canonical))
-
-	kDate := hmacSHA256([]byte("AWS4"+c.secret), dateStamp)
-	kRegion := hmacSHA256(kDate, c.region)
-	kService := hmacSHA256(kRegion, "s3")
-	kSigning := hmacSHA256(kService, "aws4_request")
-	signature := hex.EncodeToString(hmacSHA256(kSigning, stringToSign))
+	credentialScope := dateStamp + "/" + c.region + "/s3/aws4_request"
+	stringToSign := buildStringToSign(amzDate, dateStamp, c.region, "s3", sha256Hex([]byte(canonical)))
+	signature := hexHMAC(deriveSigningKey(c.secret, dateStamp, c.region, "s3"), stringToSign)
 
 	req.Header.Set("Authorization", fmt.Sprintf(
 		"AWS4-HMAC-SHA256 Credential=%s/%s, SignedHeaders=%s, Signature=%s",

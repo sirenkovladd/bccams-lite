@@ -54,6 +54,9 @@ python3 -m http.server -d public 80
 go build -o /opt/bccams-lite/archive ./cmd/archive
 cp .env.example /opt/bccams-lite/.env   # then fill in R2_* values
 cp deploy/archive.service /etc/systemd/system/bccams-lite-archive.service
+# 4b. Verify signing + upload against real R2 before enabling the timer:
+set -a; source /opt/bccams-lite/.env; set +a
+/tmp/archive --once   # expect exit 0; check history/manifest.json in the bucket
 systemctl enable --now bccams-lite-archive
 ```
 
