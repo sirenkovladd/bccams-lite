@@ -29,11 +29,11 @@ const MUST_INCLUDE_PAGES = ["burrardDavie.htm", "buteDavie.htm"];
 const root = join(import.meta.dir, "..");
 const REGIONS = JSON.parse(readFileSync(join(root, "data", "regions.json"), "utf8"));
 
-function normTitle(t) {
+export function normTitle(t) {
   return t.toLowerCase().replace(/boundry/g, "boundary").replace(/\b(\d+) av\b/g, "$1st");
 }
 
-function regionFor(title) {
+export function regionFor(title) {
   const t = normTitle(title);
   for (const [region, kws] of REGIONS.rules) {
     if (kws.every((k) => t.includes(k))) return region;
@@ -41,11 +41,11 @@ function regionFor(title) {
   return REGIONS.fallback;
 }
 
-function prettyName(h5) {
+export function prettyName(h5) {
   return h5.replace(/\bAv\b/g, "Ave").replace(/\s+/g, " ").trim();
 }
 
-function slug(pageUrl) {
+export function slug(pageUrl) {
   const m = /\/([^/?#]+)\.htm/i.exec(pageUrl);
   return (m ? m[1] : pageUrl).toLowerCase();
 }
@@ -84,7 +84,7 @@ async function verify(url) {
   return { lastModified: res.headers.get("last-modified") || "", etag: res.headers.get("etag") || "" };
 }
 
-function parseKml(xml) {
+export function parseKml(xml) {
   const out = [];
   // Descriptions are HTML-escaped; unescape the entities we need for parsing.
   const clean = xml.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
@@ -98,7 +98,7 @@ function parseKml(xml) {
   return out;
 }
 
-function indexHrefs(indexHtml) {
+export function indexHrefs(indexHtml) {
   const out = [];
   for (const m of indexHtml.matchAll(/<a\s[^>]*href="([^"]*\.htm[^"]*)"[^>]*>(.*?)<\/a>/gis)) {
     const text = m[2].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
@@ -107,7 +107,7 @@ function indexHrefs(indexHtml) {
   return out;
 }
 
-function wordSet(s) {
+export function wordSet(s) {
   return new Set(
     normTitle(s)
       .replace(/[^a-z0-9 ]/g, " ")
@@ -117,7 +117,7 @@ function wordSet(s) {
   );
 }
 
-function sameWords(a, b) {
+export function sameWords(a, b) {
   const A = wordSet(a),
     B = wordSet(b);
   if (A.size !== B.size) return false;
@@ -130,7 +130,7 @@ function sameWords(a, b) {
 //     the alt attribute, so "... - East intersection - North" votes North, not East); else
 // (2) nearest preceding <strong>North|East|South|West</strong> (within 600 chars); else
 // (3) /(north|east|south|west)/i in the filename.
-function extractImages(pageHtml) {
+export function extractImages(pageHtml) {
   const found = {};
   const re = /<img\b[^>]*src="(cameraimages\/[^"]+)"[^>]*>/gi;
   let m;
@@ -168,6 +168,8 @@ async function pool(items, n, fn) {
   return results;
 }
 
+// Execution runs only as `bun scripts/build.mjs`, never on import (tests import the helpers above). Top-level await inside this block is valid ESM.
+if (import.meta.main) {
 const KML_CACHE = join(root, "data", "traffic_cameras.kml");
 const kmlMode = process.env.KML_SOURCE === "cache" ? "cache" : "live";
 let kmlSource = "CACHE";
@@ -257,7 +259,7 @@ for (const p of withPages) {
   cams.push({
     id: slug(p.page),
     name: prettyName(p.title),
-    neighbourhood: regionFor(p.title),
+    neighbourhood: regionFor(p.title), // KML title, pre-prettyName: Av->Ave would break digit keywords + the Boundry rule
     page: p.page,
     lat: p.lat,
     lng: p.lng,
@@ -318,3 +320,4 @@ writeFileSync(join(root, "data", "skipped.json"), JSON.stringify(skipped, null, 
 console.log(
   `wrote data/cams.json (${cams.length} cams, ${verifiedCount} images verified, ${skipped.length} skipped) [${kmlSource}]`,
 );
+}

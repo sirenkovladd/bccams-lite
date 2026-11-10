@@ -240,12 +240,9 @@ func runCycle(cfg *config, st *daemonState, fetchClient *http.Client, r2 *r2Clie
 				cy.lines = append(cy.lines, cycleNote("shard-failed", camID+": "+err.Error()))
 			}
 		}
-		stats := map[string]any{"generatedAt": m.GeneratedAt, "stats": m.Stats, "frames": st.Frames}
-		sb, _ := json.MarshalIndent(stats, "", "  ")
-		if _, err := r2.put("history/stats.json", "application/json", "public, max-age=60", sb); err != nil {
-			cy.errs++
-			cy.lines = append(cy.lines, cycleNote("stats-failed", err.Error()))
-		}
+		// NOTE: no history/stats.json upload. It carried the full Frames map
+		// (megabytes per dirty cycle at full-city scale) and nothing reads it:
+		// the viewer uses per-cam shards, operators use STATE_PATH + the JSONL log.
 	}
 
 	// 5. Persist state + flush log batch (always, including dry-run).
