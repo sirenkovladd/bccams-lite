@@ -127,6 +127,21 @@ func (cfg *config) r2() *r2Client {
 
 func strptr(s string) *string { return &s }
 
+// pendingUpload is a new frame awaiting its R2 PUT. Classification (skip vs
+// store) stays serial; the PUTs fan out over workers; state recording stays
+// serial in job order so logs and state are deterministic.
+type pendingUpload struct {
+	job      frameJob
+	fr       fetchResult
+	r2key    string
+	line     checkLine
+	now      time.Time
+	ts       string
+	uploadMs int64
+	spooled  bool
+	putErr   string
+}
+
 // runPool fans jobs out over n workers, collecting results in job order.
 func runPool[T any, R any](jobs []T, n int, fn func(T) R) []R {
 	out := make([]R, len(jobs))
@@ -160,16 +175,17 @@ type frameJob struct {
 }
 
 type cycle struct {
-	cfg   *config
-	st    *daemonState
-	r2    *r2Client
-	cams  []camera
-	lines []any
-	dirty map[string]bool
-	ok    int
-	skip  int
-	store int
-	errs  int
+	cfg     *config
+	st      *daemonState
+	r2      *r2Client
+	cams    []camera
+	lines   []any
+	dirty   map[string]bool
+	pending []*pendingUpload
+	ok      int
+	skip    int
+	store   int
+	errs    int
 }
 
 func frameStateFor(st *daemonState, camID, dir string) *frameState {
@@ -233,6 +249,9 @@ func runCycle(cfg *config, st *daemonState, fetchClient *http.Client, r2 *r2Clie
 	for i, j := range jobs {
 		cy.applyFrame(j, results[i])
 	}
+	// Uploads fan out over workers; state recording stays serial in order.
+	cy.flushUploads()
+	cy.recordUploads()
 
 	// 3. Prune keys older than retention.
 	now := time.Now()
@@ -345,42 +364,72 @@ func (cy *cycle) applyFrame(j frameJob, fr fetchResult) {
 		cy.lines = append(cy.lines, line)
 		return
 	}
-	uploadMs, err := r2.put(r2key, "image/jpeg", "public, max-age=31536000, immutable", fr.body)
-	line.UploadMs = uploadMs
-	advance := func(spooled bool, msg string) {
-		if !spooled {
-			cy.ok++
-			line.StoredKey = strptr(r2key)
-		} else {
-			cy.errs++
-			line.Error = strptr(msg)
-		}
-		cy.store++
-		recordUpdate(fs, now, cfg.statsDepth)
-		fs.LastModified, fs.ETag, fs.LastHash, fs.LastFile = fr.lastMod, fr.etag, fr.hash, ts
-		insertKey(fs, r2key, cfg.manifestCap)
-		cy.dirty[cam.ID] = true
-		line.Changed = true
-		line.PrevUpdateAt, line.AvgIntervalMs, line.NextPredicted =
-			fs.PrevUpdateAt, fs.AvgIntervalMs, fs.NextPredicted
-		cy.lines = append(cy.lines, line)
-	}
-	if err != nil {
-		// Spool to disk, keep going; state still advances so the next
-		// poll compares against the new frame, not the old one.
-		os.MkdirAll(cfg.spoolDir, 0o755)
-		sp := spoolFile(cfg.spoolDir, cam.ID, dir, ts)
-		if werr := os.WriteFile(sp, fr.body, 0o644); werr != nil {
-			msg := "upload failed and spool failed: " + err.Error() + " / " + werr.Error()
-			cy.errs++
-			line.Error = strptr(msg)
-			cy.lines = append(cy.lines, line)
-			return
-		}
-		advance(true, "upload failed, spooled: "+err.Error())
+	// Queue the PUT; uploads fan out over workers in flushUploads, then
+	// recordUploads applies the outcomes serially in job order.
+	cy.pending = append(cy.pending, &pendingUpload{job: frameJob{cam: cam, dir: dir, fs: fs}, fr: fr, r2key: r2key, line: line, now: now, ts: ts})
+	return
+}
+
+func (cy *cycle) flushUploads() {
+	if len(cy.pending) == 0 || cy.cfg.dryRun || cy.r2 == nil {
 		return
 	}
-	advance(false, "")
+	runPool(cy.pending, cy.cfg.fetchWorkers, func(u *pendingUpload) struct{} {
+		uploadMs, err := cy.r2.put(u.r2key, "image/jpeg", "public, max-age=31536000, immutable", u.fr.body)
+		u.line.UploadMs = uploadMs
+		u.uploadMs = uploadMs
+		if err == nil {
+			return struct{}{}
+		}
+		// Spool to disk, keep going; state still advances so the next
+		// poll compares against the new frame, not the old one.
+		os.MkdirAll(cy.cfg.spoolDir, 0o755)
+		sp := spoolFile(cy.cfg.spoolDir, u.job.cam.ID, u.job.dir, u.ts)
+		if werr := os.WriteFile(sp, u.fr.body, 0o644); werr != nil {
+			u.putErr = "upload failed and spool failed: " + err.Error() + " / " + werr.Error()
+			return struct{}{}
+		}
+		u.spooled = true
+		u.putErr = "upload failed, spooled: " + err.Error()
+		return struct{}{}
+	})
+}
+
+func (cy *cycle) recordUploads() {
+	cfg := cy.cfg
+	for _, u := range cy.pending {
+		j, fr, r2key, line, now, ts := u.job, u.fr, u.r2key, u.line, u.now, u.ts
+		fs, cam := j.fs, j.cam
+		if u.putErr != "" && !u.spooled {
+			cy.errs++
+			line.Error = strptr(u.putErr)
+			cy.lines = append(cy.lines, line)
+			continue
+		}
+		advance := func(spooled bool, msg string) {
+			if !spooled {
+				cy.ok++
+				line.StoredKey = strptr(r2key)
+			} else {
+				cy.errs++
+				line.Error = strptr(msg)
+			}
+			cy.store++
+			recordUpdate(fs, now, cfg.statsDepth)
+			fs.LastModified, fs.ETag, fs.LastHash, fs.LastFile = fr.lastMod, fr.etag, fr.hash, ts
+			insertKey(fs, r2key, cfg.manifestCap)
+			cy.dirty[cam.ID] = true
+			line.Changed = true
+			line.PrevUpdateAt, line.AvgIntervalMs, line.NextPredicted =
+				fs.PrevUpdateAt, fs.AvgIntervalMs, fs.NextPredicted
+			cy.lines = append(cy.lines, line)
+		}
+		if u.spooled {
+			advance(true, u.putErr)
+		} else {
+			advance(false, "")
+		}
+	}
 }
 
 func cycleNote(kind, msg string) map[string]string {

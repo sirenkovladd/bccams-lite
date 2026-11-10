@@ -196,3 +196,49 @@ func TestDryRunLeavesStateUntouched(t *testing.T) {
 		}
 	}
 }
+
+// Parallel uploads must record state and log lines in deterministic job order.
+func TestParallelUploadOrder(t *testing.T) {
+	var mu sync.Mutex
+	var puts []string
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == "PUT" {
+			mu.Lock()
+			puts = append(puts, strings.TrimPrefix(r.URL.Path, "/b/"))
+			mu.Unlock()
+			w.WriteHeader(200)
+			return
+		}
+		w.Header().Set("Content-Type", "image/jpeg")
+		w.Header().Set("Last-Modified", "Tue, 10 Nov 2026 12:00:00 GMT")
+		_, _ = w.Write([]byte("bytes-for-" + r.URL.Path))
+	}))
+	defer srv.Close()
+	dir := t.TempDir()
+	cfg := &config{
+		pollIntervalMs: 300000,
+		retentionHours: 24,
+		logPath:        filepath.Join(dir, "log.jsonl"),
+		statePath:      filepath.Join(dir, "state.json"),
+		spoolDir:       filepath.Join(dir, "spool"),
+		fetchWorkers:   8,
+		manifestCap:    100,
+	}
+	r2 := &r2Client{http: srv.Client(), endpoint: srv.URL, bucket: "b",
+		region: "auto", access: "AK", secret: "SK"}
+	st := &daemonState{Frames: map[string]*frameState{}}
+	cams := []camera{{
+		ID:     "testcam",
+		Images: map[string]string{"N": srv.URL + "/n.jpg", "S": srv.URL + "/s.jpg"},
+	}}
+	ok, _, stored, errs := runCycle(cfg, st, srv.Client(), r2, cams)
+	if errs != 0 || ok != 2 || stored != 2 {
+		t.Fatalf("parallel: ok=%d stored=%d errs=%d", ok, stored, errs)
+	}
+	for _, d := range []string{"N", "S"} {
+		fs := st.Frames["testcam/"+d]
+		if fs == nil || len(fs.StoredKeys) != 1 {
+			t.Fatalf("missing stored key for dir %s: %+v", d, fs)
+		}
+	}
+}
