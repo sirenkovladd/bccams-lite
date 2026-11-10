@@ -297,25 +297,12 @@ function wireControls() {
     if (e.target.id === "modal") closeModal();
   });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !document.getElementById("modal").hidden) closeModal();
+    if (document.getElementById("modal").hidden || !current || !current.tl) return;
+    if (e.key === "Escape") closeModal();
+    else if (e.key === "ArrowLeft") tlStep(-1);
+    else if (e.key === "ArrowRight") tlStep(1);
   });
-  document.getElementById("frame-strip").addEventListener("click", (e) => {
-    const img = e.target.closest("img[data-dir]");
-    if (!img || !current) return;
-    const slot = document.querySelector(`#modal-stills img[data-dir="${img.dataset.dir}"]`);
-    if (!slot) return;
-    slot.src = img.src;
-    slot.classList.remove("on");
-    slot.addEventListener("load", () => slot.classList.add("on"), { once: true });
-    const time = document.querySelector(`#modal-stills time[data-dir="${img.dataset.dir}"]`);
-    if (time && img.dataset.ts && +img.dataset.ts > 0) {
-      time.textContent = new Date(+img.dataset.ts).toLocaleTimeString();
-    }
-    document
-      .querySelectorAll("#frame-strip img.sel")
-      .forEach((el) => el.classList.remove("sel"));
-    img.classList.add("sel");
-  });
+
 }
 
 function showTab(which) {
@@ -411,53 +398,176 @@ function updateStripHead() {
   document.getElementById("prev-frames-h").hidden = !strip.hasChildNodes();
 }
 
-const STRIP_MAX = 24; // timeline thumbs cap: enough history, no spam
-// One timeline renderer for live session frames and archived shard frames.
-// entries: [{dir, url, ts}]. Drops whatever is showing in the stills above
-// (full-URL compare: live frames differ only by ?t= cache-buster),
-// newest first, grouped by hour.
-function setStrip(entries) {
+const STRIP_MAX = 150; // timeline dots are cheap; thumbs were not
+const TL_MIN_SPAN = 120000; // closest zoom: 2 minutes
+
+function tlFullRange() {
+  const ts = current.tl.frames.map((f) => f.ts);
+  const lo = Math.min(...ts), hi = Math.max(...ts);
+  return lo === hi ? { start: lo - 300000, end: hi + 300000 } : { start: lo, end: hi };
+}
+
+// Video-player timeline: one bar, a dot per frame moment, zoom + steppers.
+// Dots are <button>s (keyboard focusable); selecting one loads it into its
+// direction's still, like the old strip click did.
+function renderTimeline() {
   const strip = document.getElementById("frame-strip");
   strip.innerHTML = "";
-  if (!current) {
+  const T = current.tl;
+  if (!T.frames.length) {
     updateStripHead();
     return;
   }
-  const stillSrc = {};
-  for (const dir of Object.keys(current.cam.images)) {
-    const slot = document.querySelector(`#modal-stills img[data-dir="${dir}"]`);
-    if (slot && slot.src) stillSrc[dir] = slot.src;
-  }
-  const fresh = entries
-    .filter((e) => e.url !== stillSrc[e.dir])
-    .sort((a, b) => b.ts - a.ts)
-    .slice(0, STRIP_MAX);
-  let lastHour = null;
-  let row = null;
-  for (const e of fresh) {
-    const hour = new Date(e.ts).toTimeString().slice(0, 2) + ":00";
-    if (hour !== lastHour) {
-      const grp = document.createElement("div");
-      grp.className = "fr-group";
-      const lab = document.createElement("span");
-      lab.className = "fr-hour";
-      lab.textContent = hour;
-      row = document.createElement("div");
-      row.className = "fr-thumbs";
-      grp.append(lab, row);
-      strip.append(grp);
-      lastHour = hour;
-    }
-    const img = document.createElement("img");
-    img.loading = "lazy";
-    img.decoding = "async";
-    img.dataset.dir = e.dir;
-    img.dataset.ts = e.ts;
-    img.alt = `${current.cam.name} ${e.dir} frame at ${new Date(e.ts).toLocaleTimeString()}`;
-    img.src = e.url;
-    row.append(img);
-  }
+  if (!T.view) T.view = tlFullRange();
+  const { start, end } = T.view;
+  const span = Math.max(end - start, 1);
+
+  const nav = document.createElement("div");
+  nav.className = "tl-nav";
+  const prev = document.createElement("button");
+  prev.type = "button";
+  prev.className = "tl-arrow";
+  prev.setAttribute("aria-label", "Previous frame");
+  prev.textContent = "\u2039";
+  const next = document.createElement("button");
+  next.type = "button";
+  next.className = "tl-arrow";
+  next.setAttribute("aria-label", "Next frame");
+  next.textContent = "\u203a";
+  const bar = document.createElement("div");
+  bar.className = "tl-bar";
+  bar.setAttribute("role", "slider");
+  bar.setAttribute("aria-label", "Frame timeline");
+  bar.setAttribute("tabindex", "0");
+  const track = document.createElement("div");
+  track.className = "tl-track";
+  bar.append(track);
+  const readout = document.createElement("span");
+  readout.className = "tl-readout";
+  const zin = document.createElement("button");
+  zin.type = "button";
+  zin.className = "tl-arrow";
+  zin.setAttribute("aria-label", "Zoom timeline in");
+  zin.textContent = "+";
+  const zout = document.createElement("button");
+  zout.type = "button";
+  zout.className = "tl-arrow";
+  zout.setAttribute("aria-label", "Zoom timeline out");
+  zout.textContent = "\u2212";
+  nav.append(prev, bar, next, readout, zin, zout);
+  strip.append(nav);
+
+  const pos = (ts) => ((ts - start) / span) * 100;
+  T.frames.forEach((f, i) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "tl-dot" + (i === T.sel ? " sel" : "");
+    dot.dataset.i = i;
+    dot.title = `${f.dir} ${new Date(f.ts).toLocaleTimeString()}`;
+    dot.setAttribute("aria-label", `Frame ${f.dir} at ${new Date(f.ts).toLocaleString()}`);
+    dot.style.left = pos(f.ts) + "%";
+    dot.style.top = `calc(50% + ${(DIR_ORDER.indexOf(f.dir) - 1.5) * 7}px)`;
+    dot.addEventListener("click", () => tlSelect(i));
+    bar.append(dot);
+  });
+  prev.addEventListener("click", () => tlStep(-1));
+  next.addEventListener("click", () => tlStep(1));
+  zin.addEventListener("click", () => tlZoom(0.5));
+  zout.addEventListener("click", () => tlZoom(2));
+  bar.addEventListener("click", (e) => {
+    if (e.target !== bar && e.target !== track) return;
+    const r = bar.getBoundingClientRect();
+    const ts = start + ((e.clientX - r.left) / Math.max(r.width, 1)) * span;
+    let best = 0, bd = Infinity;
+    T.frames.forEach((f, i) => {
+      const d = Math.abs(f.ts - ts);
+      if (d < bd) { bd = d; best = i; }
+    });
+    tlSelect(best);
+  });
+  tlReadout();
   updateStripHead();
+}
+
+function tlReadout() {
+  const T = current && current.tl;
+  if (!T) return;
+  const el = document.querySelector("#frame-strip .tl-readout");
+  if (!el) return;
+  const sel = T.sel >= 0 ? new Date(T.frames[T.sel].ts).toLocaleTimeString() : null;
+  el.textContent = (sel ? sel + " · " : "") + T.frames.length + " frames";
+}
+
+function tlEnsureVisible() {
+  const T = current.tl;
+  const ts = T.frames[T.sel].ts;
+  if (ts < T.view.start || ts > T.view.end) {
+    const span = Math.max(T.view.end - T.view.start, TL_MIN_SPAN);
+    T.view = { start: ts - span / 2, end: ts + span / 2 };
+  }
+}
+
+function tlSelect(i) {
+  const T = current.tl;
+  T.sel = Math.max(0, Math.min(i, T.frames.length - 1));
+  tlEnsureVisible();
+  const f = T.frames[T.sel];
+  const slot = document.querySelector(`#modal-stills img[data-dir="${f.dir}"]`);
+  if (slot && slot.src !== f.url) {
+    slot.src = f.url;
+    slot.classList.remove("on");
+    slot.addEventListener("load", () => slot.classList.add("on"), { once: true });
+    const time = document.querySelector(`#modal-stills time[data-dir="${f.dir}"]`);
+    if (time) time.textContent = new Date(f.ts).toLocaleTimeString();
+  }
+  document.querySelectorAll("#frame-strip .tl-dot.sel").forEach((el) => el.classList.remove("sel"));
+  renderTimeline();
+}
+
+function tlZoom(factor) {
+  const T = current.tl;
+  const full = tlFullRange();
+  const anchor = T.sel >= 0 ? T.frames[T.sel].ts : (T.view.start + T.view.end) / 2;
+  let span = (T.view.end - T.view.start) * factor;
+  span = Math.min(span, full.end - full.start);
+  if (span <= TL_MIN_SPAN && factor < 1) return;
+  span = Math.max(span, TL_MIN_SPAN);
+  let start = anchor - span / 2, end = anchor + span / 2;
+  if (start < full.start) { end += full.start - start; start = full.start; }
+  if (end > full.end) { start -= end - full.end; end = full.end; }
+  if (start < full.start) { start = full.start; end = full.end; }
+  T.view = { start, end };
+  renderTimeline();
+}
+
+function tlStep(d) {
+  const T = current.tl;
+  if (!T.frames.length) return;
+  if (T.sel < 0) return tlSelect(d > 0 ? 0 : T.frames.length - 1);
+  if (T.sel + d < 0 || T.sel + d >= T.frames.length) return;
+  tlSelect(T.sel + d);
+}
+
+function setStrip(entries) {
+  if (current) {
+    const stillSrc = {};
+    for (const dir of Object.keys(current.cam.images)) {
+      const slot = document.querySelector(`#modal-stills img[data-dir="${dir}"]`);
+      if (slot && slot.src) stillSrc[dir] = slot.src;
+    }
+    current.tl = {
+      frames: entries
+        .filter((e) => e.ts > 0 && e.url !== stillSrc[e.dir])
+        .sort((a, b) => a.ts - b.ts)
+        .slice(-STRIP_MAX),
+      view: null,
+      sel: -1,
+    };
+    renderTimeline();
+  } else {
+    document.getElementById("frame-strip").innerHTML = "";
+    updateStripHead();
+  }
 }
 
 function renderStrip() {
