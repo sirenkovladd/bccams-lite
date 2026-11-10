@@ -343,7 +343,7 @@ function fmtTime(d) {
 
 function openModal(cam) {
   closeModal();
-  current = { cam, timer: null, frames: {} };
+  current = { cam, timer: null, frames: {}, archived: null };
   for (const d of Object.keys(cam.images)) current.frames[d] = [];
   document.getElementById("modal-title").textContent = cam.name;
   document.getElementById("modal-source").href = cam.page;
@@ -648,13 +648,37 @@ function setStrip(entries) {
       const slot = document.querySelector(`#modal-stills img[data-dir="${dir}"]`);
       if (slot && slot.src) stillSrc[dir] = slot.src;
     }
-    current.tl = {
-      groups: groupByTime(
-        entries.filter((e) => e.ts > 0 && e.url !== stillSrc[e.dir]).sort((a, b) => b.ts - a.ts).slice(0, STRIP_MAX),
-      ),
-      view: null,
-      sel: -1,
-    };
+    // Preserve selection + zoom across refreshes; without this every 60 s tick
+    // snaps the viewer back to latest / full range.
+    const prev = current.tl;
+    const prevSel = prev && prev.sel >= 0 && prev.groups[prev.sel] ? prev.groups[prev.sel].start : null;
+    const prevView = prev && prev.view ? { start: prev.view.start, end: prev.view.end } : null;
+    // The selected moment's frames match the stills, but they must stay in the
+    // strip (as a dot) instead of being filtered out as "showing above".
+    const kept = entries.filter(
+      (e) => e.ts > 0 && (e.url !== stillSrc[e.dir] || (prevSel !== null && Math.abs(e.ts - prevSel) <= GROUP_WINDOW)),
+    );
+    const groups = groupByTime(kept.sort((a, b) => b.ts - a.ts).slice(0, STRIP_MAX));
+    let sel = -1, view = null;
+    if (groups.length) {
+      if (prevSel !== null) {
+        let best = 0, bd = Infinity;
+        groups.forEach((g, i) => {
+          const d = Math.abs(g.start - prevSel);
+          if (d < bd) { bd = d; best = i; }
+        });
+        sel = best;
+      }
+      if (prevView) {
+        const lo = groups[0].start, hi = groups[groups.length - 1].end;
+        view = {
+          start: Math.min(Math.max(prevView.start, lo), hi),
+          end: Math.max(Math.min(prevView.end, hi), lo),
+        };
+        if (view.end <= view.start) view = null;
+      }
+    }
+    current.tl = { groups, view, sel };
     renderTimeline();
   } else {
     document.getElementById("frame-strip").innerHTML = "";
@@ -671,6 +695,9 @@ function renderStrip() {
   for (const dir of DIR_ORDER.filter((d) => current.frames[d])) {
     for (const f of current.frames[dir]) entries.push({ dir, url: f.url, ts: f.ts });
   }
+  // Archived moments stay in the strip across live refreshes; otherwise the
+  // first 60 s tick flushes the whole history and snaps selection to latest.
+  if (current.archived) entries.push(...current.archived);
   setStrip(entries);
 }
 
@@ -700,7 +727,9 @@ async function enhanceFromHistory(cam) {
       entries.push({ dir, url: historyBase + "/" + rel, ts });
     }
   }
-  setStrip(entries);
+  if (!current || current.cam.id !== cam.id) return;
+  current.archived = entries;
+  renderStrip();
 }
 
 function closeModal() {
