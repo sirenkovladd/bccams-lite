@@ -484,6 +484,7 @@ function renderTimeline() {
     dot.title = `${new Date(g.start).toLocaleTimeString()} · ${g.frames.length} frames`;
     dot.setAttribute("aria-label", `Moment ${i + 1} of ${T.groups.length} at ${new Date(g.start).toLocaleString()}`);
     dot.style.left = `calc(${EDGE}px + ${frac(ts)} * (100% - ${2 * EDGE}px))`;
+    dot.style.top = "50%";
     dot.addEventListener("click", () => tlSelect(i));
     bar.append(dot);
   });
