@@ -18,10 +18,27 @@ Hotlink the public JPEGs, link back to the source pages.
 
 ## Status
 
-v1: 4 West End cams (Burrard×Davie/Drake/Pacific, Bute×Davie), verified live by
-`bun scripts/build.mjs` into `data/cams.json` (+ runtime copy `public/cams.json`).
-Viewer is `public/` (vanilla JS + Leaflet). History archiver is `cmd/archive`
-(Go, VPS cron/systemd, stores to R2). Seed data (verified URLs only) in `data/seed.json`.
+Full city: ~221 cams (219 city intersections from the city's KML map data +
+UBC weather cam), verified live by `bun scripts/build.mjs` into `data/cams.json`
+(+ runtime copy `public/cams.json`). Viewer is `public/` (vanilla JS + Leaflet):
+region grid (bccams-style) + map tab + search. History archiver is `cmd/archive`
+(Go, VPS systemd, worker pool, stores to R2). Seed data (verified URLs only) in
+`data/seed.json`; region map in `data/regions.json`.
+
+## Pipeline (city KML → build → grid/map viewer)
+
+```
+city KML (220 pins: id, name, page, coords)
+  → scripts/build.mjs (scrapes pages, verifies every JPEG, assigns regions)
+  → data/cams.json (+ public/ copy, data/skipped.json report)
+  → public/ grid+map viewer  →  R2 static hosting
+  → cmd/archive (reads CAMS_JSON, polls with worker pool)
+  → history/<cam-id>/manifest.json shards + images in R2
+```
+
+Build skips unverifiable cams with reasons (never fails on one bad page) and
+exits nonzero only if Burrard & Davie or Bute & Davie (the bccams.ca regression
+cases) are missing. `KML_SOURCE=cache` replays the committed KML for testing.
 
 ## How it fits together
 
@@ -44,8 +61,10 @@ bun scripts/build.mjs
 # 2. Point the viewer at history (or leave {"base": ""} for live-only)
 echo '{"base": "https://pub-xxxxxxxxxxxxxxxx.r2.dev"}' > public/history.json
 
-# 3a. Static hosting on R2 (AWS CLI v2 against the R2 S3 endpoint)
-aws s3 sync public/ s3://$R2_BUCKET/ --endpoint-url $R2_ENDPOINT --delete
+# 3a. Static hosting on R2 (wrangler with an admin API token; per-file content types)
+for f in index.html app.js style.css cams.json history.json; do
+  npx -y wrangler r2 object put "bccams-lite/$f" --file "public/$f" --remote
+done
 # 3b. or any static box:
 python3 -m http.server -d public 80
 # caddy file-server --root public --listen :80
@@ -53,12 +72,19 @@ python3 -m http.server -d public 80
 # 4. Archiver on the VPS (Go, single binary)
 go build -o /opt/bccams-lite/archive ./cmd/archive
 cp .env.example /opt/bccams-lite/.env   # then fill in R2_* values
+cp data/cams.json /opt/bccams-lite/data/cams.json  # CAMS_JSON source of truth
 cp deploy/archive.service /etc/systemd/system/bccams-lite-archive.service
 # 4b. Verify signing + upload against real R2 before enabling the timer:
 set -a; source /opt/bccams-lite/.env; set +a
 /tmp/archive --once   # expect exit 0; check history/manifest.json in the bucket
 systemctl enable --now bccams-lite-archive
 ```
+
+R2 volume at full-city scale: ~876 frames/cycle, ~7k new files/day, ~1–2GB live
+at 24h retention (inside the free tier). Manifest PUTs stay small: the slim
+top-level manifest plus only the per-cam shards that changed each cycle
+(quiet cycles publish nothing). Needs an R2 API token scoped to the
+`bccams-lite` bucket for the archiver's S3 uploads (mint in dashboard).
 
 R2 bucket CORS (dashboard → bucket → CORS, or `wrangler r2 bucket cors`):
 
