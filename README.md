@@ -22,8 +22,7 @@ Full city: ~221 cams (219 city intersections from the city's KML map data +
 UBC weather cam), verified live by `bun scripts/build.mjs` into `data/cams.json`
 (+ runtime copy `public/cams.json`). Viewer is `public/` (vanilla JS + Leaflet):
 region grid (bccams-style) + map tab + search. History archiver is `cmd/archive`
-(Go, VPS systemd, worker pool, stores to R2). Seed data (verified URLs only) in
-`data/seed.json`; region map in `data/regions.json`.
+(Go, VPS systemd, worker pool, stores to R2). Region map in `data/regions.json`.
 
 ## Pipeline (city KML → build → grid/map viewer)
 
