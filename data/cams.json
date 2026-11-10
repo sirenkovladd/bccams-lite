@@ -1,0 +1,58 @@
+[
+  {
+    "id": "burrard-davie",
+    "name": "Burrard St & Davie St",
+    "neighbourhood": "West End",
+    "page": "https://trafficcams.vancouver.ca/burrardDavie.htm",
+    "lat": 49.2791,
+    "lng": -123.1292,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardDavieNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BurrardDavieEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BurrardDavieSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BurrardDavieWest.jpg"
+    }
+  },
+  {
+    "id": "bute-davie",
+    "name": "Bute St & Davie St",
+    "neighbourhood": "West End",
+    "page": "https://trafficcams.vancouver.ca/buteDavie.htm",
+    "lat": 49.2818,
+    "lng": -123.1334,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/ButeNorthDavie.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/DavieEastBute.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/ButeSouthDavie.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/DavieWestBute.jpg"
+    }
+  },
+  {
+    "id": "burrard-drake",
+    "name": "Burrard St & Drake St",
+    "neighbourhood": "West End",
+    "page": "https://trafficcams.vancouver.ca/burrardDrake.htm",
+    "lat": 49.2809,
+    "lng": -123.1289,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardDrakeNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BurrardDrakeEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BurrardDrakeSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BurrardDrakeWest.jpg"
+    }
+  },
+  {
+    "id": "burrard-pacific",
+    "name": "Burrard St & Pacific Ave",
+    "neighbourhood": "West End",
+    "page": "https://trafficcams.vancouver.ca/BurrardPacific4.htm",
+    "lat": 49.2775,
+    "lng": -123.1285,
+    "images": {
+      "N": "https://trafficcams.vancouver.ca/cameraimages/BurrardPacificNorth.jpg",
+      "E": "https://trafficcams.vancouver.ca/cameraimages/BurrardPacificEast.jpg",
+      "S": "https://trafficcams.vancouver.ca/cameraimages/BurrardBridgeSouth.jpg",
+      "W": "https://trafficcams.vancouver.ca/cameraimages/BurrardPacificWest.jpg"
+    }
+  }
+]
